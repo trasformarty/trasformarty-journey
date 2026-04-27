@@ -49,7 +49,7 @@ export const WaysToWork = () => {
             <Reveal key={o.title} delay={i * 100}>
               <a
                 href={o.href}
-                className="group flex flex-col h-full p-8 md:p-10 transition-transform duration-500 hover:-translate-y-1"
+                className="group leaf-card flex flex-col h-full"
                 aria-label={`Learn more about ${o.title}`}
               >
                 <h3 className="font-serif text-2xl md:text-3xl text-forest-deep mb-3">
