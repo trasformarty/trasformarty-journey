@@ -8,26 +8,26 @@
 @layer base {
   :root {
     /* Core palette */
-    --ivory: 42 38% 96%;            /* soft ivory background */
-    --ivory-warm: 38 36% 92%;       /* warmer ivory */
-    --sage: 90 14% 78%;             /* sage green */
-    --sage-deep: 100 12% 60%;
-    --forest: 140 22% 24%;          /* forest green */
-    --forest-deep: 145 28% 16%;
-    --earth: 28 28% 32%;            /* earthy brown */
-    --earth-soft: 30 24% 55%;
-    --gold: 38 52% 58%;             /* warm light gold */
-    --gold-soft: 40 60% 78%;
+    --ivory: 40 60% 96%;            /* warm ivory from logo reference */
+    --ivory-warm: 39 39% 93%;       /* beige from forest/video light */
+    --sage: 73 12% 57%;             /* muted sage from forest stills */
+    --sage-deep: 80 13% 37%;
+    --forest: 109 11% 20%;          /* deep forest green from screenshots */
+    --forest-deep: 98 13% 12%;
+    --earth: 38 20% 40%;            /* earthy beige-brown accent */
+    --earth-soft: 39 37% 85%;
+    --gold: 40 40% 59%;             /* subtle sunlit warmth */
+    --gold-soft: 39 37% 85%;
 
     /* Semantic — light theme */
     --background: var(--ivory);
-    --foreground: 145 22% 14%;
+    --foreground: 98 13% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 145 22% 14%;
+    --card: 40 60% 97%;
+    --card-foreground: 98 13% 12%;
 
-    --popover: 42 38% 98%;
-    --popover-foreground: 145 22% 14%;
+    --popover: 40 60% 98%;
+    --popover-foreground: 98 13% 12%;
 
     --primary: var(--forest);
     --primary-foreground: 42 38% 96%;
@@ -35,8 +35,8 @@
     --secondary: var(--sage);
     --secondary-foreground: var(--forest-deep);
 
-    --muted: 38 28% 90%;
-    --muted-foreground: 145 12% 35%;
+    --muted: 39 37% 90%;
+    --muted-foreground: 90 9% 34%;
 
     --accent: var(--gold);
     --accent-foreground: 145 28% 16%;
@@ -44,8 +44,8 @@
     --destructive: 0 60% 45%;
     --destructive-foreground: 42 38% 96%;
 
-    --border: 90 14% 84%;
-    --input: 90 14% 84%;
+    --border: 73 12% 76%;
+    --input: 73 12% 76%;
     --ring: var(--forest);
 
     --radius: 1.25rem;
@@ -65,12 +65,12 @@
     --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
 
     --sidebar-background: var(--ivory);
-    --sidebar-foreground: 145 22% 14%;
+    --sidebar-foreground: 98 13% 12%;
     --sidebar-primary: var(--forest);
     --sidebar-primary-foreground: var(--ivory);
     --sidebar-accent: var(--sage);
     --sidebar-accent-foreground: var(--forest-deep);
-    --sidebar-border: 90 14% 84%;
+    --sidebar-border: 73 12% 76%;
     --sidebar-ring: var(--forest);
   }
 }
@@ -120,19 +120,16 @@
 }
 
 @layer components {
-  /* Signature wordmark — handwritten, feminine, readable */
+  /* Signature wordmark — inspired by the attached thin cursive reference */
   .signature {
-    font-family: 'Dancing Script', 'Brush Script MT', cursive;
-    font-weight: 600;
-    letter-spacing: 0.005em;
-    line-height: 1;
+    font-family: 'Sacramento', 'Allura', 'Brush Script MT', cursive;
+    font-weight: 400;
+    letter-spacing: 0.015em;
+    line-height: 0.86;
     display: inline-block;
-  }
-  .signature .cap-m {
-    font-size: 1.18em;
-    font-weight: 700;
-    margin-left: 0.01em;
-    margin-right: -0.02em;
+    white-space: nowrap;
+    font-synthesis: none;
+    transform: rotate(-0.5deg);
   }
 
   .section {
