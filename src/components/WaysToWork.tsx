@@ -31,7 +31,7 @@ const OFFERINGS = [
 
 export const WaysToWork = () => {
   return (
-    <section id="work" className="section" aria-label="Ways to work with me">
+    <section id="work" className="section bg-ivory-warm" aria-label="Ways to work with me">
       <div className="container-soft">
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">Ways to Work With Me</p>
@@ -49,7 +49,7 @@ export const WaysToWork = () => {
             <Reveal key={o.title} delay={i * 100}>
               <a
                 href={o.href}
-                className="group leaf-card flex flex-col h-full"
+                className="group flex flex-col h-full p-8 md:p-10 transition-transform duration-500 hover:-translate-y-1"
                 aria-label={`Learn more about ${o.title}`}
               >
                 <h3 className="font-serif text-2xl md:text-3xl text-forest-deep mb-3">
