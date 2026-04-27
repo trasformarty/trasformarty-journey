@@ -42,7 +42,7 @@ export const Footer = () => {
           <div className="md:col-span-3">
             <p className="text-xs uppercase tracking-[0.3em] text-ivory/50 mb-4">Elsewhere</p>
             <a
-              href="https://instagram.com/trasformarti_"
+              href="https://www.instagram.com/trasformarti_"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-ivory/80 hover:text-ivory transition-colors text-sm"
