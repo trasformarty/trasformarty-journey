@@ -29,10 +29,10 @@ export const Sessions = () => {
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">Offering — One-to-One</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-4 text-balance">
-            Emotional &amp; Somatic Accompaniment
+            Moving Through
           </h2>
           <p className="font-serif italic text-foreground/55 mb-8">
-            Temporary name — this work is still finding its final form.
+            One-to-one emotional &amp; somatic accompaniment.
           </p>
           <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
             <p>
