@@ -39,7 +39,7 @@ export const Contact = () => {
             <li className="flex items-start gap-4">
               <Instagram size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
               <a
-                href="https://instagram.com/trasformarti_"
+                href="https://www.instagram.com/trasformarti_"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-forest-deep"
