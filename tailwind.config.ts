@@ -14,7 +14,7 @@ export default {
       fontFamily: {
         serif: ['"Cormorant Garamond"', "Georgia", "serif"],
         sans: ['Inter', "system-ui", "sans-serif"],
-        script: ['"Dancing Script"', '"Brush Script MT"', "cursive"],
+        script: ['"Sacramento"', '"Allura"', '"Brush Script MT"', "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",
