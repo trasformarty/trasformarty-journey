@@ -54,7 +54,7 @@ export const Footer = () => {
         </div>
 
         <div className="mt-16 pt-8 border-t border-ivory/15 flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-ivory/50">
-          <p>© {new Date().getFullYear()} Trasformarty — Martina Roscioli.</p>
+          <p>© {new Date().getFullYear()} TrasforMarti — Martina Roscioli.</p>
           <p className="italic">Made with breath, body and presence.</p>
         </div>
       </div>
