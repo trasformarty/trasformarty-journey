@@ -53,10 +53,7 @@ export const Sessions = () => {
           {FORMATS.map((f, i) => (
             <Reveal key={f.title} delay={i * 90}>
               <div className="leaf-card text-center h-full">
-                <span className="font-serif italic text-earth-soft text-sm">
-                  Format 0{i + 1}
-                </span>
-                <h3 className="font-serif text-xl md:text-2xl text-forest-deep mt-2 mb-2">
+                <h3 className="font-serif text-xl md:text-2xl text-forest-deep mb-2">
                   {f.title}
                 </h3>
                 <p className="text-foreground/65 text-sm">{f.note}</p>
