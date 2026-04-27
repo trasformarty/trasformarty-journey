@@ -31,6 +31,15 @@ export const TouchToSoul = () => {
               listened to.
             </p>
 
+            <p>
+              The body holds memories. When the mind softens and listening
+              deepens, what has been quietly stored can begin to surface —
+              sometimes as an image, a sensation, a forgotten emotion, a
+              fragment of memory. Nothing is sought, nothing is forced:
+              there is simply space for what asks to be seen, welcomed, and
+              gently released.
+            </p>
+
             <p className="font-serif italic text-xl text-forest-deep pt-2">
               A gentle therapy. A sensory path where body and soul find each
               other again.
