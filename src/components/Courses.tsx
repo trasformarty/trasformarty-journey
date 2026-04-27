@@ -27,18 +27,21 @@ export const Courses = () => {
 
         <Reveal delay={150} className="mt-12">
           <div className="leaf-card border-dashed">
-            <p className="eyebrow mb-3">Upcoming</p>
-            <p className="font-serif text-2xl text-forest-deep mb-2">
-              Course dates & registration links coming soon.
+            <p className="eyebrow mb-3">Trainings &amp; Dates</p>
+            <p className="font-serif text-2xl text-forest-deep mb-3">
+              Explore Lisandro&rsquo;s upcoming Deep Connection Massage trainings.
             </p>
-            <p className="text-foreground/65">
-              Reach out if you&rsquo;d like to be the first to know.
+            <p className="text-foreground/65 mb-6">
+              Find the full schedule, locations and registration details on the
+              official website.
             </p>
             <a
-              href="#contact"
-              className="mt-6 inline-flex items-center rounded-full bg-forest text-ivory px-7 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
+              href="https://www.deepconnectionmassage.com/alltrainings"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-forest text-ivory px-7 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
             >
-              Learn More
+              View All Trainings
             </a>
           </div>
         </Reveal>
