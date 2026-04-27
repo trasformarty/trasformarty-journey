@@ -106,7 +106,7 @@ export const Header = () => {
           }`}
         >
           <div className="flex items-center justify-between p-6 border-b border-forest-deep/10">
-            <Wordmark size="sm" className="text-forest-deep" />
+            <Wordmark size="sm" variant="dark" />
             <button
               onClick={() => setOpen(false)}
               aria-label="Close menu"
