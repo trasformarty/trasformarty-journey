@@ -11,16 +11,26 @@ export const Courses = () => {
           </h2>
           <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
             <p>
-              You can also find me assisting and accompanying the trainings of{" "}
+              I assist and accompany the trainings of{" "}
               <span className="text-forest-deep font-medium">Lisandro Maseret</span>,
               creator of <em>Deep Connection Massage</em> &mdash; a bodywork
-              technique that weaves deep tissue, presence and conscious touch
-              into a profound dialogue between giver and receiver.
+              practice that goes far beyond technique. It is a way of touching
+              and being touched where depth, presence and listening become one
+              language.
             </p>
             <p>
-              Assisting these trainings is an important part of my work:
-              supporting, holding the space and accompanying participants so
-              they can feel guided, safe and present in their own process.
+              In these trainings we open a space where participants can slow
+              down, inhabit the body more fully and learn a touch that meets
+              the other with respect, sensitivity and quiet strength. A space
+              where vulnerability is welcomed, where emotions can move, and
+              where each person is invited to reconnect with their own ritmo
+              and authenticity.
+            </p>
+            <p>
+              My role is to hold this space alongside Lisandro: to accompany
+              each participant with care, to support their process on and off
+              the table, and to help create the safety needed for something
+              honest and transformative to unfold.
             </p>
           </div>
         </Reveal>
