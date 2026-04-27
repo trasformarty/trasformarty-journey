@@ -37,8 +37,8 @@ export const Hero = () => {
       <div className="relative z-20 max-w-4xl mx-auto px-6 text-center animate-fade-in-slow">
         <p className="eyebrow text-ivory/70 mb-8">A holistic & somatic practice</p>
 
-        <h1 className="mb-8">
-          <Wordmark size="lg" className="text-ivory drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)]" />
+        <h1 className="mb-8 flex justify-center">
+          <Wordmark size="lg" variant="ivory" className="drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]" />
         </h1>
 
         <p className="font-serif italic text-2xl md:text-4xl text-ivory/95 mb-6 text-balance">
