@@ -1,19 +1,48 @@
 import { useState } from "react";
-import { Instagram, Mail, MapPin, Check } from "lucide-react";
+import { Instagram, Mail, MapPin, Check, AlertCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
+
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
 
 export const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    // Graceful no-backend submit state
-    setTimeout(() => {
-      setLoading(false);
+    setError(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    formData.append("_subject", "New message from TrasforMarti website");
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send the message");
+      }
+
+      form.reset();
       setSubmitted(true);
-    }, 800);
+    } catch {
+      setError(
+        "Something went wrong while sending your message. Please write directly to martina.roscioli@gmail.com."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,8 +98,7 @@ export const Contact = () => {
                 </div>
                 <h3 className="font-serif text-3xl text-forest-deep mb-3">Thank you.</h3>
                 <p className="text-foreground/70 max-w-md mx-auto leading-relaxed">
-                  Your message has been received in spirit. I&rsquo;ll write back as
-                  soon as I can.
+                  Your message has been sent. I&rsquo;ll write back as soon as I can.
                 </p>
               </div>
             ) : (
@@ -129,6 +157,13 @@ export const Contact = () => {
                     placeholder="Share what feels alive for you right now…"
                   />
                 </Field>
+
+                {error && (
+                  <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
+                    <AlertCircle size={16} strokeWidth={1.5} className="mt-0.5 shrink-0" />
+                    {error}
+                  </p>
+                )}
 
                 <button
                   type="submit"
