@@ -13,20 +13,73 @@ export const TouchToSoul = () => {
 
           <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
             <p>
-              This is my signature massage and bodywork treatment. Over the years,
-              my clients began to describe it as a massage that reaches the soul.
-              The name came from their words:{" "}
-              <em className="text-forest-deep">
-                &ldquo;No one had ever massaged my soul before.&rdquo;
-              </em>
+              A Touch to Soul is an experience of deep listening — a sensory
+              journey that accompanies the body into a state of relaxation and
+              presence, where mind, emotions and sensations can finally slow
+              down and begin to speak with one another.
             </p>
             <p>
-              A Touch to Soul is a space of deep listening through the hands —
-              where the body is not treated as something to correct, but met as a
-              living landscape of memory, sensation, emotion and presence.
+              It is a space where the mind grows quiet and a more honest
+              listening of the self can emerge. A safe place where the body is
+              free to express itself without being guided or forced, where
+              emotions can flow and vital energy returns to move with ease.
             </p>
-            <p className="text-foreground/55 italic text-base">
-              More detailed information about the treatment will be added here soon.
+
+            <p className="font-serif italic text-xl text-forest-deep pt-2">
+              My work is born from movement. <br />
+              I am movement. I feel movement. I observe movement.
+            </p>
+
+            <p>
+              What moves within us travels through body, heart and soul,
+              creating harmony between what we feel and what we are ready to
+              live. In this treatment, touch becomes a language — subtle,
+              sensitive, born from listening and presence.
+            </p>
+            <p>
+              Slow, deep movements alternate with gestures so light they are
+              almost imperceptible, following the rhythm of the breath and the
+              needs of the body in that precise moment. Each gesture rises
+              from an inner movement and, in turn, moves something in the
+              other.
+            </p>
+            <p>
+              Touch opens space, shifts perception, and accompanies the
+              nervous system toward greater safety, calm and integration.
+              Sometimes it is a soft caress that makes the difference, other
+              times a deeper pressure — what guides is always the listening.
+            </p>
+
+            <p>
+              Through movement, I accompany what is asking to happen — in the
+              body, in the emotions, in the sensations. The passage from one
+              state to another: from control to release, from tension to
+              fluidity.
+            </p>
+
+            <p className="font-serif italic text-xl text-forest-deep">
+              A Touch to Soul is not only a massage. It is an encounter.
+            </p>
+
+            <p>
+              An encounter with one's own felt sense, with one's own rhythm,
+              with a quality of presence that daily life often forgets. What
+              remains is a state of well-being that can last in time: a
+              feeling of peace, of clarity, of openness. Sometimes a release,
+              other times a deep silence. Always a small step on the path of
+              reconnection with the self.
+            </p>
+
+            <p>
+              My intention is to open a space where expression is welcome in
+              all its forms — an emotion, a breath, a gesture of the body, an
+              inner movement. Because it is in flowing, in feeling and in
+              welcoming that we find harmony again.
+            </p>
+
+            <p className="font-serif italic text-xl text-earth">
+              Movement and calm. Presence and depth. <br />
+              A touch to the soul, to return to dancing life with more freedom.
             </p>
           </div>
 
@@ -40,7 +93,7 @@ export const TouchToSoul = () => {
 
         <Reveal delay={150} className="md:col-span-6 order-1 md:order-2">
           {/* TREATMENT IMAGE PLACEHOLDER — Upload treatment image here */}
-          <div className="relative">
+          <div className="relative md:sticky md:top-28">
             <div
               className="aspect-[5/6] w-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-organic flex items-center justify-center"
               role="img"
