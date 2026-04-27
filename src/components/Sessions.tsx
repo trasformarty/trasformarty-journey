@@ -32,7 +32,7 @@ export const Sessions = () => {
             Moving Through
           </h2>
           <p className="font-serif italic text-foreground/55 mb-8">
-            One-to-one emotional &amp; somatic accompaniment.
+            A one-to-one somatic &amp; emotional accompaniment journey — through body-based listening, available both online and in person.
           </p>
           <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
             <p>
