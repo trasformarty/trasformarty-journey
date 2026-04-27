@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import martinaPortrait from "@/assets/martina-portrait.png";
 
 export const About = () => {
   return (
@@ -6,15 +7,13 @@ export const About = () => {
       <div className="container-soft grid md:grid-cols-12 gap-12 md:gap-16 items-center">
         <Reveal className="md:col-span-5">
           <div className="relative">
-            {/* PORTRAIT PLACEHOLDER — Upload Martina portrait here as /public/martina.jpg */}
-            <div
-              className="aspect-[4/5] w-full rounded-[3rem] overflow-hidden bg-gradient-to-br from-sage/60 via-ivory-warm to-earth-soft/40 shadow-organic relative"
-              role="img"
-              aria-label="Portrait placeholder of Martina Roscioli"
-            >
-              <div className="absolute inset-0 flex items-center justify-center text-forest-deep/50 text-xs uppercase tracking-[0.3em] text-center px-6">
-                Upload Martina portrait here
-              </div>
+            <div className="aspect-[4/5] w-full rounded-[3rem] overflow-hidden shadow-organic relative">
+              <img
+                src={martinaPortrait}
+                alt="Portrait of Martina Roscioli"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
               <div
                 aria-hidden="true"
                 className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-gold/40 blur-2xl"
