@@ -24,7 +24,7 @@ const PHASES = [
 
 export const Sessions = () => {
   return (
-    <section id="sessions" className="section bg-sage/30" aria-label="Emotional and somatic accompaniment">
+    <section id="sessions" className="section bg-ivory-warm" aria-label="Emotional and somatic accompaniment">
       <div className="container-soft">
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">Offering — One-to-One</p>
