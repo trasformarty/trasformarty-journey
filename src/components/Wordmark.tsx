@@ -17,9 +17,9 @@ export const Wordmark = ({ className = "", size = "md" }: WordmarkProps) => {
   return (
     <span
       className={`signature ${sizeMap[size]} ${className}`}
-      aria-label="TrasforMarti"
+      aria-label="Transformarty"
     >
-      TrasforMarti
+      Transformarty
     </span>
   );
 };
