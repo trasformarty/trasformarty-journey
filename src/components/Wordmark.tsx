@@ -21,7 +21,7 @@ export const Wordmark = ({ className = "", size = "md", variant = "auto" }: Word
   return (
     <img
       src={src}
-      alt="Transformarty"
+      alt="TrasforMarti"
       className={`${sizeMap[size]} w-auto inline-block select-none ${className}`}
       draggable={false}
     />
