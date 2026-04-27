@@ -38,7 +38,7 @@ export const Header = () => {
         <a
           href="#home"
           className={`${headerTone} transition-colors duration-700`}
-          aria-label="Trasformarty — back to top"
+          aria-label="TrasforMarti — back to top"
         >
           <Wordmark
             size="sm"
