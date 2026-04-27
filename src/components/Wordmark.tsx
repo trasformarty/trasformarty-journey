@@ -1,26 +1,30 @@
+import logoDark from "@/assets/transformarty-logo.png";
+import logoIvory from "@/assets/transformarty-logo-ivory.png";
+
 interface WordmarkProps {
   className?: string;
   size?: "sm" | "md" | "lg";
+  variant?: "auto" | "dark" | "ivory";
 }
 
-/**
- * TrasforMarti — signature-style wordmark.
- * The word stays attached, with Marti revealed through the capital M.
- */
 const sizeMap = {
-  sm: "text-3xl",
-  md: "text-4xl md:text-5xl",
-  lg: "text-6xl md:text-8xl",
+  sm: "h-8 md:h-9",
+  md: "h-12 md:h-14",
+  lg: "h-24 md:h-36",
 };
 
-export const Wordmark = ({ className = "", size = "md" }: WordmarkProps) => {
+export const Wordmark = ({ className = "", size = "md", variant = "auto" }: WordmarkProps) => {
+  // "auto": show ivory on dark backgrounds (parent uses text-ivory) via currentColor not possible w/ raster.
+  // We render the ivory version when variant === "ivory", otherwise the dark ink.
+  const src = variant === "ivory" ? logoIvory : logoDark;
+
   return (
-    <span
-      className={`signature ${sizeMap[size]} ${className}`}
-      aria-label="Transformarty"
-    >
-      Transformarty
-    </span>
+    <img
+      src={src}
+      alt="Transformarty"
+      className={`${sizeMap[size]} w-auto inline-block select-none ${className}`}
+      draggable={false}
+    />
   );
 };
 
