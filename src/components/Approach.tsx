@@ -47,7 +47,7 @@ export const Approach = () => {
           {PILLARS.map((p, i) => (
             <Reveal key={p.title} delay={i * 120}>
               <article className="h-full rounded-[2rem] p-8 md:p-10 bg-ivory/[0.04] backdrop-blur-sm border border-ivory/15 hover:bg-ivory/[0.08] transition-colors duration-500">
-                <h3 className="font-serif text-2xl md:to-3xl text-ivory mb-4">{p.title}</h3>
+                <h3 className="font-serif text-2xl md:text-3xl text-ivory mb-4">{p.title}</h3>
                 <p className="text-ivory/75 leading-relaxed text-pretty">{p.body}</p>
               </article>
             </Reveal>
