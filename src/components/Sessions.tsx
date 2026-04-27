@@ -89,15 +89,10 @@ export const Sessions = () => {
                 {PHASES.map((p, i) => (
                   <li
                     key={p.range}
-                    className="flex gap-5 items-start rounded-2xl bg-ivory/[0.06] border border-ivory/15 p-5"
+                    className="rounded-2xl bg-ivory/[0.06] border border-ivory/15 p-5"
                   >
-                    <span className="font-serif italic text-gold-soft text-2xl shrink-0 w-10">
-                      {i + 1}
-                    </span>
-                    <div>
-                      <p className="font-serif text-xl text-ivory">{p.range}</p>
-                      <p className="text-ivory/75">{p.detail}</p>
-                    </div>
+                    <p className="font-serif text-xl text-ivory">{p.range}</p>
+                    <p className="text-ivory/75">{p.detail}</p>
                   </li>
                 ))}
               </ol>

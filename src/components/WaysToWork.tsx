@@ -52,9 +52,6 @@ export const WaysToWork = () => {
                 className="group leaf-card flex flex-col h-full"
                 aria-label={`Learn more about ${o.title}`}
               >
-                <span className="font-serif italic text-earth-soft text-sm mb-4">
-                  0{i + 1}
-                </span>
                 <h3 className="font-serif text-2xl md:text-3xl text-forest-deep mb-3">
                   {o.title}
                 </h3>

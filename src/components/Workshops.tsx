@@ -45,10 +45,7 @@ export const Workshops = () => {
           {EXAMPLES.map((w, i) => (
             <Reveal key={w.title} delay={i * 150}>
               <article className="leaf-card">
-                <span className="font-serif italic text-earth-soft text-sm">
-                  Example 0{i + 1}
-                </span>
-                <h3 className="font-serif text-2xl md:text-3xl text-forest-deep mt-2 mb-4">
+                <h3 className="font-serif text-2xl md:text-3xl text-forest-deep mb-4">
                   {w.title}
                 </h3>
                 <p className="text-foreground/75 leading-relaxed">{w.body}</p>
