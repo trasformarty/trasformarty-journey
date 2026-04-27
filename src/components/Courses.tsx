@@ -23,7 +23,7 @@ export const Courses = () => {
               down, inhabit the body more fully and learn a touch that meets
               the other with respect, sensitivity and quiet strength. A space
               where vulnerability is welcomed, where emotions can move, and
-              where each person is invited to reconnect with their own ritmo
+              where each person is invited to reconnect with their own
               rhythm and authenticity.
             </p>
             <p>
