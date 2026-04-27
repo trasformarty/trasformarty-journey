@@ -34,7 +34,7 @@ export const Sessions = () => {
           <p className="text-lg text-foreground/70 leading-relaxed mb-8 text-pretty">
             A one-to-one somatic &amp; emotional accompaniment journey — through body-based listening, available both online and in person.
           </p>
-          <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
+          <div className="space-y-5 text-foreground/70 leading-relaxed text-pretty">
             <p>
               One-to-one sessions, available both online and in person, where I
               accompany emotional processes through a somatic, body-based and
