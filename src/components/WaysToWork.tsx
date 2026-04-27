@@ -8,8 +8,8 @@ const OFFERINGS = [
     href: "#touch-to-soul",
   },
   {
-    title: "Emotional & Somatic Accompaniment",
-    desc: "One-to-one journeys, online or in person, through body-based listening.",
+    title: "Moving Through",
+    desc: "Emotional & Somatic One-to-one accompaniment, online or in person, through body-based listening.",
     href: "#sessions",
   },
   {
