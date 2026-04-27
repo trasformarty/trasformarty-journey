@@ -7,17 +7,17 @@
 
 @layer base {
   :root {
-    /* Core palette */
-    --ivory: 40 60% 96%;            /* warm ivory from logo reference */
-    --ivory-warm: 39 39% 93%;       /* beige from forest/video light */
-    --sage: 73 12% 57%;             /* muted sage from forest stills */
-    --sage-deep: 80 13% 37%;
-    --forest: 109 11% 20%;          /* deep forest green from screenshots */
-    --forest-deep: 98 13% 12%;
-    --earth: 38 20% 40%;            /* earthy beige-brown accent */
-    --earth-soft: 39 37% 85%;
-    --gold: 40 40% 59%;             /* subtle sunlit warmth */
-    --gold-soft: 39 37% 85%;
+    /* Core palette — inspired by sunlit Mediterranean pine forest */
+    --ivory: 40 60% 96%;            /* warm ivory */
+    --ivory-warm: 39 39% 93%;       /* beige from forest light */
+    --sage: 88 18% 64%;             /* lighter sunlit sage */
+    --sage-deep: 92 15% 44%;        /* mid green */
+    --forest: 96 18% 32%;           /* lighter forest green from screenshots */
+    --forest-deep: 100 16% 22%;     /* deeper but still soft */
+    --earth: 34 24% 46%;            /* warm earthy beige-brown */
+    --earth-soft: 38 35% 84%;
+    --gold: 40 42% 62%;             /* sunlit warmth */
+    --gold-soft: 39 40% 86%;
 
     /* Semantic — light theme */
     --background: var(--ivory);
@@ -120,16 +120,15 @@
 }
 
 @layer components {
-  /* Signature wordmark — inspired by the attached thin cursive reference */
+  /* Signature wordmark — thin, flowing cursive in the spirit of the reference */
   .signature {
-    font-family: 'Sacramento', 'Allura', 'Brush Script MT', cursive;
+    font-family: 'Pinyon Script', 'Allura', 'Mrs Saint Delafield', 'Brush Script MT', cursive;
     font-weight: 400;
-    letter-spacing: 0.015em;
-    line-height: 0.86;
+    letter-spacing: 0.005em;
+    line-height: 0.92;
     display: inline-block;
     white-space: nowrap;
     font-synthesis: none;
-    transform: rotate(-0.5deg);
   }
 
   .section {
