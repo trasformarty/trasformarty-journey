@@ -31,10 +31,10 @@ export const Sessions = () => {
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-4 text-balance">
             Moving Through
           </h2>
-          <p className="text-lg text-foreground/70 leading-relaxed mb-8 text-pretty">
+          <p className="text-foreground/70 leading-relaxed mb-6">
             A one-to-one somatic &amp; emotional accompaniment journey — through body-based listening, available both online and in person.
           </p>
-          <div className="space-y-5 text-foreground/70 leading-relaxed text-pretty">
+          <div className="space-y-5 text-foreground/70 leading-relaxed">
             <p>
               One-to-one sessions, available both online and in person, where I
               accompany emotional processes through a somatic, body-based and
