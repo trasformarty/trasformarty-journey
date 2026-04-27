@@ -11,14 +11,16 @@ export const Courses = () => {
           </h2>
           <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
             <p>
-              You can also find me assisting and accompanying Lisandro&rsquo;s
-              courses. This is an important part of my work: supporting, assisting
-              and helping hold the space so that participants can feel guided,
-              safe and present in their own process.
+              You can also find me assisting and accompanying the trainings of{" "}
+              <span className="text-forest-deep font-medium">Lisandro Maseret</span>,
+              creator of <em>Deep Connection Massage</em> &mdash; a bodywork
+              technique that weaves deep tissue, presence and conscious touch
+              into a profound dialogue between giver and receiver.
             </p>
-            <p className="text-foreground/55 italic">
-              More details about Lisandro, the type of courses, dates and links
-              will be added here soon.
+            <p>
+              Assisting these trainings is an important part of my work:
+              supporting, holding the space and accompanying participants so
+              they can feel guided, safe and present in their own process.
             </p>
           </div>
         </Reveal>
