@@ -24,7 +24,7 @@ export const Courses = () => {
               the other with respect, sensitivity and quiet strength. A space
               where vulnerability is welcomed, where emotions can move, and
               where each person is invited to reconnect with their own ritmo
-              and authenticity.
+              rhythm and authenticity.
             </p>
             <p>
               My role is to hold this space alongside Lisandro: to accompany
