@@ -6,7 +6,7 @@ export const Hero = () => {
     <section
       id="home"
       className="relative min-h-[100svh] w-full overflow-hidden flex items-center justify-center text-ivory"
-      aria-label="Trasformarty — move, feel, transform"
+      aria-label="TrasforMarti — move, feel, transform"
     >
       {/* Video background */}
       <div className="absolute inset-0 z-0 bg-gradient-forest" aria-hidden="true">
