@@ -21,7 +21,7 @@ const ESSENCE = [
 
 export const Essence = () => {
   return (
-    <section id="essence" className="section bg-gradient-ivory relative overflow-hidden" aria-label="The essence of Trasformarty">
+    <section id="essence" className="section bg-gradient-ivory relative overflow-hidden" aria-label="The essence of TrasforMarti">
       {/* organic floating shape */}
       <div
         aria-hidden="true"
@@ -37,7 +37,7 @@ export const Essence = () => {
         <Reveal className="max-w-3xl mx-auto text-center">
           <p className="eyebrow mb-8">Essence</p>
           <p className="font-serif text-3xl md:text-5xl leading-[1.2] text-forest-deep text-balance">
-            Trasformarty is an invitation to move through life with more
+            TrasforMarti is an invitation to move through life with more
             <em className="text-earth"> presence</em>,
             <em className="text-earth"> softness </em>
             and <em className="text-earth">freedom</em>.
