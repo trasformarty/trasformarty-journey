@@ -31,7 +31,7 @@ const OFFERINGS = [
 
 export const WaysToWork = () => {
   return (
-    <section id="work" className="section bg-ivory-warm" aria-label="Ways to work with me">
+    <section id="work" className="section" aria-label="Ways to work with me">
       <div className="container-soft">
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">Ways to Work With Me</p>
