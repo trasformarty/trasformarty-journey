@@ -24,17 +24,23 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const headerTone = scrolled ? "text-forest-deep" : "text-ivory";
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
-          ? "bg-ivory/80 backdrop-blur-xl border-b border-border/60"
-          : "bg-transparent"
+          ? "bg-ivory/86 backdrop-blur-xl border-b border-forest-deep/10 shadow-soft"
+          : "bg-gradient-to-b from-forest-deep/30 to-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 py-4 md:py-5">
-        <a href="#home" className="text-forest-deep" aria-label="Trasformarty — back to top">
-          <Wordmark size="sm" />
+        <a
+          href="#home"
+          className={`${headerTone} transition-colors duration-700`}
+          aria-label="Trasformarty — back to top"
+        >
+          <Wordmark size="sm" className={!scrolled ? "drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]" : ""} />
         </a>
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Primary">
@@ -42,22 +48,34 @@ export const Header = () => {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm text-forest-deep/80 hover:text-forest-deep transition-colors duration-300 relative group"
+              className={`text-sm transition-colors duration-300 relative group ${
+                scrolled
+                  ? "text-forest-deep/80 hover:text-forest-deep"
+                  : "text-ivory/82 hover:text-ivory"
+              }`}
             >
               {item.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-forest group-hover:w-full transition-all duration-500" />
+              <span
+                className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 ${
+                  scrolled ? "bg-forest" : "bg-ivory"
+                }`}
+              />
             </a>
           ))}
           <a
             href="#contact"
-            className="ml-2 inline-flex items-center rounded-full bg-forest text-ivory px-5 py-2.5 text-sm hover:bg-forest-deep transition-colors duration-300 shadow-soft"
+            className={`ml-2 inline-flex items-center rounded-full px-5 py-2.5 text-sm transition-all duration-500 shadow-soft ${
+              scrolled
+                ? "bg-forest text-ivory hover:bg-forest-deep"
+                : "bg-ivory/90 text-forest-deep hover:bg-ivory"
+            }`}
           >
             Book a Session
           </a>
         </nav>
 
         <button
-          className="lg:hidden p-2 -mr-2 text-forest-deep"
+          className={`lg:hidden p-2 -mr-2 transition-colors duration-700 ${headerTone}`}
           onClick={() => setOpen(true)}
           aria-label="Open menu"
           aria-expanded={open}
@@ -75,7 +93,7 @@ export const Header = () => {
         aria-modal="true"
       >
         <div
-          className="absolute inset-0 bg-forest-deep/40 backdrop-blur-sm"
+          className="absolute inset-0 bg-forest-deep/45 backdrop-blur-sm"
           onClick={() => setOpen(false)}
         />
         <div
@@ -83,8 +101,8 @@ export const Header = () => {
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between p-6 border-b border-border/60">
-            <Wordmark size="sm" />
+          <div className="flex items-center justify-between p-6 border-b border-forest-deep/10">
+            <Wordmark size="sm" className="text-forest-deep" />
             <button
               onClick={() => setOpen(false)}
               aria-label="Close menu"
@@ -99,7 +117,7 @@ export const Header = () => {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="font-serif text-2xl py-3 text-forest-deep border-b border-border/40 last:border-0"
+                className="font-serif text-2xl py-3 text-forest-deep border-b border-forest-deep/10 last:border-0"
               >
                 {item.label}
               </a>

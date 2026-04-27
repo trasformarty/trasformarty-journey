@@ -4,13 +4,13 @@ interface WordmarkProps {
 }
 
 /**
- * TrasforMarti — handwritten signature wordmark.
- * One attached word with emphasized capital M.
+ * TrasforMarti — signature-style wordmark.
+ * The word stays attached, with Marti revealed through the capital M.
  */
 const sizeMap = {
-  sm: "text-2xl",
-  md: "text-3xl md:text-4xl",
-  lg: "text-5xl md:text-7xl",
+  sm: "text-3xl",
+  md: "text-4xl md:text-5xl",
+  lg: "text-6xl md:text-8xl",
 };
 
 export const Wordmark = ({ className = "", size = "md" }: WordmarkProps) => {
@@ -19,7 +19,7 @@ export const Wordmark = ({ className = "", size = "md" }: WordmarkProps) => {
       className={`signature ${sizeMap[size]} ${className}`}
       aria-label="TrasforMarti"
     >
-      Trasfor<span className="cap-m">M</span>arti
+      TrasforMarti
     </span>
   );
 };
