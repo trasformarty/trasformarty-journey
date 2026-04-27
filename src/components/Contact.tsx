@@ -32,29 +32,25 @@ export const Contact = () => {
           <ul className="mt-10 space-y-5 text-foreground/80">
             <li className="flex items-start gap-4">
               <Mail size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
-              <a href="mailto:hello@trasformarty.com" className="hover:text-forest-deep">
-                hello@trasformarty.com
-                <span className="block text-xs text-foreground/50 italic">placeholder</span>
+              <a href="mailto:martina.roscioli@gmail.com" className="hover:text-forest-deep">
+                martina.roscioli@gmail.com
               </a>
             </li>
             <li className="flex items-start gap-4">
               <Instagram size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
               <a
-                href="https://instagram.com/trasformarty"
+                href="https://instagram.com/trasformarti_"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-forest-deep"
               >
-                @trasformarty
-                <span className="block text-xs text-foreground/50 italic">
-                  Instagram link coming soon
-                </span>
+                @trasformarti_
               </a>
             </li>
             <li className="flex items-start gap-4">
               <MapPin size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
               <span>
-                Location / city to be added
+                Ibiza & more
               </span>
             </li>
           </ul>
