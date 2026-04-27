@@ -63,7 +63,7 @@ export const Contact = () => {
             aria-label="Contact form"
           >
             {submitted ? (
-              <div className="text-center py-12 px-4 animate-fade-in">
+              <div key="thanks" className="text-center py-12 px-4 animate-fade-in">
                 <div className="mx-auto w-14 h-14 rounded-full bg-sage/40 flex items-center justify-center mb-5">
                   <Check size={26} strokeWidth={1.5} className="text-forest-deep" />
                 </div>
@@ -74,7 +74,7 @@ export const Contact = () => {
                 </p>
               </div>
             ) : (
-              <>
+              <div key="form-fields" className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <Field label="Name" id="name" required>
                     <input
@@ -137,27 +137,26 @@ export const Contact = () => {
                 >
                   {loading ? "Sending…" : "Send Message"}
                 </button>
-              </>
+              </div>
             )}
-
-            <style>{`
-              .form-input {
-                width: 100%;
-                background: hsl(var(--ivory));
-                border: 1px solid hsl(var(--border));
-                border-radius: 0.85rem;
-                padding: 0.85rem 1rem;
-                font-size: 0.95rem;
-                color: hsl(var(--foreground));
-                transition: border-color .3s, box-shadow .3s;
-              }
-              .form-input:focus {
-                outline: none;
-                border-color: hsl(var(--forest));
-                box-shadow: 0 0 0 3px hsl(var(--sage) / 0.4);
-              }
-            `}</style>
           </form>
+          <style>{`
+            .form-input {
+              width: 100%;
+              background: hsl(var(--ivory));
+              border: 1px solid hsl(var(--border));
+              border-radius: 0.85rem;
+              padding: 0.85rem 1rem;
+              font-size: 0.95rem;
+              color: hsl(var(--foreground));
+              transition: border-color .3s, box-shadow .3s;
+            }
+            .form-input:focus {
+              outline: none;
+              border-color: hsl(var(--forest));
+              box-shadow: 0 0 0 3px hsl(var(--sage) / 0.4);
+            }
+          `}</style>
         </Reveal>
       </div>
     </section>
