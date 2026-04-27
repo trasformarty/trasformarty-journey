@@ -40,7 +40,11 @@ export const Header = () => {
           className={`${headerTone} transition-colors duration-700`}
           aria-label="Trasformarty — back to top"
         >
-          <Wordmark size="sm" className={!scrolled ? "drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]" : ""} />
+          <Wordmark
+            size="sm"
+            variant={scrolled ? "dark" : "ivory"}
+            className={!scrolled ? "drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]" : ""}
+          />
         </a>
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Primary">
