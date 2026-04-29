@@ -14,9 +14,10 @@ export const Courses = () => {
               I assist and accompany the trainings of{" "}
               <span className="text-forest-deep font-medium">Lisandro Maseret</span>,
               creator of <em>Deep Connection Massage</em> &mdash; a bodywork
-              practice that goes far beyond technique. It is a way of touching
-              and being touched where depth, presence and listening become one
-              language.
+              practice that goes far beyond technique and has been an important
+              part of my own personal path and growth. Its philosophy and way of
+              working feel deeply aligned with mine: a way of touching and being
+              touched where depth, presence and listening become one language.
             </p>
             <p>
               In these trainings we open a space where participants can slow
