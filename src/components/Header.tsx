@@ -28,7 +28,7 @@ export const Header = () => {
   const heroBookLink =
     "font-serif italic text-xl md:text-2xl tracking-wide text-ivory/95 hover:text-ivory transition-colors duration-300";
   const menuButtonBase =
-    "group inline-flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 backdrop-blur-sm";
+    "group inline-flex items-center justify-center p-2 -mr-2 transition-all duration-500";
 
   return (
     <header
@@ -77,12 +77,12 @@ export const Header = () => {
                 Book a Session
               </a>
               <button
-                className={`${menuButtonBase} border-ivory/35 bg-ivory/8 text-ivory hover:bg-ivory/16 hover:border-ivory/60 hover:scale-105`}
+                className={`${menuButtonBase} text-ivory hover:text-ivory/80 hover:scale-105`}
                 onClick={() => setOpen(true)}
                 aria-label="Open menu"
                 aria-expanded={open}
               >
-                <Menu size={31} strokeWidth={1.25} className="transition-transform duration-500 group-hover:scale-110" />
+                <Menu size={34} strokeWidth={1.2} className="transition-transform duration-500 group-hover:scale-110" />
               </button>
             </div>
           )}
@@ -100,16 +100,12 @@ export const Header = () => {
             Book a Session
           </a>
           <button
-            className={
-              scrolled
-                ? `${menuButtonBase} border-forest-deep/20 bg-ivory/60 text-forest-deep hover:bg-ivory hover:border-forest-deep/35`
-                : `${menuButtonBase} border-ivory/35 bg-ivory/8 text-ivory hover:bg-ivory/16 hover:border-ivory/60 hover:scale-105`
-            }
+            className={`${menuButtonBase} ${headerTone} hover:opacity-80 hover:scale-105`}
             onClick={() => setOpen(true)}
             aria-label="Open menu"
             aria-expanded={open}
           >
-            <Menu size={scrolled ? 29 : 31} strokeWidth={1.25} className="transition-transform duration-500 group-hover:scale-110" />
+            <Menu size={scrolled ? 31 : 34} strokeWidth={1.2} className="transition-transform duration-500 group-hover:scale-110" />
           </button>
         </div>
       </div>
