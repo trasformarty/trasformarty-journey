@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Instagram, Mail, MapPin, Check, AlertCircle } from "lucide-react";
+import { Instagram, Mail, MapPin, Phone, Check, AlertCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
@@ -81,6 +81,12 @@ export const Contact = () => {
               <span>
                 Ibiza & more
               </span>
+            </li>
+            <li className="flex items-start gap-4">
+              <Phone size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
+              <a href="tel:+346917384" className="hover:text-forest-deep">
+                +34 691 73 84
+              </a>
             </li>
           </ul>
         </Reveal>
