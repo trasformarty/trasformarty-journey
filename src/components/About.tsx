@@ -38,6 +38,29 @@ export const About = () => {
               touch as a language of presence, care and reconnection.
             </p>
             <p>
+              Through massage and bodywork, I began to understand that the hands
+              can listen in a way that goes beyond technique. Touch opened a door
+              into the body&rsquo;s quiet intelligence, into what is held, protected,
+              remembered and ready to soften.
+            </p>
+            <p>
+              This experience led me to explore more deeply the nervous system
+              and somatic therapy — not as abstract knowledge, but as living tools
+              to support regulation, emotional integration and a more compassionate
+              relationship with oneself.
+            </p>
+            <p>
+              Over time, I have learned to give space to a sensitivity that has
+              always been part of me — a sensitivity to the body, to subtle energy,
+              and to the quieter layers of experience that are not always visible,
+              but can be deeply felt.
+            </p>
+            <p>
+              Today, this sensitivity can be expressed through touch, somatic
+              listening and emotional accompaniment, becoming a way to meet others
+              with presence, respect and care.
+            </p>
+            <p>
               I accompany people through processes of transformation, creating
               spaces where the body can speak, emotions can move, and the person
               can return to a deeper sense of presence and freedom.
