@@ -45,6 +45,14 @@ export const Sessions = () => {
               the body can express what words may not yet know, and where
               transformation can happen with presence and respect.
             </p>
+            <p>
+              Along the way, we learn to recognize the resources already present
+              within you — what supports you, how to access it, and how to return
+              to it. Gently, we practice moving between what feels safe and what
+              feels more delicate or difficult, sometimes approaching traumatic
+              memories with care, while strengthening emotional resilience, trust,
+              inner capacity and emotional muscles.
+            </p>
           </div>
         </Reveal>
 
