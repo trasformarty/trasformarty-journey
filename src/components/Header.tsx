@@ -25,6 +25,10 @@ export const Header = () => {
   }, []);
 
   const headerTone = scrolled ? "text-forest-deep" : "text-ivory";
+  const heroBookLink =
+    "font-serif italic text-xl md:text-2xl tracking-wide text-ivory/95 hover:text-ivory transition-colors duration-300";
+  const menuButtonBase =
+    "group inline-flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-500 backdrop-blur-sm";
 
   return (
     <header
@@ -69,19 +73,16 @@ export const Header = () => {
             </nav>
           ) : (
             <div className="flex items-center gap-5 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
-              <a
-                href="#contact"
-                className="text-sm tracking-wide text-ivory/90 hover:text-ivory transition-colors duration-300"
-              >
+              <a href="#contact" className={heroBookLink}>
                 Book a Session
               </a>
               <button
-                className="p-2 -mr-2 text-ivory transition-colors duration-300 hover:text-ivory/80"
+                className={`${menuButtonBase} border-ivory/35 bg-ivory/8 text-ivory hover:bg-ivory/16 hover:border-ivory/60 hover:scale-105`}
                 onClick={() => setOpen(true)}
                 aria-label="Open menu"
                 aria-expanded={open}
               >
-                <Menu size={28} strokeWidth={1.4} />
+                <Menu size={31} strokeWidth={1.25} className="transition-transform duration-500 group-hover:scale-110" />
               </button>
             </div>
           )}
@@ -90,17 +91,25 @@ export const Header = () => {
         <div className="lg:hidden flex items-center gap-4">
           <a
             href="#contact"
-            className={`text-sm tracking-wide transition-colors duration-700 ${headerTone}`}
+            className={
+              scrolled
+                ? `font-serif italic text-lg tracking-wide transition-colors duration-700 ${headerTone}`
+                : heroBookLink
+            }
           >
             Book a Session
           </a>
           <button
-            className={`p-2 -mr-2 transition-colors duration-700 ${headerTone}`}
+            className={
+              scrolled
+                ? `${menuButtonBase} border-forest-deep/20 bg-ivory/60 text-forest-deep hover:bg-ivory hover:border-forest-deep/35`
+                : `${menuButtonBase} border-ivory/35 bg-ivory/8 text-ivory hover:bg-ivory/16 hover:border-ivory/60 hover:scale-105`
+            }
             onClick={() => setOpen(true)}
             aria-label="Open menu"
             aria-expanded={open}
           >
-            <Menu size={26} strokeWidth={1.4} />
+            <Menu size={scrolled ? 29 : 31} strokeWidth={1.25} className="transition-transform duration-500 group-hover:scale-110" />
           </button>
         </div>
       </div>
