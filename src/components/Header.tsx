@@ -47,50 +47,67 @@ export const Header = () => {
           />
         </a>
 
-        <nav className="hidden lg:flex items-center gap-7" aria-label="Primary">
-          {NAV.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={`text-sm transition-colors duration-300 relative group ${
-                scrolled
-                  ? "text-forest-deep/80 hover:text-forest-deep"
-                  : "text-ivory/82 hover:text-ivory"
-              }`}
-            >
-              {item.label}
-              <span
-                className={`absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 ${
-                  scrolled ? "bg-forest" : "bg-ivory"
-                }`}
-              />
-            </a>
-          ))}
+        <div className="hidden lg:flex items-center gap-6">
+          {scrolled ? (
+            <nav className="flex items-center gap-7" aria-label="Primary">
+              {NAV.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm transition-colors duration-300 relative group text-forest-deep/80 hover:text-forest-deep"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 bg-forest" />
+                </a>
+              ))}
+              <a
+                href="#contact"
+                className="ml-2 inline-flex items-center rounded-full px-5 py-2.5 text-sm transition-all duration-500 shadow-soft bg-forest text-ivory hover:bg-forest-deep"
+              >
+                Book a Session
+              </a>
+            </nav>
+          ) : (
+            <div className="flex items-center gap-5 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
+              <a
+                href="#contact"
+                className="text-sm tracking-wide text-ivory/90 hover:text-ivory transition-colors duration-300"
+              >
+                Book a Session
+              </a>
+              <button
+                className="p-2 -mr-2 text-ivory transition-colors duration-300 hover:text-ivory/80"
+                onClick={() => setOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={open}
+              >
+                <Menu size={28} strokeWidth={1.4} />
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="lg:hidden flex items-center gap-4">
           <a
             href="#contact"
-            className={`ml-2 inline-flex items-center rounded-full px-5 py-2.5 text-sm transition-all duration-500 shadow-soft ${
-              scrolled
-                ? "bg-forest text-ivory hover:bg-forest-deep"
-                : "bg-ivory/90 text-forest-deep hover:bg-ivory"
-            }`}
+            className={`text-sm tracking-wide transition-colors duration-700 ${headerTone}`}
           >
             Book a Session
           </a>
-        </nav>
-
-        <button
-          className={`lg:hidden p-2 -mr-2 transition-colors duration-700 ${headerTone}`}
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
-          aria-expanded={open}
-        >
-          <Menu size={26} strokeWidth={1.4} />
-        </button>
+          <button
+            className={`p-2 -mr-2 transition-colors duration-700 ${headerTone}`}
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={open}
+          >
+            <Menu size={26} strokeWidth={1.4} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       <div
-        className={`lg:hidden fixed inset-0 z-50 transition-all duration-500 ${
+        className={`fixed inset-0 z-50 transition-all duration-500 ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         role="dialog"
@@ -115,7 +132,7 @@ export const Header = () => {
               <X size={24} strokeWidth={1.4} />
             </button>
           </div>
-          <nav className="flex flex-col p-6 gap-1" aria-label="Mobile primary">
+          <nav className="flex flex-col p-6 gap-1" aria-label="Menu navigation">
             {NAV.map((item) => (
               <a
                 key={item.href}
