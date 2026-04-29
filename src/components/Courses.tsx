@@ -20,12 +20,12 @@ export const Courses = () => {
               touched where depth, presence and listening become one language.
             </p>
             <p>
-              In these trainings we open a space where participants can slow
-              down, inhabit the body more fully and learn a touch that meets
-              the other with respect, sensitivity and quiet strength. A space
-              where vulnerability is welcomed, where emotions can move, and
-              where each person is invited to reconnect with their own
-              rhythm and authenticity.
+              In these trainings, we create a space where participants can slow
+              down, return to the body and discover touch as a living language
+              &mdash; something to feel, listen to and offer with respect. A space
+              where vulnerability is welcomed, emotions can move, and each person
+              is invited to reconnect with their own rhythm, sensitivity and
+              authenticity.
             </p>
             <p>
               My role is to hold this space alongside Lisandro: to accompany
