@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Reveal } from "./Reveal";
+import ImageLightbox from "./ImageLightbox";
 
 const COURSE_IMAGES = [
   "/deep-connection-1.jpg",
@@ -8,6 +10,8 @@ const COURSE_IMAGES = [
 ];
 
 export const Courses = () => {
+  const [lightbox, setLightbox] = useState<string | null>(null);
+
   return (
     <section id="courses" className="section bg-ivory-warm" aria-label="Courses and collaborations">
       <div className="container-soft max-w-4xl">
@@ -46,9 +50,12 @@ export const Courses = () => {
         <Reveal delay={120} className="mt-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4" aria-label="Deep Connection Massage course gallery">
             {COURSE_IMAGES.map((src, index) => (
-              <div
+              <button
                 key={src}
-                className="aspect-square overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-sage/45 via-ivory to-gold-soft/35 shadow-soft"
+                type="button"
+                onClick={() => setLightbox(src)}
+                className="aspect-square overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-sage/45 via-ivory to-gold-soft/35 shadow-soft cursor-zoom-in text-left"
+                aria-label={`Open Deep Connection Massage training photo ${index + 1}`}
               >
                 <img
                   src={src}
@@ -59,7 +66,7 @@ export const Courses = () => {
                     event.currentTarget.style.display = "none";
                   }}
                 />
-              </div>
+              </button>
             ))}
           </div>
           <p className="mt-4 text-sm italic text-foreground/50">
@@ -88,6 +95,12 @@ export const Courses = () => {
           </div>
         </Reveal>
       </div>
+
+      <ImageLightbox
+        src={lightbox}
+        alt="Deep Connection Massage training image preview"
+        onClose={() => setLightbox(null)}
+      />
     </section>
   );
 };
