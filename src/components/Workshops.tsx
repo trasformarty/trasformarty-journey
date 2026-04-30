@@ -42,7 +42,7 @@ const WorkshopCarousel = ({
 
   return (
     <div>
-      <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft">
+      <div className="relative aspect-[5/3] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft">
         {images.map((src, index) => (
           <img
             key={src}
@@ -65,7 +65,7 @@ const WorkshopCarousel = ({
         )}
       </div>
 
-      <div className="mt-4 flex items-center justify-center gap-2" aria-label={`${title} gallery controls`}>
+      <div className="mt-3 flex items-center justify-center gap-2" aria-label={`${title} gallery controls`}>
         {images.map((_, index) => (
           <button
             key={index}
@@ -99,13 +99,13 @@ export const Workshops = () => {
           </p>
         </Reveal>
 
-        <div className="mt-14 space-y-8">
+        <div className="mt-12 space-y-7">
           {WORKSHOPS.map((workshop, index) => (
             <Reveal key={workshop.title} delay={index * 150}>
-              <article className="leaf-card grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              <article className="bg-card rounded-[2rem] p-6 md:p-8 shadow-card border border-border grid lg:grid-cols-12 gap-6 lg:gap-8 items-center transition-shadow duration-500 hover:shadow-organic">
                 <div className="lg:col-span-5">
-                  <p className="eyebrow mb-4">Workshop</p>
-                  <h3 className="font-serif text-3xl md:text-4xl text-forest-deep mb-5 text-balance">
+                  <p className="eyebrow mb-3">Workshop</p>
+                  <h3 className="font-serif text-3xl md:text-[2.35rem] leading-[1.08] text-forest-deep mb-4 text-balance">
                     {workshop.title}
                   </h3>
                   <p className="text-foreground/75 leading-relaxed text-pretty">
@@ -121,7 +121,7 @@ export const Workshops = () => {
           ))}
         </div>
 
-        <Reveal delay={400} className="mt-10">
+        <Reveal delay={400} className="mt-9">
           <a
             href="#contact"
             className="inline-flex items-center rounded-full bg-forest text-ivory px-7 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
