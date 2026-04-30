@@ -41,8 +41,8 @@ const WorkshopCarousel = ({
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
 
   return (
-    <div>
-      <div className="relative aspect-[5/3] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft">
+    <div className="lg:max-w-[430px] lg:ml-auto">
+      <div className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft">
         {images.map((src, index) => (
           <img
             key={src}
@@ -103,7 +103,7 @@ export const Workshops = () => {
           {WORKSHOPS.map((workshop, index) => (
             <Reveal key={workshop.title} delay={index * 150}>
               <article className="bg-card rounded-[2rem] p-6 md:p-8 shadow-card border border-border grid lg:grid-cols-12 gap-6 lg:gap-8 items-center transition-shadow duration-500 hover:shadow-organic">
-                <div className="lg:col-span-5">
+                <div className="lg:col-span-6">
                   <p className="eyebrow mb-3">Workshop</p>
                   <h3 className="font-serif text-3xl md:text-[2.35rem] leading-[1.08] text-forest-deep mb-4 text-balance">
                     {workshop.title}
@@ -113,7 +113,7 @@ export const Workshops = () => {
                   </p>
                 </div>
 
-                <div className="lg:col-span-7">
+                <div className="lg:col-span-6">
                   <WorkshopCarousel title={workshop.title} images={workshop.images} />
                 </div>
               </article>
