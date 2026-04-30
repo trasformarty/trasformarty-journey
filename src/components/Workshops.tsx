@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Reveal } from "./Reveal";
+import ImageLightbox from "./ImageLightbox";
 
 const WORKSHOPS = [
   {
@@ -39,10 +40,14 @@ const WorkshopCarousel = ({
 }) => {
   const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
     <div className="lg:max-w-[430px] lg:ml-auto">
-      <div className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft">
+      <div
+        className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft cursor-zoom-in"
+        onClick={() => setLightbox(images[active])}
+      >
         {images.map((src, index) => (
           <img
             key={src}
@@ -65,19 +70,24 @@ const WorkshopCarousel = ({
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-center gap-2" aria-label={`${title} gallery controls`}>
+      <div className="mt-3 flex items-center justify-center gap-2">
         {images.map((_, index) => (
           <button
             key={index}
             type="button"
             onClick={() => setActive(index)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              active === index ? "w-6 bg-forest" : "w-2 bg-forest/25 hover:bg-forest/45"
+              active === index ? "w-6 bg-forest" : "w-2 bg-forest/25"
             }`}
-            aria-label={`Show ${title} photo ${index + 1}`}
           />
         ))}
       </div>
+
+      <ImageLightbox
+        src={lightbox}
+        alt={`${title} image preview`}
+        onClose={() => setLightbox(null)}
+      />
     </div>
   );
 };
@@ -102,13 +112,13 @@ export const Workshops = () => {
         <div className="mt-12 space-y-7">
           {WORKSHOPS.map((workshop, index) => (
             <Reveal key={workshop.title} delay={index * 150}>
-              <article className="bg-card rounded-[2rem] p-6 md:p-8 shadow-card border border-border grid lg:grid-cols-12 gap-6 lg:gap-8 items-center transition-shadow duration-500 hover:shadow-organic">
+              <article className="bg-card rounded-[2rem] p-6 md:p-8 shadow-card border border-border grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 <div className="lg:col-span-6">
                   <p className="eyebrow mb-3">Workshop</p>
-                  <h3 className="font-serif text-3xl md:text-[2.35rem] leading-[1.08] text-forest-deep mb-4 text-balance">
+                  <h3 className="font-serif text-3xl md:text-[2.35rem] text-forest-deep mb-4">
                     {workshop.title}
                   </h3>
-                  <p className="text-foreground/75 leading-relaxed text-pretty">
+                  <p className="text-foreground/75 leading-relaxed">
                     {workshop.body}
                   </p>
                 </div>
@@ -120,15 +130,6 @@ export const Workshops = () => {
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={400} className="mt-9">
-          <a
-            href="#contact"
-            className="inline-flex items-center rounded-full bg-forest text-ivory px-7 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
-          >
-            Explore Workshops
-          </a>
-        </Reveal>
       </div>
     </section>
   );
