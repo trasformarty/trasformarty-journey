@@ -85,12 +85,12 @@ export const Contact = () => {
             <li className="flex items-start gap-4">
               <Phone size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
               <a
-                href="https://wa.me/346917384"
+                href="https://wa.me/34691738479"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-forest-deep"
               >
-                +34 691 73 84
+                +34 691 73 84 79
               </a>
             </li>
           </ul>
