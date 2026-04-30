@@ -1,5 +1,12 @@
 import { Reveal } from "./Reveal";
 
+const COURSE_IMAGES = [
+  "/deep-connection-1.jpg",
+  "/deep-connection-2.jpg",
+  "/deep-connection-3.jpg",
+  "/deep-connection-4.jpg",
+];
+
 export const Courses = () => {
   return (
     <section id="courses" className="section bg-ivory-warm" aria-label="Courses and collaborations">
@@ -34,6 +41,30 @@ export const Courses = () => {
               honest and transformative to unfold.
             </p>
           </div>
+        </Reveal>
+
+        <Reveal delay={120} className="mt-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4" aria-label="Deep Connection Massage course gallery">
+            {COURSE_IMAGES.map((src, index) => (
+              <div
+                key={src}
+                className="aspect-square overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-sage/45 via-ivory to-gold-soft/35 shadow-soft"
+              >
+                <img
+                  src={src}
+                  alt={`Deep Connection Massage training moment ${index + 1}`}
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-sm italic text-foreground/50">
+            Photos from Deep Connection Massage trainings will be added here.
+          </p>
         </Reveal>
 
         <Reveal delay={150} className="mt-12">
