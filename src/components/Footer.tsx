@@ -8,6 +8,7 @@ const LINKS = [
   { label: "Work With Me", href: "#work" },
   { label: "Workshops", href: "#workshops" },
   { label: "Contact", href: "#contact" },
+  { label: "Your Words", href: "#from-you" },
 ];
 
 export const Footer = () => {
