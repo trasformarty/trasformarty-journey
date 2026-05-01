@@ -11,6 +11,7 @@ const NAV = [
   { label: "Retreats", href: "#retreats" },
   { label: "Courses", href: "#courses" },
   { label: "Contact", href: "#contact" },
+  { label: "Your Words", href: "#from-you" },
 ];
 
 export const Header = () => {
@@ -53,7 +54,7 @@ export const Header = () => {
 
         <div className="hidden lg:flex items-center gap-6">
           {scrolled ? (
-            <nav className="flex items-center gap-7" aria-label="Primary">
+            <nav className="flex items-center gap-6" aria-label="Primary">
               {NAV.map((item) => (
                 <a
                   key={item.href}
