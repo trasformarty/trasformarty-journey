@@ -6,28 +6,9 @@ const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
 
 const TESTIMONIALS = [
   {
-    quote: "Your words here...",
-    name: "Name S.",
-  },
-  {
-    quote: "Your words here...",
-    name: "Name S.",
-  },
-  {
-    quote: "Your words here...",
-    name: "Name S.",
-  },
-  {
-    quote: "Your words here...",
-    name: "Name S.",
-  },
-  {
-    quote: "Your words here...",
-    name: "Name S.",
-  },
-  {
-    quote: "Your words here...",
-    name: "Name S.",
+    quote:
+      "Marti... così autentica e magica da saper accogliere ogni tua cellula. Avvicinarsi a lei significa entrare in ascolto con se stessi: senza maschere e con dolcezza. Grazie ✨",
+    name: "Letizia B.",
   },
 ];
 
@@ -86,7 +67,7 @@ export const Testimonials = () => {
             {TESTIMONIALS.map((item, index) => (
               <figure
                 key={index}
-                className="min-w-[78%] sm:min-w-[42%] lg:min-w-[19%] snap-start"
+                className="min-w-[78%] sm:min-w-[42%] lg:min-w-[38%] snap-start"
               >
                 <blockquote className="font-serif italic text-2xl md:text-3xl leading-[1.22] text-forest-deep text-pretty">
                   “{item.quote}”
