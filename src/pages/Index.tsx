@@ -9,6 +9,7 @@ import { Sessions } from "@/components/Sessions";
 import { Workshops } from "@/components/Workshops";
 import { Retreats } from "@/components/Retreats";
 import { Courses } from "@/components/Courses";
+import { Testimonials } from "@/components/Testimonials";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
@@ -27,6 +28,7 @@ const Index = () => {
         <Workshops />
         <Retreats />
         <Courses />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />
