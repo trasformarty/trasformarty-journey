@@ -108,22 +108,22 @@ export const Header = () => {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-50 transition-all duration-500 ${
-          open ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed inset-0 z-[90] transition-all duration-500 ${
+          open ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
         }`}
         role="dialog"
         aria-modal="true"
       >
         <div
-          className="absolute inset-0 bg-forest-deep/45 backdrop-blur-sm"
+          className="absolute inset-0 bg-forest-deep/55 backdrop-blur-sm"
           onClick={() => setOpen(false)}
         />
         <div
-          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-ivory shadow-organic flex flex-col transition-transform duration-500 ${
+          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-[hsl(var(--ivory))] shadow-organic flex flex-col transition-transform duration-500 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between p-6 border-b border-forest-deep/10">
+          <div className="flex items-center justify-between p-6 border-b border-forest-deep/10 bg-[hsl(var(--ivory))]">
             <Wordmark size="sm" variant="dark" />
             <button
               onClick={() => setOpen(false)}
@@ -133,7 +133,7 @@ export const Header = () => {
               <X size={24} strokeWidth={1.4} />
             </button>
           </div>
-          <nav className="flex flex-col p-6 gap-1" aria-label="Menu navigation">
+          <nav className="flex flex-col p-6 gap-1 bg-[hsl(var(--ivory))] flex-1" aria-label="Menu navigation">
             {NAV.map((item) => (
               <a
                 key={item.href}
