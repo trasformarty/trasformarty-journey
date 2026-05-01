@@ -26,7 +26,7 @@ export const Header = () => {
 
   const headerTone = scrolled ? "text-forest-deep" : "text-ivory";
   const bookLinkBase =
-    "text-xs md:text-sm uppercase tracking-[0.18em] font-medium transition-colors duration-500";
+    "text-[10px] md:text-[11px] lowercase tracking-[0.14em] font-normal transition-colors duration-500";
   const menuButtonBase =
     "group inline-flex items-center justify-center p-2 -mr-2 transition-all duration-500";
 
@@ -72,9 +72,9 @@ export const Header = () => {
               </a>
             </nav>
           ) : (
-            <div className="flex items-center gap-4 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
+            <div className="flex items-center gap-3 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
               <a href="#contact" className={`${bookLinkBase} text-ivory/90 hover:text-ivory`}>
-                Book Session
+                book a session
               </a>
               <button
                 className={`${menuButtonBase} text-ivory hover:text-ivory/80 hover:scale-105`}
@@ -88,12 +88,12 @@ export const Header = () => {
           )}
         </div>
 
-        <div className="lg:hidden flex items-center gap-3">
+        <div className="lg:hidden flex items-center gap-2.5">
           <a
             href="#contact"
             className={`${bookLinkBase} ${headerTone} hover:opacity-80`}
           >
-            Book Session
+            book a session
           </a>
           <button
             className={`${menuButtonBase} ${headerTone} hover:opacity-80 hover:scale-105`}
