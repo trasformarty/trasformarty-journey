@@ -21,9 +21,10 @@ const WORKSHOPS = [
     title: "Mama yo te curo",
     body: [
       "Born from a simple and true gesture — my son’s spontaneous desire to care, share and teach something that, at home, is already a game, a moment of calm, contact and love.",
-      "Mama yo te curo is an experiential workshop for parents and children, where touch, presence and listening become languages of care. Through conscious play, families are invited to slow down, leave performance aside, and rediscover a more natural and authentic way of being together.",
-      "At the heart of the experience are the hands: hands that listen, connect, communicate, calm and reassure. Through play, children discover the subtle magic of touch — the quiet energy that passes through the hands, and the care, presence and power they already carry within them.",
-      "It is a warm and intimate space where care becomes play and play becomes care, where children and adults meet each other with more presence, sweetness and truth.",
+      "Mama yo te curo is a workshop for parents and children, created from my experience as a mother and often held with my children beside me. Through play, touch and presence, families are invited to slow down and find a sweeter, more natural way of being together.",
+      "At the heart of the experience are the hands: small hands that listen, connect, calm and reassure. Through simple gestures, children discover the subtle magic of touch — the quiet energy that passes through the hands, and the care and power they already carry within them.",
+      "Parents and children leave with something they can bring home: a small massage sequence, a shared ritual of softness, a way to turn touch into a moment of intimacy, play and care.",
+      "It is a warm and intimate space where care becomes play and play becomes care — a place to meet each other with more presence, sweetness and truth.",
     ],
     cta: "Ask for the Full Story",
     images: [
