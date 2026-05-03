@@ -58,11 +58,16 @@ export const TouchToSoul = () => {
             </p>
 
             <p>
-              An intimate encounter with one&apos;s own rhythm, one&apos;s own felt
-              sense, with a quality of presence that daily life so often
-              forgets. What remains is a state of well-being, peace and
-              integration that can last in time —
+              An intimate encounter with one&apos;s own rhythm and felt sense, with
+              a quality of presence that daily life so often forgets. What
+              remains is a state of well-being, peace and integration that can
+              last in time —
               <span className="italic"> a small step on the path of knowing oneself.</span>
+            </p>
+
+            <p className="text-base text-foreground/70 pt-1">
+              I offer sessions from 60 to 120 minutes, allowing the time to
+              follow the rhythm and depth of the work.
             </p>
           </div>
 
