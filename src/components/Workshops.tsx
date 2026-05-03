@@ -19,7 +19,8 @@ const WORKSHOPS = [
   {
     title: "Mama yo te curo",
     body:
-      "A workshop that brings massage, touch and playful connection into the relationship between parents and children. Designed for adults and children, it creates a space where touch becomes care, play, presence and connection.",
+      "Born from a simple and true gesture — my son’s spontaneous desire to care, share and teach something that, at home, is already a game, a moment of calm, contact and love. Mama yo te curo is an experiential workshop for parents and children, where touch, presence and listening become languages of care. Through conscious play, families are invited to slow down, leave performance aside, and rediscover a more natural and authentic way of being together. At the heart of the experience are the hands: hands that listen, connect, communicate, calm and reassure. In this space, children are supported in recognizing something they already know — how to touch, how to listen, how to care. It is a warm and intimate space where care becomes play and play becomes care, where children and adults meet each other with more presence, sweetness and truth.",
+    cta: "Ask for the Full Story",
     images: [
       "/workshops/mama-1.jpg",
       "/workshops/mama-2.jpg",
@@ -121,6 +122,14 @@ export const Workshops = () => {
                   <p className="text-foreground/75 leading-relaxed">
                     {workshop.body}
                   </p>
+                  {workshop.cta && (
+                    <a
+                      href="#contact"
+                      className="mt-5 inline-flex items-center rounded-full border border-forest/30 text-forest-deep px-5 py-2.5 text-sm hover:bg-sage/25 transition-colors duration-500"
+                    >
+                      {workshop.cta}
+                    </a>
+                  )}
                 </div>
 
                 <div className="lg:col-span-6">
