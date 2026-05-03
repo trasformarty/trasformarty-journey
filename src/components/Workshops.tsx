@@ -5,8 +5,9 @@ import ImageLightbox from "./ImageLightbox";
 const WORKSHOPS = [
   {
     title: "The Importance of Touch",
-    body:
+    body: [
       "For groups such as future yoga teachers, this workshop explores touch as presence, communication, grounding and support.",
+    ],
     images: [
       "/workshops/touch-1.jpg",
       "/workshops/touch-2.jpg",
@@ -18,8 +19,12 @@ const WORKSHOPS = [
   },
   {
     title: "Mama yo te curo",
-    body:
-      "Born from a simple and true gesture — my son’s spontaneous desire to care, share and teach something that, at home, is already a game, a moment of calm, contact and love. Mama yo te curo is an experiential workshop for parents and children, where touch, presence and listening become languages of care. Through conscious play, families are invited to slow down, leave performance aside, and rediscover a more natural and authentic way of being together. At the heart of the experience are the hands: hands that listen, connect, communicate, calm and reassure. Through play, children discover the subtle magic of touch — the quiet energy that passes through the hands, and the care, presence and power they already carry within them. It is a warm and intimate space where care becomes play and play becomes care, where children and adults meet each other with more presence, sweetness and truth.",
+    body: [
+      "Born from a simple and true gesture — my son’s spontaneous desire to care, share and teach something that, at home, is already a game, a moment of calm, contact and love.",
+      "Mama yo te curo is an experiential workshop for parents and children, where touch, presence and listening become languages of care. Through conscious play, families are invited to slow down, leave performance aside, and rediscover a more natural and authentic way of being together.",
+      "At the heart of the experience are the hands: hands that listen, connect, communicate, calm and reassure. Through play, children discover the subtle magic of touch — the quiet energy that passes through the hands, and the care, presence and power they already carry within them.",
+      "It is a warm and intimate space where care becomes play and play becomes care, where children and adults meet each other with more presence, sweetness and truth.",
+    ],
     cta: "Ask for the Full Story",
     images: [
       "/workshops/mama-1.jpg",
@@ -119,9 +124,11 @@ export const Workshops = () => {
                   <h3 className="font-serif text-3xl md:text-[2.35rem] text-forest-deep mb-4">
                     {workshop.title}
                   </h3>
-                  <p className="text-foreground/75 leading-relaxed">
-                    {workshop.body}
-                  </p>
+                  <div className="space-y-3 text-foreground/75 leading-relaxed">
+                    {workshop.body.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
                   {workshop.cta && (
                     <a
                       href="#contact"
