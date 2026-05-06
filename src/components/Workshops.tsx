@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
-const mamaImages = Array.from({ length: 44 }, (_, index) => `/workshops/mama-${index + 1}.jpg`);
+const mamaImages = Array.from({ length: 44 }, (_, index) => {
+  const photoNumber = index + 1;
+  const extension = [1, 2, 14, 15, 19].includes(photoNumber) ? "JPG" : "jpg";
+  return `/workshops/Mamà yo te curo web${photoNumber}.${extension}`;
+});
 
 const WORKSHOPS = [
   {
@@ -48,12 +52,12 @@ const WorkshopCarousel = ({
     <div className="lg:max-w-[430px] lg:ml-auto">
       <div
         className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft cursor-zoom-in"
-        onClick={() => setLightbox(images[active])}
+        onClick={() => loaded[active] && setLightbox(images[active])}
       >
         {images.map((src, index) => (
           <img
             key={src}
-            src={src}
+            src={encodeURI(src)}
             alt={`${title} workshop moment ${index + 1}`}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
               active === index && loaded[index] ? "opacity-100" : "opacity-0"
@@ -87,7 +91,7 @@ const WorkshopCarousel = ({
       </div>
 
       <ImageLightbox
-        src={lightbox}
+        src={lightbox ? encodeURI(lightbox) : null}
         alt={`${title} image preview`}
         onClose={() => setLightbox(null)}
       />
