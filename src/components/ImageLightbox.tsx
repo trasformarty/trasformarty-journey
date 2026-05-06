@@ -1,12 +1,34 @@
+import { useEffect } from "react";
 import { X } from "lucide-react";
 
 interface ImageLightboxProps {
   src: string | null;
   alt: string;
   onClose: () => void;
+  onPrevious?: () => void;
+  onNext?: () => void;
 }
 
-export const ImageLightbox = ({ src, alt, onClose }: ImageLightboxProps) => {
+export const ImageLightbox = ({
+  src,
+  alt,
+  onClose,
+  onPrevious,
+  onNext,
+}: ImageLightboxProps) => {
+  useEffect(() => {
+    if (!src) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "ArrowLeft") onPrevious?.();
+      if (event.key === "ArrowRight") onNext?.();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [src, onClose, onPrevious, onNext]);
+
   if (!src) return null;
 
   return (
