@@ -2,17 +2,7 @@ import { useState } from "react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
-const encodeImagePath = (path: string) =>
-  path
-    .split("/")
-    .map((part, index) => (index === 0 ? part : encodeURIComponent(part)))
-    .join("/");
-
-const mamaImages = Array.from({ length: 44 }, (_, index) => {
-  const photoNumber = index + 1;
-  const extension = [1, 2, 14, 15, 19].includes(photoNumber) ? "JPG" : "jpg";
-  return `/workshops/Mamà yo te curo web${photoNumber}.${extension}`;
-});
+const mamaImages = Array.from({ length: 44 }, (_, index) => `/workshops/mama-${index + 1}.jpg`);
 
 const WORKSHOPS = [
   {
@@ -63,7 +53,7 @@ const WorkshopCarousel = ({
         {images.map((src, index) => (
           <img
             key={src}
-            src={encodeImagePath(src)}
+            src={src}
             alt={`${title} workshop moment ${index + 1}`}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
               active === index && loaded[index] ? "opacity-100" : "opacity-0"
@@ -97,7 +87,7 @@ const WorkshopCarousel = ({
       </div>
 
       <ImageLightbox
-        src={lightbox ? encodeImagePath(lightbox) : null}
+        src={lightbox}
         alt={`${title} image preview`}
         onClose={() => setLightbox(null)}
       />
