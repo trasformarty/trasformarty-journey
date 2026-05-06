@@ -2,6 +2,12 @@ import { useState } from "react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
+const encodeImagePath = (path: string) =>
+  path
+    .split("/")
+    .map((part, index) => (index === 0 ? part : encodeURIComponent(part)))
+    .join("/");
+
 const mamaImages = Array.from({ length: 44 }, (_, index) => {
   const photoNumber = index + 1;
   const extension = [1, 2, 14, 15, 19].includes(photoNumber) ? "JPG" : "jpg";
@@ -57,7 +63,7 @@ const WorkshopCarousel = ({
         {images.map((src, index) => (
           <img
             key={src}
-            src={encodeURI(src)}
+            src={encodeImagePath(src)}
             alt={`${title} workshop moment ${index + 1}`}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
               active === index && loaded[index] ? "opacity-100" : "opacity-0"
@@ -70,7 +76,7 @@ const WorkshopCarousel = ({
         {!loaded[active] && (
           <div className="absolute inset-0 flex items-center justify-center px-8 text-center">
             <span className="text-[11px] uppercase tracking-[0.3em] text-forest-deep/45">
-              Add photos here
+              Aggiungi qui le foto
             </span>
           </div>
         )}
@@ -91,7 +97,7 @@ const WorkshopCarousel = ({
       </div>
 
       <ImageLightbox
-        src={lightbox ? encodeURI(lightbox) : null}
+        src={lightbox ? encodeImagePath(lightbox) : null}
         alt={`${title} image preview`}
         onClose={() => setLightbox(null)}
       />
