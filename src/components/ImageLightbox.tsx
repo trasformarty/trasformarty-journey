@@ -20,13 +20,27 @@ export const ImageLightbox = ({
     if (!src) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-      if (event.key === "ArrowLeft") onPrevious?.();
-      if (event.key === "ArrowRight") onNext?.();
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        onPrevious?.();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        onNext?.();
+      }
     };
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", onKeyDown, true);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown, true);
+    };
   }, [src, onClose, onPrevious, onNext]);
 
   if (!src) return null;
@@ -37,6 +51,7 @@ export const ImageLightbox = ({
       role="dialog"
       aria-modal="true"
       aria-label="Image preview"
+      tabIndex={-1}
       onClick={onClose}
     >
       <button
