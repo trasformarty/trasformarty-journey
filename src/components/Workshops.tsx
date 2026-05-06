@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
@@ -42,13 +42,38 @@ const WorkshopCarousel = ({
 }) => {
   const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
-  const [lightbox, setLightbox] = useState<string | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  const goNext = () => {
+    setActive((current) => (current + 1) % images.length);
+  };
+
+  const goPrevious = () => {
+    setActive((current) => (current - 1 + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (lightboxOpen) return;
+
+      if (event.key === "ArrowRight") {
+        goNext();
+      }
+
+      if (event.key === "ArrowLeft") {
+        goPrevious();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen, images.length]);
 
   return (
     <div className="lg:max-w-[430px] lg:ml-auto">
       <div
         className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft cursor-zoom-in"
-        onClick={() => loaded[active] && setLightbox(images[active])}
+        onClick={() => loaded[active] && setLightboxOpen(true)}
       >
         {images.map((src, index) => (
           <img
@@ -87,9 +112,11 @@ const WorkshopCarousel = ({
       </div>
 
       <ImageLightbox
-        src={lightbox}
+        src={lightboxOpen ? images[active] : null}
         alt={`${title} image preview`}
-        onClose={() => setLightbox(null)}
+        onClose={() => setLightboxOpen(false)}
+        onNext={goNext}
+        onPrevious={goPrevious}
       />
     </div>
   );
