@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
+const mamaImages = Array.from({ length: 44 }, (_, index) => `/workshops/mama-${index + 1}.jpg`);
+
 const WORKSHOPS = [
   {
     title: "The Importance of Touch",
@@ -27,14 +29,7 @@ const WORKSHOPS = [
       "It is a warm and intimate space where care becomes play and play becomes care — a place to meet each other with more presence, sweetness and truth.",
     ],
     cta: "Ask for the Full Story",
-    images: [
-      "/workshops/mama-1.jpg",
-      "/workshops/mama-2.jpg",
-      "/workshops/mama-3.jpg",
-      "/workshops/mama-4.jpg",
-      "/workshops/mama-5.jpg",
-      "/workshops/mama-6.jpg",
-    ],
+    images: mamaImages,
   },
 ];
 
@@ -77,15 +72,16 @@ const WorkshopCarousel = ({
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-center gap-2">
+      <div className="mt-3 flex items-center justify-center gap-1.5 flex-wrap">
         {images.map((_, index) => (
           <button
             key={index}
             type="button"
             onClick={() => setActive(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              active === index ? "w-6 bg-forest" : "w-2 bg-forest/25"
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              active === index ? "w-5 bg-forest" : "w-1.5 bg-forest/25"
             }`}
+            aria-label={`Show ${title} photo ${index + 1}`}
           />
         ))}
       </div>
