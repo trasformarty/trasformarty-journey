@@ -10,6 +10,11 @@ const TESTIMONIALS = [
       "Marti... così autentica e magica da saper accogliere ogni tua cellula. Avvicinarsi a lei significa entrare in ascolto con se stessi: senza maschere e con dolcezza. Grazie ✨",
     name: "Letizia B.",
   },
+  {
+    quote:
+      "Il percorso che sto facendo con Martina è un viaggio mai provato prima, una coccola che ognuno di noi dovrebbe concedersi ogni tanto. Apparentemente difficile da spiegare ma in realtà estremamente facile. Circa due anni fa per la prima volta c’è stata una prima “magia”, una prima connessione. Da un po’ di tempo stiamo lavorando a distanza, e ogni volta la realtà supera le aspettative. Martina mi ha fatto scoprire un modo di comunicare, di sentire e di ascoltare diverso dal solito.",
+    name: "Giorgia R.",
+  },
 ];
 
 export const Testimonials = () => {
