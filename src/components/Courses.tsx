@@ -69,9 +69,6 @@ export const Courses = () => {
               </button>
             ))}
           </div>
-          <p className="mt-4 text-sm italic text-foreground/50">
-            Photos from Deep Connection Massage trainings will be added here.
-          </p>
         </Reveal>
 
         <Reveal delay={150} className="mt-12">
