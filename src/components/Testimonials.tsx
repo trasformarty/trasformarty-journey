@@ -77,9 +77,9 @@ export const Testimonials = () => {
             {TESTIMONIALS.map((item, index) => (
               <figure
                 key={index}
-                className="min-w-[78%] sm:min-w-[42%] lg:min-w-[38%] snap-start"
+                className="min-w-[78%] sm:min-w-[44%] lg:min-w-[30%] snap-start"
               >
-                <blockquote className="font-serif italic text-2xl md:text-3xl leading-[1.22] text-forest-deep text-pretty">
+                <blockquote className="font-serif italic text-lg md:text-xl leading-[1.45] text-forest-deep text-pretty">
                   “{item.quote}”
                 </blockquote>
                 <figcaption className="mt-5 text-sm text-foreground/55 tracking-wide">
