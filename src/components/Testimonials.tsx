@@ -15,6 +15,11 @@ const TESTIMONIALS = [
       "Il percorso che sto facendo con Martina è un viaggio mai provato prima, una coccola che ognuno di noi dovrebbe concedersi ogni tanto. Apparentemente difficile da spiegare ma in realtà estremamente facile. Circa due anni fa per la prima volta c’è stata una prima “magia”, una prima connessione. Da un po’ di tempo stiamo lavorando a distanza, e ogni volta la realtà supera le aspettative. Martina mi ha fatto scoprire un modo di comunicare, di sentire e di ascoltare diverso dal solito.",
     name: "Giorgia R.",
   },
+  {
+    quote:
+      "I worked with Martina as a student and booked multiple sessions with her. Her touch is soft yet powerful. And there is so much love and compassion in what she does as a space holder. I’d love to come back soon for another session. Thank you Martina, for who you are ✨🤍",
+    name: "Chantal S.",
+  },
 ];
 
 export const Testimonials = () => {
