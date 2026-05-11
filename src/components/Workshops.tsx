@@ -3,6 +3,7 @@ import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
 const mamaImages = Array.from({ length: 44 }, (_, index) => `/workshops/mama-${index + 1}.jpg`);
+const touchImages = Array.from({ length: 22 }, (_, index) => `/workshops/touch-${index + 1}.jpg`);
 
 const WORKSHOPS = [
   {
@@ -10,14 +11,8 @@ const WORKSHOPS = [
     body: [
       "For groups such as future yoga teachers, this workshop explores touch as presence, communication, grounding and support.",
     ],
-    images: [
-      "/workshops/touch-1.jpg",
-      "/workshops/touch-2.jpg",
-      "/workshops/touch-3.jpg",
-      "/workshops/touch-4.jpg",
-      "/workshops/touch-5.jpg",
-      "/workshops/touch-6.jpg",
-    ],
+    images: touchImages,
+    caption: "Workshop Kalena Yoga Teacher Training, Ibiza aprile 2026",
   },
   {
     title: "Mama yo te curo",
@@ -36,9 +31,11 @@ const WORKSHOPS = [
 const WorkshopCarousel = ({
   title,
   images,
+  caption,
 }: {
   title: string;
   images: string[];
+  caption?: string;
 }) => {
   const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
@@ -108,6 +105,12 @@ const WorkshopCarousel = ({
         ))}
       </div>
 
+      {caption && (
+        <p className="mt-3 text-center text-xs italic text-foreground/50">
+          {caption}
+        </p>
+      )}
+
       <ImageLightbox
         src={lightboxOpen ? images[active] : null}
         alt={`${title} image preview`}
@@ -161,7 +164,7 @@ export const Workshops = () => {
                 </div>
 
                 <div className="lg:col-span-6">
-                  <WorkshopCarousel title={workshop.title} images={workshop.images} />
+                  <WorkshopCarousel title={workshop.title} images={workshop.images} caption={workshop.caption} />
                 </div>
               </article>
             </Reveal>
