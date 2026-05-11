@@ -97,16 +97,13 @@ const WorkshopCarousel = ({
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-center gap-1.5 flex-wrap">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => setActive(index)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              active === index ? "w-5 bg-forest" : "w-1.5 bg-forest/25"
+      <div className="mt-3 flex items-center justify-center gap-2" aria-hidden="true">
+        {[0, 1, 2].map((dot) => (
+          <span
+            key={dot}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              dot === active % 3 ? "w-6 bg-forest" : "w-2 bg-forest/25"
             }`}
-            aria-label={`Show ${title} photo ${index + 1}`}
           />
         ))}
       </div>
