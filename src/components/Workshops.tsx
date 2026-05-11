@@ -9,8 +9,12 @@ const WORKSHOPS = [
   {
     title: "The Importance of Touch",
     body: [
-      "For groups such as future yoga teachers, this workshop explores touch as presence, communication, grounding and support.",
+      "This workshop is created for yoga teachers, movement facilitators, body-based practitioners, support groups, families and anyone who works with people through the body, presence and relationship.",
+      "Together, we explore touch as a conscious language — a way to offer support, grounding, calm or activation when it is truly needed.",
+      "Through simple and respectful practices, we learn when touch can accompany a process, when it can become a resource, and when the most sensitive choice is simply not to touch.",
+      "A space to bring more listening, clarity and care into the way we meet another body.",
     ],
+    cta: "Explore More",
     images: touchImages,
     caption: "Workshop Kalena Yoga Teacher Training, Ibiza aprile 2026",
   },
