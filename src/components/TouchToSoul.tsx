@@ -21,7 +21,9 @@ export const TouchToSoul = () => {
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-4 text-balance">
             A Touch to Soul
           </h2>
-          <p className="font-serif italic text-xl text-earth mb-8">A touch to the soul.</p>
+          <p className="font-serif italic text-xl text-earth mb-8">
+            A full body massage and somatic experience.
+          </p>
 
           <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
             <p>
