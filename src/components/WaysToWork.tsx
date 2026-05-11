@@ -98,13 +98,18 @@ export const WaysToWork = () => {
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">Ways to Work With Me</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-8 text-balance">
-            Choose the way your body is asking to be met.
+            Different doors into the same movement.
           </h2>
-          <p className="text-lg md:text-xl text-foreground/75 leading-relaxed text-pretty">
-            Different doors into the same movement: returning to the body,
-            listening to what is alive, and allowing transformation to unfold
-            with care.
-          </p>
+
+          <div className="space-y-4 text-lg md:text-xl text-foreground/75 leading-relaxed text-pretty">
+            <p>
+              Returning to the body, listening to what is alive, and allowing transformation to unfold with care.
+            </p>
+
+            <p>
+              Choose the way your body is asking to be met.
+            </p>
+          </div>
         </Reveal>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-[1.05fr_1.45fr] lg:gap-6">
