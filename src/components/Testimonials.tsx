@@ -20,6 +20,11 @@ const TESTIMONIALS = [
       "I worked with Martina as a student and booked multiple sessions with her. Her touch is soft yet powerful. And there is so much love and compassion in what she does as a space holder. I’d love to come back soon for another session. Thank you Martina, for who you are ✨🤍",
     name: "Chantal S.",
   },
+  {
+    quote:
+      "I’ve known and worked with Martina for many years, and she brings such amazing energy to everything she does. Now that I have the pleasure of having her in my salon in Turin, the atmosphere, the flow of the salon, and the incredible feedback from my clients make me so happy and proud of her work and passion. I always highly recommend this incredible talent.",
+    name: "Nico — Toei House Salon, Torino",
+  },
 ];
 
 export const Testimonials = () => {
