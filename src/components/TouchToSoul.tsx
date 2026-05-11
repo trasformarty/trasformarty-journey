@@ -16,7 +16,7 @@ export const TouchToSoul = () => {
   return (
     <section id="touch-to-soul" className="section bg-ivory" aria-label="A Touch to Soul">
       <div className="container-soft grid md:grid-cols-12 gap-12 md:gap-16 items-center">
-        <Reveal className="md:col-span-6 order-2 md:order-1">
+        <Reveal className="md:col-span-6">
           <p className="eyebrow mb-5">Offering — Bodywork</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-4 text-balance">
             A Touch to Soul
@@ -79,7 +79,7 @@ export const TouchToSoul = () => {
           </a>
         </Reveal>
 
-        <Reveal delay={150} className="md:col-span-6 order-1 md:order-2">
+        <Reveal delay={150} className="md:col-span-6">
           <div className="relative md:sticky md:top-28">
             <div
               className="aspect-[5/4] w-full rounded-[2rem] overflow-hidden bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-organic cursor-zoom-in"
