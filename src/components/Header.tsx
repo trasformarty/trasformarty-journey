@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Wordmark } from "./Wordmark";
 
+const WHATSAPP_BOOKING_URL =
+  "https://wa.me/34691738479?text=Hi%20Martina%2C%20I%20would%20like%20to%20book%20a%20session.%0AMy%20name%20is%3A%0AI%27m%20interested%20in%3A%0AMy%20availability%20is%3A";
+
 const NAV = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
@@ -66,7 +69,9 @@ export const Header = () => {
                 </a>
               ))}
               <a
-                href="#contact"
+                href={WHATSAPP_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="ml-2 inline-flex items-center rounded-full px-5 py-2.5 text-sm transition-all duration-500 shadow-soft bg-forest text-ivory hover:bg-forest-deep"
               >
                 Book a Session
@@ -74,7 +79,12 @@ export const Header = () => {
             </nav>
           ) : (
             <div className="flex items-center gap-3 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
-              <a href="#contact" className={`${bookLinkBase} text-ivory/90 hover:text-ivory`}>
+              <a
+                href={WHATSAPP_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${bookLinkBase} text-ivory/90 hover:text-ivory`}
+              >
                 book a session
               </a>
               <button
@@ -91,7 +101,9 @@ export const Header = () => {
 
         <div className="lg:hidden flex items-center gap-2.5">
           <a
-            href="#contact"
+            href={WHATSAPP_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`${bookLinkBase} ${headerTone} hover:opacity-80`}
           >
             book a session
@@ -146,7 +158,9 @@ export const Header = () => {
               </a>
             ))}
             <a
-              href="#contact"
+              href={WHATSAPP_BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-6 inline-flex items-center justify-center rounded-full bg-forest text-ivory px-6 py-3.5 text-sm shadow-soft"
             >
