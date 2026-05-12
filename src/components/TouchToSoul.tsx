@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
+const WHATSAPP_BOOKING_URL =
+  "https://wa.me/34691738479?text=Hi%20Martina%2C%20I%20would%20like%20to%20book%20a%20session.%0AMy%20name%20is%3A%0AI%27m%20interested%20in%3A%0AMy%20availability%20is%3A";
+
 const IMAGES = [
   "/touch-to-soul-1.jpg",
   "/touch-to-soul-2.jpg",
@@ -74,7 +77,9 @@ export const TouchToSoul = () => {
           </div>
 
           <a
-            href="#contact"
+            href={WHATSAPP_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-10 inline-flex items-center rounded-full bg-forest text-ivory px-7 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
           >
             Book a Session
