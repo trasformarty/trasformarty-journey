@@ -29,7 +29,7 @@ export const About = () => {
         <Reveal delay={150} className="md:col-span-7">
           <p className="eyebrow mb-5">Who I Am</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-8 text-balance">
-            I&rsquo;m Martina Roscioli.
+            I&rsquo;m Martina.
           </h2>
           <div className="space-y-6 text-lg text-foreground/80 leading-relaxed text-pretty">
             <p>
