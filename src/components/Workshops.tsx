@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
@@ -44,6 +45,7 @@ const WorkshopCarousel = ({
   const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   const goNext = () => {
     setActive((current) => (current + 1) % images.length);
@@ -51,6 +53,26 @@ const WorkshopCarousel = ({
 
   const goPrevious = () => {
     setActive((current) => (current - 1 + images.length) % images.length);
+  };
+
+  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return;
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const distance = touchEndX - touchStartX.current;
+    touchStartX.current = null;
+
+    if (Math.abs(distance) < 35) return;
+
+    if (distance > 0) {
+      goPrevious();
+    } else {
+      goNext();
+    }
   };
 
   useEffect(() => {
@@ -75,6 +97,8 @@ const WorkshopCarousel = ({
       <div
         className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft cursor-zoom-in"
         onClick={() => loaded[active] && setLightboxOpen(true)}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
         {images.map((src, index) => (
           <img
@@ -89,6 +113,31 @@ const WorkshopCarousel = ({
             onError={() => setLoaded((current) => ({ ...current, [index]: false }))}
           />
         ))}
+
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            goPrevious();
+          }}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-ivory/70 text-forest-deep backdrop-blur-sm flex items-center justify-center shadow-soft md:hidden"
+          aria-label={`Previous ${title} photo`}
+        >
+          <ChevronLeft size={23} strokeWidth={1.5} />
+        </button>
+
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            goNext();
+          }}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-ivory/70 text-forest-deep backdrop-blur-sm flex items-center justify-center shadow-soft md:hidden"
+          aria-label={`Next ${title} photo`}
+        >
+          <ChevronRight size={23} strokeWidth={1.5} />
+        </button>
+
         {!loaded[active] && (
           <div className="absolute inset-0 flex items-center justify-center px-8 text-center">
             <span className="text-[11px] uppercase tracking-[0.3em] text-forest-deep/45">
@@ -98,13 +147,19 @@ const WorkshopCarousel = ({
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-center gap-2" aria-hidden="true">
+      <div className="mt-3 flex items-center justify-center gap-2">
         {[0, 1, 2].map((dot) => (
-          <span
+          <button
             key={dot}
+            type="button"
+            onClick={() => {
+              const nextIndex = Math.min(dot, images.length - 1);
+              setActive(nextIndex);
+            }}
             className={`h-2 rounded-full transition-all duration-300 ${
               dot === active % 3 ? "w-6 bg-forest" : "w-2 bg-forest/25"
             }`}
+            aria-label={`Show ${title} photo group ${dot + 1}`}
           />
         ))}
       </div>
