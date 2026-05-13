@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, AlertCircle } from "lucide-react";
+import { Check, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
@@ -27,10 +27,34 @@ const TESTIMONIALS = [
   },
 ];
 
+const TestimonialQuote = ({ quote, name }: { quote: string; name: string }) => (
+  <figure>
+    <blockquote className="font-serif italic text-lg md:text-xl leading-[1.45] text-forest-deep text-pretty">
+      “{quote}”
+    </blockquote>
+    <figcaption className="mt-5 text-sm text-foreground/55 tracking-wide">
+      — {name}
+    </figcaption>
+  </figure>
+);
+
 export const Testimonials = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [active, setActive] = useState(0);
+
+  const goPrevious = () => {
+    setActive((current) => (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
+  const goNext = () => {
+    setActive((current) => (current + 1) % TESTIMONIALS.length);
+  };
+
+  const visibleDesktopTestimonials = [0, 1, 2].map(
+    (offset) => TESTIMONIALS[(active + offset) % TESTIMONIALS.length]
+  );
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -75,23 +99,52 @@ export const Testimonials = () => {
         </Reveal>
 
         <Reveal delay={120} className="mt-12">
-          <div
-            className="flex gap-8 overflow-x-auto pb-6 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-            aria-label="Client testimonials carousel"
-          >
-            {TESTIMONIALS.map((item, index) => (
-              <figure
-                key={index}
-                className="min-w-[78%] sm:min-w-[44%] lg:min-w-[30%] snap-start"
+          <div className="relative" aria-label="Client testimonials carousel">
+            <div className="sm:hidden px-6 text-center min-h-[310px] flex items-center justify-center">
+              <TestimonialQuote {...TESTIMONIALS[active]} />
+            </div>
+
+            <div className="hidden sm:grid sm:grid-cols-3 gap-8">
+              {visibleDesktopTestimonials.map((item, index) => (
+                <div key={`${item.name}-${index}`}>
+                  <TestimonialQuote {...item} />
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex items-center justify-center gap-5">
+              <button
+                type="button"
+                onClick={goPrevious}
+                className="h-9 w-9 rounded-full border border-forest/20 text-forest-deep/70 flex items-center justify-center hover:bg-sage/20 transition-colors duration-500"
+                aria-label="Previous feedback"
               >
-                <blockquote className="font-serif italic text-lg md:text-xl leading-[1.45] text-forest-deep text-pretty">
-                  “{item.quote}”
-                </blockquote>
-                <figcaption className="mt-5 text-sm text-foreground/55 tracking-wide">
-                  — {item.name}
-                </figcaption>
-              </figure>
-            ))}
+                <ChevronLeft size={19} strokeWidth={1.3} />
+              </button>
+
+              <div className="flex items-center justify-center gap-2" aria-label="Feedback position">
+                {TESTIMONIALS.map((item, index) => (
+                  <button
+                    key={item.name}
+                    type="button"
+                    onClick={() => setActive(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === active ? "w-6 bg-forest" : "w-2 bg-forest/25"
+                    }`}
+                    aria-label={`Show feedback ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={goNext}
+                className="h-9 w-9 rounded-full border border-forest/20 text-forest-deep/70 flex items-center justify-center hover:bg-sage/20 transition-colors duration-500"
+                aria-label="Next feedback"
+              >
+                <ChevronRight size={19} strokeWidth={1.3} />
+              </button>
+            </div>
           </div>
         </Reveal>
 
