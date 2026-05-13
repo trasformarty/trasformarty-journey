@@ -49,8 +49,21 @@ export const Essence = () => {
           </p>
         </Reveal>
 
-        <Reveal delay={200} className="mt-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-10">
+        <Reveal delay={200} className="mt-10 md:mt-20">
+          <div className="grid grid-cols-2 gap-3 sm:hidden">
+            {ESSENCE.map((item) => (
+              <div
+                key={item.word}
+                className="rounded-full border border-forest/15 bg-ivory/55 px-4 py-3 text-center shadow-soft backdrop-blur-sm"
+              >
+                <p className="font-serif italic text-2xl text-forest-deep">
+                  {item.word}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-10">
             {ESSENCE.map((item) => (
               <div key={item.word} className="text-center lg:text-left">
                 <p className="font-serif italic text-3xl md:text-4xl text-forest-deep mb-3">
