@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, AlertCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
@@ -43,14 +43,6 @@ export const Testimonials = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [active, setActive] = useState(0);
-
-  const goPrevious = () => {
-    setActive((current) => (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
-  };
-
-  const goNext = () => {
-    setActive((current) => (current + 1) % TESTIMONIALS.length);
-  };
 
   const visibleDesktopTestimonials = [0, 1, 2].map(
     (offset) => TESTIMONIALS[(active + offset) % TESTIMONIALS.length]
@@ -112,38 +104,18 @@ export const Testimonials = () => {
               ))}
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-5">
-              <button
-                type="button"
-                onClick={goPrevious}
-                className="h-9 w-9 rounded-full border border-forest/20 text-forest-deep/70 flex items-center justify-center hover:bg-sage/20 transition-colors duration-500"
-                aria-label="Previous feedback"
-              >
-                <ChevronLeft size={19} strokeWidth={1.3} />
-              </button>
-
-              <div className="flex items-center justify-center gap-2" aria-label="Feedback position">
-                {TESTIMONIALS.map((item, index) => (
-                  <button
-                    key={item.name}
-                    type="button"
-                    onClick={() => setActive(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === active ? "w-6 bg-forest" : "w-2 bg-forest/25"
-                    }`}
-                    aria-label={`Show feedback ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={goNext}
-                className="h-9 w-9 rounded-full border border-forest/20 text-forest-deep/70 flex items-center justify-center hover:bg-sage/20 transition-colors duration-500"
-                aria-label="Next feedback"
-              >
-                <ChevronRight size={19} strokeWidth={1.3} />
-              </button>
+            <div className="mt-8 flex items-center justify-center gap-2" aria-label="Feedback position">
+              {TESTIMONIALS.map((item, index) => (
+                <button
+                  key={item.name}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === active ? "w-6 bg-forest" : "w-2 bg-forest/25"
+                  }`}
+                  aria-label={`Show feedback ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </Reveal>
