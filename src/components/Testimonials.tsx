@@ -62,7 +62,7 @@ export const Testimonials = () => {
   };
 
   return (
-    <section id="from-you" className="section bg-ivory" aria-label="Client feedback">
+    <section id="from-you" className="bg-ivory pt-24 pb-10 px-6 md:pt-32 md:pb-14 md:px-10" aria-label="Client feedback">
       <div className="container-soft">
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">Feedback</p>
