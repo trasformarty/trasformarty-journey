@@ -54,10 +54,13 @@ export const Essence = () => {
             {ESSENCE.map((item) => (
               <div
                 key={item.word}
-                className="rounded-full border border-forest/15 bg-ivory/55 px-4 py-3 text-center shadow-soft backdrop-blur-sm"
+                className="min-h-[118px] rounded-[1.35rem] border border-forest/12 bg-ivory/55 px-3.5 py-4 text-center shadow-soft backdrop-blur-sm flex flex-col justify-center"
               >
-                <p className="font-serif italic text-2xl text-forest-deep">
+                <p className="font-serif italic text-[1.7rem] leading-none text-forest-deep mb-2">
                   {item.word}
+                </p>
+                <p className="text-[11px] leading-[1.45] text-foreground/62">
+                  {item.text}
                 </p>
               </div>
             ))}
