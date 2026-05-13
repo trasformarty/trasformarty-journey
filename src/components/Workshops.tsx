@@ -46,6 +46,7 @@ const WorkshopCarousel = ({
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const touchStartX = useRef<number | null>(null);
+  const suppressNextClick = useRef(false);
 
   const goNext = () => {
     setActive((current) => (current + 1) % images.length);
@@ -55,8 +56,21 @@ const WorkshopCarousel = ({
     setActive((current) => (current - 1 + images.length) % images.length);
   };
 
+  const getDotIndex = () => {
+    if (images.length <= 1) return 0;
+    return Math.min(2, Math.floor((active / images.length) * 3));
+  };
+
+  const goToDot = (dot: number) => {
+    if (images.length <= 1) return;
+
+    const nextIndex = Math.round((dot / 2) * (images.length - 1));
+    setActive(nextIndex);
+  };
+
   const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = event.touches[0]?.clientX ?? null;
+    suppressNextClick.current = false;
   };
 
   const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
@@ -67,6 +81,8 @@ const WorkshopCarousel = ({
     touchStartX.current = null;
 
     if (Math.abs(distance) < 35) return;
+
+    suppressNextClick.current = true;
 
     if (distance > 0) {
       goPrevious();
@@ -96,7 +112,14 @@ const WorkshopCarousel = ({
     <div className="lg:max-w-[430px] lg:ml-auto">
       <div
         className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-sage/45 via-ivory-warm to-gold-soft/35 shadow-soft cursor-zoom-in"
-        onClick={() => loaded[active] && setLightboxOpen(true)}
+        onClick={() => {
+          if (suppressNextClick.current) {
+            suppressNextClick.current = false;
+            return;
+          }
+
+          if (loaded[active]) setLightboxOpen(true);
+        }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
@@ -120,10 +143,10 @@ const WorkshopCarousel = ({
             event.stopPropagation();
             goPrevious();
           }}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-ivory/70 text-forest-deep backdrop-blur-sm flex items-center justify-center shadow-soft md:hidden"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-ivory/50 text-forest-deep/80 backdrop-blur-sm flex items-center justify-center shadow-soft md:hidden"
           aria-label={`Previous ${title} photo`}
         >
-          <ChevronLeft size={23} strokeWidth={1.5} />
+          <ChevronLeft size={21} strokeWidth={1.45} />
         </button>
 
         <button
@@ -132,10 +155,10 @@ const WorkshopCarousel = ({
             event.stopPropagation();
             goNext();
           }}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-ivory/70 text-forest-deep backdrop-blur-sm flex items-center justify-center shadow-soft md:hidden"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-ivory/50 text-forest-deep/80 backdrop-blur-sm flex items-center justify-center shadow-soft md:hidden"
           aria-label={`Next ${title} photo`}
         >
-          <ChevronRight size={23} strokeWidth={1.5} />
+          <ChevronRight size={21} strokeWidth={1.45} />
         </button>
 
         {!loaded[active] && (
@@ -152,14 +175,11 @@ const WorkshopCarousel = ({
           <button
             key={dot}
             type="button"
-            onClick={() => {
-              const nextIndex = Math.min(dot, images.length - 1);
-              setActive(nextIndex);
-            }}
+            onClick={() => goToDot(dot)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              dot === active % 3 ? "w-6 bg-forest" : "w-2 bg-forest/25"
+              dot === getDotIndex() ? "w-6 bg-forest" : "w-2 bg-forest/25"
             }`}
-            aria-label={`Show ${title} photo group ${dot + 1}`}
+            aria-label={`Show ${title} photo moment ${dot + 1}`}
           />
         ))}
       </div>
