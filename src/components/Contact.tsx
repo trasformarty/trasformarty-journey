@@ -46,7 +46,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section bg-ivory" aria-label="Contact and booking">
+    <section id="contact" className="bg-ivory pt-10 pb-24 px-6 md:pt-14 md:pb-32 md:px-10" aria-label="Contact and booking">
       <div className="container-soft grid md:grid-cols-12 gap-12 md:gap-16">
         <Reveal className="md:col-span-5">
           <p className="eyebrow mb-5">Contact</p>
