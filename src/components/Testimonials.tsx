@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, AlertCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
 
@@ -43,10 +43,59 @@ export const Testimonials = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [active, setActive] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+
+  const goPrevious = () => {
+    setActive((current) => (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
+  const goNext = () => {
+    setActive((current) => (current + 1) % TESTIMONIALS.length);
+  };
 
   const visibleDesktopTestimonials = [0, 1, 2].map(
     (offset) => TESTIMONIALS[(active + offset) % TESTIMONIALS.length]
   );
+
+  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return;
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const distance = touchEndX - touchStartX.current;
+    touchStartX.current = null;
+
+    if (Math.abs(distance) < 40) return;
+
+    if (distance > 0) {
+      goPrevious();
+    } else {
+      goNext();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const isWritingField = target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.tagName === "SELECT";
+
+      if (isWritingField) return;
+
+      if (event.key === "ArrowLeft") {
+        goPrevious();
+      }
+
+      if (event.key === "ArrowRight") {
+        goNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -91,7 +140,13 @@ export const Testimonials = () => {
         </Reveal>
 
         <Reveal delay={120} className="mt-12">
-          <div className="relative" aria-label="Client testimonials carousel">
+          <div
+            className="relative touch-pan-y"
+            aria-label="Client testimonials carousel"
+            tabIndex={0}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             <div className="sm:hidden px-6 text-center min-h-[310px] flex items-center justify-center">
               <TestimonialQuote {...TESTIMONIALS[active]} />
             </div>
