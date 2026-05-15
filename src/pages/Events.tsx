@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,8 +8,27 @@ import martinaPortrait from "@/assets/martina-portrait.png";
 const CALENDLY_URL = "https://calendly.com/martinaroscioli-discovery-call/30min";
 
 const Events = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  useLayoutEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const scrollTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    scrollTop();
+    const frame = window.requestAnimationFrame(scrollTop);
+    const attempts = [50, 150, 350, 700].map((delay) =>
+      window.setTimeout(scrollTop, delay)
+    );
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      attempts.forEach((attempt) => window.clearTimeout(attempt));
+    };
   }, []);
 
   return (
