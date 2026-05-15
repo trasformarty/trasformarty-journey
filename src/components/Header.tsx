@@ -133,6 +133,27 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setOpen(false);
+    setWorkOpen(false);
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
+  const closeMenu = () => {
+    setOpen(false);
+    setWorkOpen(false);
+  };
+
   const headerTone = scrolled ? "text-forest-deep" : "text-ivory";
   const bookLinkBase =
     "text-[10px] md:text-[11px] lowercase tracking-[0.14em] font-normal transition-colors duration-500";
@@ -259,92 +280,87 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div
-        className={`fixed inset-0 z-[90] transition-all duration-500 ${
-          open ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
-        }`}
-        role="dialog"
-        aria-modal="true"
-      >
+      {open && (
         <div
-          className="absolute inset-0 bg-forest-deep/55 backdrop-blur-sm"
-          onClick={() => setOpen(false)}
-        />
-        <div
-          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-[hsl(var(--ivory))] shadow-organic flex flex-col transition-transform duration-500 ${
-            open ? "translate-x-0" : "translate-x-full"
-          }`}
+          className="fixed inset-0 z-[90] opacity-100 visible pointer-events-auto"
+          role="dialog"
+          aria-modal="true"
         >
-          <div className="flex items-center justify-between p-6 border-b border-forest-deep/10 bg-[hsl(var(--ivory))]">
-            <Wordmark size="sm" variant="dark" />
-            <button
-              onClick={() => setOpen(false)}
-              aria-label="Close menu"
-              className="p-2 -mr-2 text-forest-deep"
-            >
-              <X size={24} strokeWidth={1.4} />
-            </button>
-          </div>
-          <nav className="flex flex-col p-6 gap-1 bg-[hsl(var(--ivory))] flex-1 overflow-y-auto" aria-label="Menu navigation">
-            {NAV.slice(0, 3).map((item) => (
-              <MobileNavItem key={item.href} item={item} onClick={() => setOpen(false)} />
-            ))}
-
-            <div className="border-b border-forest-deep/10">
+          <div
+            className="absolute inset-0 bg-forest-deep/55 backdrop-blur-sm"
+            onClick={closeMenu}
+          />
+          <div className="absolute right-0 top-0 h-full w-[85%] max-w-sm translate-x-0 bg-[hsl(var(--ivory))] shadow-organic flex flex-col animate-slide-in-right">
+            <div className="flex items-center justify-between p-6 border-b border-forest-deep/10 bg-[hsl(var(--ivory))]">
+              <Wordmark size="sm" variant="dark" />
               <button
-                type="button"
-                onClick={() => setWorkOpen((current) => !current)}
-                className="w-full font-serif text-2xl py-3 text-forest-deep flex items-center justify-between"
-                aria-expanded={workOpen}
+                onClick={closeMenu}
+                aria-label="Close menu"
+                className="p-2 -mr-2 text-forest-deep"
               >
-                {labels.work}
-                <ChevronDown
-                  size={20}
-                  strokeWidth={1.4}
-                  className={`transition-transform duration-300 ${workOpen ? "rotate-180" : ""}`}
-                />
+                <X size={24} strokeWidth={1.4} />
               </button>
-              <div className={`overflow-hidden transition-all duration-500 ${workOpen ? "max-h-96 pb-3" : "max-h-0"}`}>
-                {WORK_LINKS.map((item, index) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className={`block pl-4 py-2.5 ${
-                      index === 0
-                        ? "text-sm uppercase tracking-[0.18em] text-forest-deep/55"
-                        : "font-serif text-xl text-forest-deep/80"
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
             </div>
+            <nav className="flex flex-col p-6 gap-1 bg-[hsl(var(--ivory))] flex-1 overflow-y-auto" aria-label="Menu navigation">
+              {NAV.slice(0, 3).map((item) => (
+                <MobileNavItem key={item.href} item={item} onClick={closeMenu} />
+              ))}
 
-            {NAV.slice(3).map((item) => (
-              <MobileNavItem key={item.href} item={item} onClick={() => setOpen(false)} />
-            ))}
-            <Link
-              to={languageToggleHref}
-              onClick={() => setOpen(false)}
-              className="mt-4 text-center text-xs tracking-[0.18em] text-forest-deep/60"
-            >
-              {languageToggleLabel}
-            </Link>
-            <a
-              href={WHATSAPP_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-forest text-ivory px-6 py-3.5 text-sm shadow-soft"
-            >
-              {labels.bookDesktop}
-            </a>
-          </nav>
+              <div className="border-b border-forest-deep/10">
+                <button
+                  type="button"
+                  onClick={() => setWorkOpen((current) => !current)}
+                  className="w-full font-serif text-2xl py-3 text-forest-deep flex items-center justify-between"
+                  aria-expanded={workOpen}
+                >
+                  {labels.work}
+                  <ChevronDown
+                    size={20}
+                    strokeWidth={1.4}
+                    className={`transition-transform duration-300 ${workOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <div className={`overflow-hidden transition-all duration-500 ${workOpen ? "max-h-96 pb-3" : "max-h-0"}`}>
+                  {WORK_LINKS.map((item, index) => (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMenu}
+                      className={`block pl-4 py-2.5 ${
+                        index === 0
+                          ? "text-sm uppercase tracking-[0.18em] text-forest-deep/55"
+                          : "font-serif text-xl text-forest-deep/80"
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {NAV.slice(3).map((item) => (
+                <MobileNavItem key={item.href} item={item} onClick={closeMenu} />
+              ))}
+              <Link
+                to={languageToggleHref}
+                onClick={closeMenu}
+                className="mt-4 text-center text-xs tracking-[0.18em] text-forest-deep/60"
+              >
+                {languageToggleLabel}
+              </Link>
+              <a
+                href={WHATSAPP_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="mt-6 inline-flex items-center justify-center rounded-full bg-forest text-ivory px-6 py-3.5 text-sm shadow-soft"
+              >
+                {labels.bookDesktop}
+              </a>
+            </nav>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 };
