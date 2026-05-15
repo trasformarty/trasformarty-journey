@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Essence } from "@/components/Essence";
@@ -14,6 +15,26 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) return;
+
+      const target = document.getElementById(hash);
+      if (!target) return;
+
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const initialScroll = window.setTimeout(scrollToHash, 250);
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => {
+      window.clearTimeout(initialScroll);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
