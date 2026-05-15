@@ -23,6 +23,15 @@
   <meta name="twitter:description" content="TrasforMarti is a space for emotional, somatic and holistic transformation through touch, movement, presence and deep listening.">
   <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f9bdd2ed-e3cd-4d43-a031-4bfbdfd7e949/id-preview-cdbc2cb8--6accbfbd-e505-4128-ae8d-1f54b92e4213.lovable.app-1777302984963.png">
   <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f9bdd2ed-e3cd-4d43-a031-4bfbdfd7e949/id-preview-cdbc2cb8--6accbfbd-e505-4128-ae8d-1f54b92e4213.lovable.app-1777302984963.png">
+  <script>
+    (function () {
+      var redirect = sessionStorage.getItem("trasformarti:redirect");
+      if (!redirect) return;
+
+      sessionStorage.removeItem("trasformarti:redirect");
+      window.history.replaceState(null, "", redirect);
+    })();
+  </script>
 </head>
 
   <body>
