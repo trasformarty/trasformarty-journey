@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Essence } from "@/components/Essence";
@@ -14,26 +15,56 @@ import { Testimonials } from "@/components/Testimonials";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
-const Index = () => {
-  useEffect(() => {
-    const scrollToHash = () => {
-      const hash = window.location.hash.replace("#", "");
-      if (!hash) return;
+const SECTION_ALIASES: Record<string, string> = {
+  "": "home",
+  home: "home",
+  essence: "essence",
+  about: "about",
+  approach: "approach",
+  work: "work",
+  "work-with-me": "work",
+  "touch-to-soul": "touch-to-soul",
+  sessions: "sessions",
+  workshops: "workshops",
+  retreats: "retreats",
+  courses: "courses",
+  "from-you": "from-you",
+  "your-words": "from-you",
+  contact: "contact",
+};
 
-      const target = document.getElementById(hash);
+const getSectionFromLocation = (pathname: string, hash: string) => {
+  const hashSection = hash.replace("#", "");
+  if (hashSection) return SECTION_ALIASES[hashSection] ?? hashSection;
+
+  const pathSection = pathname.replace(/^\//, "").replace(/\/$/, "");
+  return SECTION_ALIASES[pathSection] ?? "home";
+};
+
+const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const sectionId = getSectionFromLocation(location.pathname, location.hash);
+    if (!sectionId || sectionId === "home") return;
+
+    const scrollToSection = () => {
+      const target = document.getElementById(sectionId);
       if (!target) return;
 
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const headerOffset = 88;
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top: Math.max(targetPosition, 0), behavior: "smooth" });
     };
 
-    const initialScroll = window.setTimeout(scrollToHash, 250);
-    window.addEventListener("hashchange", scrollToHash);
+    const scrollAttempts = [120, 350, 700, 1200].map((delay) =>
+      window.setTimeout(scrollToSection, delay)
+    );
 
     return () => {
-      window.clearTimeout(initialScroll);
-      window.removeEventListener("hashchange", scrollToHash);
+      scrollAttempts.forEach((attempt) => window.clearTimeout(attempt));
     };
-  }, []);
+  }, [location.pathname, location.hash]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
