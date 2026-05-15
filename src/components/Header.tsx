@@ -6,21 +6,21 @@ const WHATSAPP_BOOKING_URL =
   "https://wa.me/34691738479?text=Hi%20Martina%2C%20I%20would%20like%20to%20book%20a%20session.%0AMy%20name%20is%3A%0AI%27m%20interested%20in%3A%0AMy%20availability%20is%3A";
 
 const NAV = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "My Approach", href: "#approach" },
-  { label: "Events", href: "#free-call" },
-  { label: "Your Words", href: "#from-you" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "My Approach", href: "/#approach" },
+  { label: "Events", href: "/events" },
+  { label: "Your Words", href: "/#from-you" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const WORK_LINKS = [
-  { label: "Work With Me", href: "#work" },
-  { label: "A Touch to Soul", href: "#touch-to-soul" },
-  { label: "Moving Through", href: "#sessions" },
-  { label: "Workshops", href: "#workshops" },
-  { label: "Retreats", href: "#retreats" },
-  { label: "Courses", href: "#courses" },
+  { label: "Work With Me", href: "/#work" },
+  { label: "A Touch to Soul", href: "/#touch-to-soul" },
+  { label: "Moving Through", href: "/#sessions" },
+  { label: "Workshops", href: "/#workshops" },
+  { label: "Retreats", href: "/#retreats" },
+  { label: "Courses", href: "/#courses" },
 ];
 
 export const Header = () => {
@@ -51,7 +51,7 @@ export const Header = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 py-4 md:py-5">
         <a
-          href="#home"
+          href="/#home"
           className={`${headerTone} transition-colors duration-700`}
           aria-label="TrasforMarti — back to top"
         >
@@ -78,7 +78,7 @@ export const Header = () => {
 
               <div className="relative group">
                 <a
-                  href="#work"
+                  href="/#work"
                   className="text-sm transition-colors duration-300 relative text-forest-deep/80 hover:text-forest-deep inline-flex items-center gap-1.5"
                 >
                   Work With Me
