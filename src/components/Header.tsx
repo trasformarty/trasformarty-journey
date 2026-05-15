@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Wordmark } from "./Wordmark";
 
 const WHATSAPP_BOOKING_URL =
@@ -9,17 +9,24 @@ const NAV = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "My Approach", href: "#approach" },
+  { label: "Events", href: "#free-call" },
+  { label: "Your Words", href: "#from-you" },
+  { label: "Contact", href: "#contact" },
+];
+
+const WORK_LINKS = [
   { label: "Work With Me", href: "#work" },
+  { label: "A Touch to Soul", href: "#touch-to-soul" },
+  { label: "Moving Through", href: "#sessions" },
   { label: "Workshops", href: "#workshops" },
   { label: "Retreats", href: "#retreats" },
   { label: "Courses", href: "#courses" },
-  { label: "Contact", href: "#contact" },
-  { label: "Your Words", href: "#from-you" },
 ];
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [workOpen, setWorkOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -58,7 +65,46 @@ export const Header = () => {
         <div className="hidden lg:flex items-center gap-6">
           {scrolled ? (
             <nav className="flex items-center gap-6" aria-label="Primary">
-              {NAV.map((item) => (
+              {NAV.slice(0, 3).map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm transition-colors duration-300 relative group text-forest-deep/80 hover:text-forest-deep"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 bg-forest" />
+                </a>
+              ))}
+
+              <div className="relative group">
+                <a
+                  href="#work"
+                  className="text-sm transition-colors duration-300 relative text-forest-deep/80 hover:text-forest-deep inline-flex items-center gap-1.5"
+                >
+                  Work With Me
+                  <ChevronDown size={14} strokeWidth={1.5} className="transition-transform duration-300 group-hover:rotate-180" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 bg-forest" />
+                </a>
+                <div className="absolute left-1/2 top-full z-20 min-w-[210px] -translate-x-1/2 pt-4 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-300">
+                  <div className="rounded-[1.25rem] border border-forest/15 bg-ivory/95 p-3 shadow-organic backdrop-blur-xl">
+                    {WORK_LINKS.map((item, index) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className={`block rounded-full px-4 py-2.5 text-sm hover:bg-sage/20 hover:text-forest-deep transition-colors duration-300 ${
+                          index === 0
+                            ? "uppercase tracking-[0.16em] text-xs text-forest-deep/55"
+                            : "text-forest-deep/75"
+                        }`}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {NAV.slice(3).map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -146,8 +192,51 @@ export const Header = () => {
               <X size={24} strokeWidth={1.4} />
             </button>
           </div>
-          <nav className="flex flex-col p-6 gap-1 bg-[hsl(var(--ivory))] flex-1" aria-label="Menu navigation">
-            {NAV.map((item) => (
+          <nav className="flex flex-col p-6 gap-1 bg-[hsl(var(--ivory))] flex-1 overflow-y-auto" aria-label="Menu navigation">
+            {NAV.slice(0, 3).map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="font-serif text-2xl py-3 text-forest-deep border-b border-forest-deep/10"
+              >
+                {item.label}
+              </a>
+            ))}
+
+            <div className="border-b border-forest-deep/10">
+              <button
+                type="button"
+                onClick={() => setWorkOpen((current) => !current)}
+                className="w-full font-serif text-2xl py-3 text-forest-deep flex items-center justify-between"
+                aria-expanded={workOpen}
+              >
+                Work With Me
+                <ChevronDown
+                  size={20}
+                  strokeWidth={1.4}
+                  className={`transition-transform duration-300 ${workOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div className={`overflow-hidden transition-all duration-500 ${workOpen ? "max-h-96 pb-3" : "max-h-0"}`}>
+                {WORK_LINKS.map((item, index) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={`block pl-4 py-2.5 ${
+                      index === 0
+                        ? "text-sm uppercase tracking-[0.18em] text-forest-deep/55"
+                        : "font-serif text-xl text-forest-deep/80"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {NAV.slice(3).map((item) => (
               <a
                 key={item.href}
                 href={item.href}
