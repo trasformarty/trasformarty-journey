@@ -127,7 +127,16 @@ export const Header = () => {
   const languageToggleLabel = language === "it" ? "EN" : "IT";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const nextScrolled = window.scrollY > 24;
+      setScrolled(nextScrolled);
+
+      if (nextScrolled) {
+        setOpen(false);
+        setWorkOpen(false);
+      }
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
