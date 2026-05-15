@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -7,6 +8,10 @@ import martinaPortrait from "@/assets/martina-portrait.png";
 const CALENDLY_URL = "https://calendly.com/martinaroscioli-discovery-call/30min";
 
 const Events = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
