@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Wordmark } from "./Wordmark";
 
@@ -9,7 +10,7 @@ const NAV = [
   { label: "Home", href: "/#home" },
   { label: "About", href: "/#about" },
   { label: "My Approach", href: "/#approach" },
-  { label: "Events", href: "/events" },
+  { label: "Events", href: "/events", route: true },
   { label: "Your Words", href: "/#from-you" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -22,6 +23,55 @@ const WORK_LINKS = [
   { label: "Retreats", href: "/#retreats" },
   { label: "Courses", href: "/#courses" },
 ];
+
+const navLinkClass = "text-sm transition-colors duration-300 relative group text-forest-deep/80 hover:text-forest-deep";
+
+const DesktopNavItem = ({ item }: { item: { label: string; href: string; route?: boolean } }) => {
+  const content = (
+    <>
+      {item.label}
+      <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 bg-forest" />
+    </>
+  );
+
+  if (item.route) {
+    return (
+      <Link to={item.href} className={navLinkClass}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={item.href} className={navLinkClass}>
+      {content}
+    </a>
+  );
+};
+
+const MobileNavItem = ({
+  item,
+  onClick,
+}: {
+  item: { label: string; href: string; route?: boolean };
+  onClick: () => void;
+}) => {
+  const className = "font-serif text-2xl py-3 text-forest-deep border-b border-forest-deep/10 last:border-0";
+
+  if (item.route) {
+    return (
+      <Link to={item.href} onClick={onClick} className={className}>
+        {item.label}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={item.href} onClick={onClick} className={className}>
+      {item.label}
+    </a>
+  );
+};
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -66,14 +116,7 @@ export const Header = () => {
           {scrolled ? (
             <nav className="flex items-center gap-6" aria-label="Primary">
               {NAV.slice(0, 3).map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm transition-colors duration-300 relative group text-forest-deep/80 hover:text-forest-deep"
-                >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 bg-forest" />
-                </a>
+                <DesktopNavItem key={item.href} item={item} />
               ))}
 
               <div className="relative group">
@@ -105,14 +148,7 @@ export const Header = () => {
               </div>
 
               {NAV.slice(3).map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm transition-colors duration-300 relative group text-forest-deep/80 hover:text-forest-deep"
-                >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-500 bg-forest" />
-                </a>
+                <DesktopNavItem key={item.href} item={item} />
               ))}
               <a
                 href={WHATSAPP_BOOKING_URL}
@@ -194,14 +230,7 @@ export const Header = () => {
           </div>
           <nav className="flex flex-col p-6 gap-1 bg-[hsl(var(--ivory))] flex-1 overflow-y-auto" aria-label="Menu navigation">
             {NAV.slice(0, 3).map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="font-serif text-2xl py-3 text-forest-deep border-b border-forest-deep/10"
-              >
-                {item.label}
-              </a>
+              <MobileNavItem key={item.href} item={item} onClick={() => setOpen(false)} />
             ))}
 
             <div className="border-b border-forest-deep/10">
@@ -237,14 +266,7 @@ export const Header = () => {
             </div>
 
             {NAV.slice(3).map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="font-serif text-2xl py-3 text-forest-deep border-b border-forest-deep/10 last:border-0"
-              >
-                {item.label}
-              </a>
+              <MobileNavItem key={item.href} item={item} onClick={() => setOpen(false)} />
             ))}
             <a
               href={WHATSAPP_BOOKING_URL}
