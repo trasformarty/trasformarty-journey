@@ -30,14 +30,10 @@ export const FreeCall = () => {
               <p className="font-serif text-3xl md:text-5xl leading-[1.15] text-forest-deep text-balance">
                 What if you could dance through life?
               </p>
-              <div className="mt-7 space-y-4 text-foreground/75 leading-relaxed max-w-xl mx-auto">
+              <div className="mt-7 text-foreground/75 leading-relaxed max-w-xl mx-auto">
                 <p>
-                  TrasforMarti is an invitation to move through life with more
-                  presence, softness and freedom.
-                </p>
-                <p>
-                  A free 30-minute online call to meet each other, listen to
-                  your moment, and feel how I may support you.
+                  A free 30-minute online call to stay in contact, ask your
+                  questions, and discover together how we can work.
                 </p>
               </div>
 
