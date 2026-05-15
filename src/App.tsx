@@ -36,9 +36,14 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/it" element={<Index />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/it/events" element={<Events />} />
           {SECTION_ROUTES.map((route) => (
             <Route key={route} path={`/${route}`} element={<Index />} />
+          ))}
+          {SECTION_ROUTES.map((route) => (
+            <Route key={`it-${route}`} path={`/it/${route}`} element={<Index />} />
           ))}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
