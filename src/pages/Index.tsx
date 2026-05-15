@@ -12,6 +12,7 @@ import { Workshops } from "@/components/Workshops";
 import { Retreats } from "@/components/Retreats";
 import { Courses } from "@/components/Courses";
 import { Testimonials } from "@/components/Testimonials";
+import { FreeCall } from "@/components/FreeCall";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
@@ -30,6 +31,8 @@ const SECTION_ALIASES: Record<string, string> = {
   courses: "courses",
   "from-you": "from-you",
   "your-words": "from-you",
+  "free-call": "free-call",
+  "lets-talk": "free-call",
   contact: "contact",
 };
 
@@ -81,6 +84,7 @@ const Index = () => {
         <Retreats />
         <Courses />
         <Testimonials />
+        <FreeCall />
         <Contact />
       </main>
       <Footer />
