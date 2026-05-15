@@ -69,6 +69,27 @@ const Index = () => {
     };
   }, [location.pathname, location.hash]);
 
+  useEffect(() => {
+    const freeCallSection = document.getElementById("free-call");
+    if (!freeCallSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        const freeCallUrl = "/free-call";
+        if (window.location.pathname !== freeCallUrl) {
+          window.history.replaceState(null, "", freeCallUrl);
+        }
+      },
+      { threshold: 0.55 }
+    );
+
+    observer.observe(freeCallSection);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
