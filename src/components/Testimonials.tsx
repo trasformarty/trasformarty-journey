@@ -3,6 +3,7 @@ import { Check, AlertCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
+const FORM_FALLBACK_ENDPOINT = "https://formsubmit.co/martina.roscioli@gmail.com";
 
 const TESTIMONIALS = [
   {
@@ -97,6 +98,12 @@ export const Testimonials = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const submitWithFallback = (form: HTMLFormElement) => {
+    form.action = FORM_FALLBACK_ENDPOINT;
+    form.method = "POST";
+    HTMLFormElement.prototype.submit.call(form);
+  };
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -104,9 +111,6 @@ export const Testimonials = () => {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    formData.append("_subject", "New private words from TrasforMarti website");
-    formData.append("_template", "table");
-    formData.append("_captcha", "false");
 
     try {
       const response = await fetch(FORM_ENDPOINT, {
@@ -119,10 +123,10 @@ export const Testimonials = () => {
 
       form.reset();
       setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please send your words directly to martina.roscioli@gmail.com.");
-    } finally {
       setLoading(false);
+    } catch {
+      setError("Opening a secure backup sending page. If it does not open, please send your words directly to martina.roscioli@gmail.com.");
+      submitWithFallback(form);
     }
   };
 
@@ -176,7 +180,12 @@ export const Testimonials = () => {
         </Reveal>
 
         <Reveal delay={180} className="mt-10 max-w-2xl">
-          <form onSubmit={onSubmit} className="border-t border-forest-deep/10 pt-8 space-y-4">
+          <form
+            onSubmit={onSubmit}
+            action={FORM_FALLBACK_ENDPOINT}
+            method="POST"
+            className="border-t border-forest-deep/10 pt-8 space-y-4"
+          >
             {submitted ? (
               <div className="flex items-start gap-3 text-foreground/70 animate-fade-in">
                 <Check size={18} strokeWidth={1.5} className="mt-1 text-forest shrink-0" />
@@ -184,6 +193,11 @@ export const Testimonials = () => {
               </div>
             ) : (
               <>
+                <input type="hidden" name="_subject" value="New private words from TrasforMarti website" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value="https://trasformarti.com/#from-you" />
+
                 <div>
                   <p className="font-serif text-2xl text-forest-deep mb-3">Share your words</p>
                   <p className="text-foreground/65 leading-relaxed">
