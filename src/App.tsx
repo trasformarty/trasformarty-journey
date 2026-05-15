@@ -22,6 +22,8 @@ const SECTION_ROUTES = [
   "courses",
   "from-you",
   "your-words",
+  "free-call",
+  "lets-talk",
   "contact",
 ];
 
