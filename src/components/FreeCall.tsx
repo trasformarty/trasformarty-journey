@@ -1,7 +1,7 @@
 import { Reveal } from "./Reveal";
 import martinaPortrait from "@/assets/martina-portrait.png";
 
-const CALENDLY_URL = "https://calendly.com/martina-roscioli/free-call";
+const CALENDLY_URL = "https://calendly.com/martinaroscioli-discovery-call/30min";
 
 export const FreeCall = () => {
   return (
