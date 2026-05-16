@@ -8,6 +8,13 @@ import { getLanguageFromPath, localizePath, toggleLanguagePath } from "@/lib/lan
 const WHATSAPP_BOOKING_URL =
   "https://wa.me/34691738479?text=Hi%20Martina%2C%20I%20would%20like%20to%20book%20a%20session.%0AMy%20name%20is%3A%0AI%27m%20interested%20in%3A%0AMy%20availability%20is%3A";
 
+type NavItem = {
+  label: string;
+  href: string;
+  route?: boolean;
+  resetBackTo?: string;
+};
+
 const NAV_LABELS = {
   en: {
     home: "Home",
@@ -45,7 +52,12 @@ const NAV_LABELS = {
 
 const navLinkClass = "text-sm transition-colors duration-300 relative group text-forest-deep/80 hover:text-forest-deep";
 
-const DesktopNavItem = ({ item }: { item: { label: string; href: string; route?: boolean } }) => {
+const keepBackButtonOnHome = (homePath?: string) => {
+  if (!homePath || typeof window === "undefined") return;
+  window.history.replaceState(null, "", homePath);
+};
+
+const DesktopNavItem = ({ item }: { item: NavItem }) => {
   const content = (
     <>
       {item.label}
@@ -55,7 +67,11 @@ const DesktopNavItem = ({ item }: { item: { label: string; href: string; route?:
 
   if (item.route) {
     return (
-      <Link to={item.href} className={navLinkClass}>
+      <Link
+        to={item.href}
+        onClick={() => keepBackButtonOnHome(item.resetBackTo)}
+        className={navLinkClass}
+      >
         {content}
       </Link>
     );
@@ -72,14 +88,21 @@ const MobileNavItem = ({
   item,
   onClick,
 }: {
-  item: { label: string; href: string; route?: boolean };
+  item: NavItem;
   onClick: () => void;
 }) => {
   const className = "font-serif text-2xl py-3 text-forest-deep border-b border-forest-deep/10 last:border-0";
 
   if (item.route) {
     return (
-      <Link to={item.href} onClick={onClick} className={className}>
+      <Link
+        to={item.href}
+        onClick={() => {
+          keepBackButtonOnHome(item.resetBackTo);
+          onClick();
+        }}
+        className={className}
+      >
         {item.label}
       </Link>
     );
@@ -130,7 +153,12 @@ export const Header = () => {
       { label: labels.home, href: `${localizePath("/", language)}#home` },
       { label: labels.about, href: `${localizePath("/", language)}#about` },
       { label: labels.approach, href: `${localizePath("/", language)}#approach` },
-      { label: labels.events, href: localizePath("/events", language), route: true },
+      {
+        label: labels.events,
+        href: localizePath("/events", language),
+        route: true,
+        resetBackTo: localizePath("/", language),
+      },
       { label: labels.words, href: `${localizePath("/", language)}#from-you` },
       { label: labels.contact, href: `${localizePath("/", language)}#contact` },
     ],
