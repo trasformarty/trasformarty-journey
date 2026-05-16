@@ -92,6 +92,30 @@ const MobileNavItem = ({
   );
 };
 
+const LanguageSwitch = ({
+  to,
+  label,
+  className,
+  onClick,
+}: {
+  to: string;
+  label: string;
+  className: string;
+  onClick?: () => void;
+}) => (
+  <Link
+    to={to}
+    onClick={onClick}
+    className={className}
+    aria-label={`Switch to ${label}`}
+    translate="no"
+  >
+    <span translate="no" className="inline-block min-w-[2ch] text-center leading-none">
+      {label}
+    </span>
+  </Link>
+);
+
 export const Header = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
@@ -228,14 +252,12 @@ export const Header = () => {
           {NAV.slice(3).map((item) => (
             <MobileNavItem key={item.href} item={item} onClick={closeMenu} />
           ))}
-          <Link
+          <LanguageSwitch
             to={languageToggleHref}
+            label={languageToggleLabel}
             onClick={closeMenu}
             className="mt-4 self-center text-xs tracking-[0.18em] uppercase text-forest-deep/60 hover:text-forest-deep transition-colors duration-300"
-            aria-label={`Switch to ${languageToggleLabel}`}
-          >
-            {languageToggleLabel}
-          </Link>
+          />
           <a
             href={WHATSAPP_BOOKING_URL}
             target="_blank"
@@ -314,9 +336,11 @@ export const Header = () => {
                 {NAV.slice(3).map((item) => (
                   <DesktopNavItem key={item.href} item={item} />
                 ))}
-                <Link to={languageToggleHref} className={languageTextClass} aria-label={`Switch to ${languageToggleLabel}`}>
-                  {languageToggleLabel}
-                </Link>
+                <LanguageSwitch
+                  to={languageToggleHref}
+                  label={languageToggleLabel}
+                  className={languageTextClass}
+                />
                 <a
                   href={WHATSAPP_BOOKING_URL}
                   target="_blank"
@@ -328,9 +352,11 @@ export const Header = () => {
               </nav>
             ) : (
               <div className="flex items-center gap-3 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
-                <Link to={languageToggleHref} className={languageTextClass} aria-label={`Switch to ${languageToggleLabel}`}>
-                  {languageToggleLabel}
-                </Link>
+                <LanguageSwitch
+                  to={languageToggleHref}
+                  label={languageToggleLabel}
+                  className={languageTextClass}
+                />
                 <a
                   href={WHATSAPP_BOOKING_URL}
                   target="_blank"
@@ -352,9 +378,11 @@ export const Header = () => {
           </div>
 
           <div className="lg:hidden flex items-center gap-0.5">
-            <Link to={languageToggleHref} className={`${languageTextClass} translate-x-1.5`} aria-label={`Switch to ${languageToggleLabel}`}>
-              {languageToggleLabel}
-            </Link>
+            <LanguageSwitch
+              to={languageToggleHref}
+              label={languageToggleLabel}
+              className={`${languageTextClass} translate-x-1.5`}
+            />
             <button
               className={`${menuButtonBase} ${headerTone} hover:opacity-80 hover:scale-105`}
               onClick={() => setOpen(true)}
