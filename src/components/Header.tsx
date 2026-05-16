@@ -174,11 +174,9 @@ export const Header = () => {
     "text-[10px] md:text-[11px] lowercase tracking-[0.14em] font-normal transition-colors duration-500 whitespace-nowrap";
   const menuButtonBase =
     "group inline-flex items-center justify-center p-2 -mr-2 transition-all duration-500";
-  const languagePillBase =
-    "inline-flex h-7 min-w-7 items-center justify-center rounded-full border px-2 text-[10px] font-medium tracking-[0.16em] uppercase transition-colors duration-500 whitespace-nowrap";
-  const languagePillClass = scrolled
-    ? `${languagePillBase} border-forest/20 text-forest-deep/75 hover:bg-sage/20 hover:text-forest-deep`
-    : `${languagePillBase} border-ivory/35 text-ivory/90 hover:bg-ivory/10 hover:text-ivory`;
+  const languageTextClass = `text-[10px] md:text-[11px] font-medium tracking-[0.18em] uppercase transition-colors duration-500 whitespace-nowrap ${
+    scrolled ? "text-forest-deep/70 hover:text-forest-deep" : "text-ivory/90 hover:text-ivory"
+  }`;
 
   const mobileMenu = open ? (
     <div className="fixed inset-0 z-[9999] opacity-100 visible pointer-events-auto" role="dialog" aria-modal="true">
@@ -233,7 +231,7 @@ export const Header = () => {
           <Link
             to={languageToggleHref}
             onClick={closeMenu}
-            className="mt-4 self-center inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-forest/20 px-2 text-xs tracking-[0.18em] text-forest-deep/60"
+            className="mt-4 self-center text-xs tracking-[0.18em] uppercase text-forest-deep/60 hover:text-forest-deep transition-colors duration-300"
             aria-label={`Switch to ${languageToggleLabel}`}
           >
             {languageToggleLabel}
@@ -312,7 +310,7 @@ export const Header = () => {
                 {NAV.slice(3).map((item) => (
                   <DesktopNavItem key={item.href} item={item} />
                 ))}
-                <Link to={languageToggleHref} className={languagePillClass} aria-label={`Switch to ${languageToggleLabel}`}>
+                <Link to={languageToggleHref} className={languageTextClass} aria-label={`Switch to ${languageToggleLabel}`}>
                   {languageToggleLabel}
                 </Link>
                 <a
@@ -326,7 +324,7 @@ export const Header = () => {
               </nav>
             ) : (
               <div className="flex items-center gap-3 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
-                <Link to={languageToggleHref} className={languagePillClass} aria-label={`Switch to ${languageToggleLabel}`}>
+                <Link to={languageToggleHref} className={languageTextClass} aria-label={`Switch to ${languageToggleLabel}`}>
                   {languageToggleLabel}
                 </Link>
                 <a
@@ -350,7 +348,7 @@ export const Header = () => {
           </div>
 
           <div className="lg:hidden flex items-center gap-2.5">
-            <Link to={languageToggleHref} className={languagePillClass} aria-label={`Switch to ${languageToggleLabel}`}>
+            <Link to={languageToggleHref} className={languageTextClass} aria-label={`Switch to ${languageToggleLabel}`}>
               {languageToggleLabel}
             </Link>
             <a
