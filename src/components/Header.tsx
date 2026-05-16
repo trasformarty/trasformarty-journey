@@ -284,11 +284,11 @@ export const Header = () => {
         <div
           className={`max-w-7xl mx-auto flex items-center ${
             scrolled ? "justify-between" : "justify-end"
-          } md:justify-between px-6 md:px-10 py-4 md:py-5`}
+          } px-6 md:px-10 py-4 md:py-5`}
         >
           <a
             href={`${localizePath("/", language)}#home`}
-            className={`${scrolled ? "block" : "hidden"} md:block ${headerTone} transition-colors duration-700`}
+            className={`${scrolled ? "block" : "hidden"} ${headerTone} transition-colors duration-700`}
             aria-label="TrasforMarti — back to top"
           >
             <Wordmark
