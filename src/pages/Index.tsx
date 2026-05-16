@@ -15,6 +15,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { FreeCall } from "@/components/FreeCall";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { getLanguageFromPath, localizePath, stripLanguageFromPath } from "@/lib/language";
 
 const SECTION_ALIASES: Record<string, string> = {
   "": "home",
@@ -40,12 +41,13 @@ const getSectionFromLocation = (pathname: string, hash: string) => {
   const hashSection = hash.replace("#", "");
   if (hashSection) return SECTION_ALIASES[hashSection] ?? hashSection;
 
-  const pathSection = pathname.replace(/^\//, "").replace(/\/$/, "");
+  const pathSection = stripLanguageFromPath(pathname).replace(/^\//, "").replace(/\/$/, "");
   return SECTION_ALIASES[pathSection] ?? "home";
 };
 
 const Index = () => {
   const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
 
   useEffect(() => {
     const sectionId = getSectionFromLocation(location.pathname, location.hash);
@@ -77,7 +79,7 @@ const Index = () => {
       ([entry]) => {
         if (!entry.isIntersecting) return;
 
-        const freeCallUrl = "/free-call";
+        const freeCallUrl = localizePath("/free-call", language);
         if (window.location.pathname !== freeCallUrl) {
           window.history.replaceState(null, "", freeCallUrl);
         }
@@ -88,7 +90,7 @@ const Index = () => {
     observer.observe(freeCallSection);
 
     return () => observer.disconnect();
-  }, []);
+  }, [language]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
