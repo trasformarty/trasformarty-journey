@@ -45,7 +45,7 @@ export const Hero = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3 sm:pt-0">
           <a
             href="#work"
-            className="inline-flex items-center rounded-full bg-ivory text-forest-deep px-7 py-3.5 text-sm tracking-wide hover:bg-gold-soft transition-colors duration-500 shadow-organic"
+            className="inline-flex items-center rounded-full border border-ivory/55 bg-ivory/16 text-ivory px-7 py-3.5 text-sm tracking-wide backdrop-blur-sm hover:bg-ivory/24 transition-colors duration-500 shadow-organic sm:bg-ivory sm:text-forest-deep sm:border-transparent sm:hover:bg-gold-soft"
           >
             Work With Me
           </a>
