@@ -28,7 +28,7 @@ const ABOUT_COPY = {
       "Il mio corpo sente. Con il tempo ho imparato ad ascoltarlo, a fidarmi dei suoi segnali, dei suoi silenzi, dei suoi movimenti.",
       "Il mio lavoro nasce da qui: dal corpo, dal tocco, dalla presenza e da una ricerca continua su ciò che ci attraversa quando smettiamo di voler controllare tutto.",
       "Ho scoperto il massaggio e il bodywork anche attraverso l’esperienza del ricevere: entrando in stati di ascolto profondo, connessione e presenza con me stessa. In quei momenti ho sentito quanto il corpo possa aprire spazi, memorie, emozioni e possibilità di trasformazione.",
-      "Oggi accompagno le persone a ritornare a sé attraverso il massaggio, il bodywork, il movimento e l’ascolto somatico: a incontrare ciò che è vivo dentro, e a lasciare che qualcosa possa muoversi con più spazio, dolcezza e verità.",
+      "Oggi accompagno le persone a ritornare a sé attraverso diverse tecniche, il movimento e l’ascolto somatico: a incontrare ciò che è vivo dentro, e a lasciare che qualcosa possa muoversi con più spazio, dolcezza e verità.",
       "Non lavoro per cambiare qualcuno. Creo uno spazio in cui il corpo possa sentirsi ascoltato, sostenuto e libero di rivelare il proprio ritmo.",
     ],
   },
