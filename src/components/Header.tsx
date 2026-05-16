@@ -259,10 +259,10 @@ export const Header = () => {
             : "bg-gradient-to-b from-forest-deep/30 to-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 py-4 md:py-5">
+        <div className="max-w-7xl mx-auto flex items-center justify-end md:justify-between px-6 md:px-10 py-4 md:py-5">
           <a
             href={`${localizePath("/", language)}#home`}
-            className={`${headerTone} transition-colors duration-700`}
+            className={`hidden md:block ${headerTone} transition-colors duration-700`}
             aria-label="TrasforMarti — back to top"
           >
             <Wordmark
@@ -347,18 +347,10 @@ export const Header = () => {
             )}
           </div>
 
-          <div className="lg:hidden flex items-center gap-2.5">
+          <div className="lg:hidden flex items-center gap-3">
             <Link to={languageToggleHref} className={languageTextClass} aria-label={`Switch to ${languageToggleLabel}`}>
               {languageToggleLabel}
             </Link>
-            <a
-              href={WHATSAPP_BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${bookLinkBase} ${headerTone} hover:opacity-80`}
-            >
-              {labels.book}
-            </a>
             <button
               className={`${menuButtonBase} ${headerTone} hover:opacity-80 hover:scale-105`}
               onClick={() => setOpen(true)}
