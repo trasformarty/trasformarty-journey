@@ -347,8 +347,8 @@ export const Header = () => {
             )}
           </div>
 
-          <div className="lg:hidden flex items-center gap-1.5">
-            <Link to={languageToggleHref} className={languageTextClass} aria-label={`Switch to ${languageToggleLabel}`}>
+          <div className="lg:hidden flex items-center gap-0.5">
+            <Link to={languageToggleHref} className={`${languageTextClass} translate-x-1.5`} aria-label={`Switch to ${languageToggleLabel}`}>
               {languageToggleLabel}
             </Link>
             <button
