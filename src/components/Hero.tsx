@@ -42,7 +42,7 @@ export const Hero = () => {
           movement, presence and deep listening.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3 sm:pt-0">
           <a
             href="#work"
             className="inline-flex items-center rounded-full bg-ivory text-forest-deep px-7 py-3.5 text-sm tracking-wide hover:bg-gold-soft transition-colors duration-500 shadow-organic"
@@ -51,7 +51,7 @@ export const Hero = () => {
           </a>
           <a
             href="#approach"
-            className="inline-flex items-center rounded-full border border-ivory/50 text-ivory px-7 py-3.5 text-sm tracking-wide hover:bg-ivory/10 transition-colors duration-500"
+            className="hidden sm:inline-flex items-center rounded-full border border-ivory/50 text-ivory px-7 py-3.5 text-sm tracking-wide hover:bg-ivory/10 transition-colors duration-500"
           >
             Discover My Approach
           </a>
