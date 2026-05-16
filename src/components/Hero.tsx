@@ -1,12 +1,37 @@
 import { ChevronDown } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { getLanguageFromPath } from "@/lib/language";
 import { Wordmark } from "./Wordmark";
 
+const HERO_COPY = {
+  en: {
+    eyebrow: "A holistic & somatic practice",
+    aria: "TrasforMarti — move, feel, transform",
+    line: "Move, feel, transform.",
+    text: "A space for emotional, somatic and holistic transformation through touch, movement, presence and deep listening.",
+    cta: "Work With Me",
+    scroll: "Scroll",
+  },
+  it: {
+    eyebrow: "Una pratica olistica e somatica",
+    aria: "TrasforMarti — muovere, sentire, trasformare",
+    line: "Muovere, sentire, trasformare.",
+    text: "Uno spazio per ritornare al corpo, ascoltare ciò che si muove dentro e lasciare che la trasformazione accada con presenza e delicatezza.",
+    cta: "Work With Me",
+    scroll: "Scorri",
+  },
+};
+
 export const Hero = () => {
+  const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
+  const copy = HERO_COPY[language];
+
   return (
     <section
       id="home"
       className="relative min-h-[100svh] w-full overflow-hidden flex items-center justify-center text-ivory"
-      aria-label="TrasforMarti — move, feel, transform"
+      aria-label={copy.aria}
     >
       {/* Video background */}
       <div className="absolute inset-0 z-0 bg-gradient-forest" aria-hidden="true">
@@ -27,19 +52,18 @@ export const Hero = () => {
       <div className="absolute inset-0 z-10 bg-gradient-veil" aria-hidden="true" />
 
       <div className="relative z-20 max-w-4xl mx-auto px-6 text-center animate-fade-in-slow">
-        <p className="eyebrow text-ivory/70 mb-8">A holistic & somatic practice</p>
+        <p className="eyebrow text-ivory/70 mb-8">{copy.eyebrow}</p>
 
         <h1 className="mb-8 flex justify-center">
           <Wordmark size="lg" variant="ivory" className="drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]" />
         </h1>
 
         <p className="font-serif italic text-2xl md:text-4xl text-ivory/95 mb-6 text-balance">
-          Move, feel, transform.
+          {copy.line}
         </p>
 
         <p className="max-w-2xl mx-auto text-base md:text-lg text-ivory/80 leading-relaxed text-pretty mb-10">
-          A space for emotional, somatic and holistic transformation through touch,
-          movement, presence and deep listening.
+          {copy.text}
         </p>
 
         <div className="flex items-center justify-center pt-3 sm:pt-0">
@@ -47,7 +71,7 @@ export const Hero = () => {
             href="#work"
             className="inline-flex items-center rounded-full bg-ivory text-forest-deep px-7 py-3.5 text-sm tracking-wide hover:bg-ivory/90 transition-colors duration-500 shadow-organic sm:hover:bg-gold-soft"
           >
-            Work With Me
+            {copy.cta}
           </a>
         </div>
       </div>
@@ -58,7 +82,7 @@ export const Hero = () => {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-ivory/70 hover:text-ivory transition-colors flex flex-col items-center gap-2"
         aria-label="Scroll to next section"
       >
-        <span className="text-[10px] uppercase tracking-[0.4em]">Scroll</span>
+        <span className="text-[10px] uppercase tracking-[0.4em]">{copy.scroll}</span>
         <ChevronDown size={20} strokeWidth={1.2} className="animate-scroll-cue" />
       </a>
     </section>
