@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Wordmark } from "./Wordmark";
-import { getLanguageFromPath, localizePath, toggleLanguagePath } from "@/lib/language";
+import { getLanguageFromPath, localizePath } from "@/lib/language";
 
 const WHATSAPP_BOOKING_URL =
   "https://wa.me/34691738479?text=Hi%20Martina%2C%20I%20would%20like%20to%20book%20a%20session.%0AMy%20name%20is%3A%0AI%27m%20interested%20in%3A%0AMy%20availability%20is%3A";
@@ -177,7 +177,7 @@ export const Header = () => {
     [labels, language]
   );
 
-  const languageToggleHref = toggleLanguagePath(location.pathname, location.hash);
+  const languageToggleHref = language === "it" ? "/" : "/it";
   const languageToggleLabel = language === "it" ? "EN" : "IT";
 
   useEffect(() => {
