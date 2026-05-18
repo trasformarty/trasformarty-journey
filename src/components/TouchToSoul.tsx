@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
@@ -20,6 +21,70 @@ const IMAGES = [
 export const TouchToSoul = () => {
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  const goPrevious = () => {
+    setActive((current) => {
+      const next = current === 0 ? IMAGES.length - 1 : current - 1;
+      if (lightbox) setLightbox(IMAGES[next]);
+      return next;
+    });
+  };
+
+  const goNext = () => {
+    setActive((current) => {
+      const next = current === IMAGES.length - 1 ? 0 : current + 1;
+      if (lightbox) setLightbox(IMAGES[next]);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (lightbox) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const isTyping =
+        target?.tagName === "INPUT" ||
+        target?.tagName === "TEXTAREA" ||
+        target?.isContentEditable;
+
+      if (isTyping) return;
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goPrevious();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goNext();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [lightbox]);
+
+  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return;
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const distance = touchEndX - touchStartX.current;
+    touchStartX.current = null;
+
+    if (Math.abs(distance) < 45) return;
+
+    if (distance > 0) {
+      goPrevious();
+    } else {
+      goNext();
+    }
+  };
 
   return (
     <section id="touch-to-soul" className="section bg-ivory" aria-label="A Touch to Soul">
@@ -94,8 +159,10 @@ export const TouchToSoul = () => {
         <Reveal delay={150} className="md:col-span-6">
           <div className="relative md:sticky md:top-28">
             <div
-              className="aspect-[5/4] w-full rounded-[2rem] overflow-hidden bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-organic cursor-zoom-in"
+              className="relative aspect-[5/4] w-full rounded-[2rem] overflow-hidden bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-organic cursor-zoom-in touch-pan-y"
               onClick={() => setLightbox(IMAGES[active])}
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
             >
               <img
                 src={IMAGES[active]}
@@ -110,6 +177,30 @@ export const TouchToSoul = () => {
                   Upload treatment images here
                 </span>
               </div>
+
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  goPrevious();
+                }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-ivory/28 text-forest-deep backdrop-blur-sm transition-colors hover:bg-ivory/45 md:h-10 md:w-10"
+                aria-label="Previous Touch to Soul image"
+              >
+                <ChevronLeft size={22} strokeWidth={1.4} />
+              </button>
+
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  goNext();
+                }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-ivory/28 text-forest-deep backdrop-blur-sm transition-colors hover:bg-ivory/45 md:h-10 md:w-10"
+                aria-label="Next Touch to Soul image"
+              >
+                <ChevronRight size={22} strokeWidth={1.4} />
+              </button>
             </div>
 
             <div className="mt-3 flex justify-center gap-2">
@@ -131,7 +222,13 @@ export const TouchToSoul = () => {
         </Reveal>
       </div>
 
-      <ImageLightbox src={lightbox} alt="Touch to Soul preview" onClose={() => setLightbox(null)} />
+      <ImageLightbox
+        src={lightbox}
+        alt="Touch to Soul preview"
+        onClose={() => setLightbox(null)}
+        onPrevious={goPrevious}
+        onNext={goNext}
+      />
     </section>
   );
 };
