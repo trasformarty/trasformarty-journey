@@ -18,10 +18,14 @@ const IMAGES = [
   "/touch-to-soul-9.jpg",
 ];
 
+const DOTS = [0, 1, 2];
+
 export const TouchToSoul = () => {
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const touchStartX = useRef<number | null>(null);
+
+  const activeDot = Math.min(2, Math.floor((active / IMAGES.length) * 3));
 
   const goPrevious = () => {
     setActive((current) => {
@@ -37,6 +41,12 @@ export const TouchToSoul = () => {
       if (lightbox) setLightbox(IMAGES[next]);
       return next;
     });
+  };
+
+  const goToDot = (dot: number) => {
+    const next = Math.min(IMAGES.length - 1, dot * Math.ceil(IMAGES.length / 3));
+    setActive(next);
+    if (lightbox) setLightbox(IMAGES[next]);
   };
 
   useEffect(() => {
@@ -204,13 +214,13 @@ export const TouchToSoul = () => {
             </div>
 
             <div className="mt-3 flex justify-center gap-2">
-              {IMAGES.map((_, i) => (
+              {DOTS.map((dot) => (
                 <button
-                  key={i}
+                  key={dot}
                   type="button"
-                  onClick={() => setActive(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${active === i ? "w-6 bg-forest" : "w-2 bg-forest/30"}`}
-                  aria-label={`Show Touch to Soul image ${i + 1}`}
+                  onClick={() => goToDot(dot)}
+                  className={`h-2 rounded-full transition-all duration-300 ${activeDot === dot ? "w-6 bg-forest" : "w-2 bg-forest/30"}`}
+                  aria-label={`Show Touch to Soul image group ${dot + 1}`}
                 />
               ))}
             </div>
