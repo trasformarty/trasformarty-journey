@@ -18,8 +18,6 @@ const IMAGES = [
   "/touch-to-soul-9.jpg",
 ];
 
-const DOTS = [0, 1, 2];
-
 export const TouchToSoul = () => {
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
@@ -95,6 +93,9 @@ export const TouchToSoul = () => {
       goNext();
     }
   };
+
+  const dotClass = (dot: number) =>
+    `h-2 rounded-full transition-all duration-300 ${activeDot === dot ? "w-6 bg-forest" : "w-2 bg-forest/30"}`;
 
   return (
     <section id="touch-to-soul" className="section bg-ivory" aria-label="A Touch to Soul">
@@ -213,16 +214,25 @@ export const TouchToSoul = () => {
               </button>
             </div>
 
-            <div className="mt-3 flex justify-center gap-2">
-              {DOTS.map((dot) => (
-                <button
-                  key={dot}
-                  type="button"
-                  onClick={() => goToDot(dot)}
-                  className={`h-2 rounded-full transition-all duration-300 ${activeDot === dot ? "w-6 bg-forest" : "w-2 bg-forest/30"}`}
-                  aria-label={`Show Touch to Soul image group ${dot + 1}`}
-                />
-              ))}
+            <div className="mt-3 flex justify-center gap-2" aria-label="Touch to Soul carousel position">
+              <button
+                type="button"
+                onClick={() => goToDot(0)}
+                className={dotClass(0)}
+                aria-label="Show Touch to Soul image group 1"
+              />
+              <button
+                type="button"
+                onClick={() => goToDot(1)}
+                className={dotClass(1)}
+                aria-label="Show Touch to Soul image group 2"
+              />
+              <button
+                type="button"
+                onClick={() => goToDot(2)}
+                className={dotClass(2)}
+                aria-label="Show Touch to Soul image group 3"
+              />
             </div>
             <div
               aria-hidden="true"
