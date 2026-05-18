@@ -10,6 +10,11 @@ const IMAGES = [
   "/touch-to-soul-2.jpg",
   "/touch-to-soul-3.jpg",
   "/touch-to-soul-4.jpg",
+  "/touch-to-soul-5.jpg",
+  "/touch-to-soul-6.jpg",
+  "/touch-to-soul-7.jpg",
+  "/touch-to-soul-8.jpg",
+  "/touch-to-soul-9.jpg",
 ];
 
 export const TouchToSoul = () => {
