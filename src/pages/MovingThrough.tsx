@@ -25,9 +25,9 @@ const FORMATS = [
 ];
 
 const PHASES = [
-  { range: "Months 1 — 3", detail: "One session per week.", text: "Close accompaniment, rhythm and safety. We begin to listen to the body, recognize resources and create a stable ground for the process." },
-  { range: "Months 4 — 6", detail: "One session every two weeks.", text: "The work begins to breathe. There is more space for integration, autonomy and the capacity to return to yourself between sessions." },
-  { range: "Months 7 — 9", detail: "One session per month.", text: "Support becomes lighter. You continue walking with more trust, resilience and inner strength, carrying the work into daily life." },
+  { range: "Months 1 — 3", detail: "One session per week.", text: "Close accompaniment, rhythm and safety. We begin to listen to the body, recognize resources and create a stable ground for the process.", image: "/moving-through/journey-1.jpg" },
+  { range: "Months 4 — 6", detail: "One session every two weeks.", text: "The work begins to breathe. There is more space for integration, autonomy and the capacity to return to yourself between sessions.", image: "/moving-through/journey-2.jpg" },
+  { range: "Months 7 — 9", detail: "One session per month.", text: "Support becomes lighter. You continue walking with more trust, resilience and inner strength, carrying the work into daily life.", image: "/moving-through/journey-3.jpg" },
 ];
 
 const SIGNS = [
@@ -147,11 +147,11 @@ const MovingThrough = () => {
                 <p>This work can be for anyone who feels the desire to understand themselves through the body, not only through words.</p>
                 <p>You may feel called to it when something is moving inside you and you do not yet know how to meet it — an emotion, a sensation, a transition, a repeated pattern, or a part of you that needs more care.</p>
               </div>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              <div className="mt-8 space-y-4 border-l border-forest/20 pl-5 md:pl-7">
                 {SIGNS.map((sign) => (
-                  <div key={sign} className="rounded-[1.5rem] border border-forest/10 bg-ivory/70 p-5 text-sm leading-relaxed text-foreground/68 shadow-soft">
+                  <p key={sign} className="font-serif text-xl leading-snug text-forest-deep/82 text-balance md:text-2xl">
                     {sign}
-                  </div>
+                  </p>
                 ))}
               </div>
             </Reveal>
@@ -229,17 +229,33 @@ const MovingThrough = () => {
               <h2 className="font-serif text-4xl leading-[1.05] text-ivory text-balance md:text-6xl">9-Month Transformation Journey</h2>
               <p className="mt-6 text-lg leading-relaxed text-ivory/78 text-pretty md:text-xl">A 9-month path that supports transformation over time. At the beginning, I accompany you closely. Gradually, the support becomes lighter, until you can continue walking with more autonomy, trust and inner strength.</p>
             </Reveal>
-            <ol className="mt-12 grid gap-5 lg:grid-cols-3">
+            <div className="mt-12 space-y-10 md:space-y-14">
               {PHASES.map((phase, index) => (
                 <Reveal key={phase.range} delay={index * 100}>
-                  <li className="h-full rounded-[2rem] border border-ivory/15 bg-ivory/[0.06] p-6 backdrop-blur-sm">
-                    <p className="font-serif text-2xl text-ivory">{phase.range}</p>
-                    <p className="mt-2 text-sm uppercase tracking-[0.18em] text-ivory/55">{phase.detail}</p>
-                    <p className="mt-5 leading-relaxed text-ivory/75 text-pretty">{phase.text}</p>
-                  </li>
+                  <article className={`grid items-center gap-7 md:grid-cols-12 md:gap-10 ${index % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}>
+                    <div className="md:col-span-5">
+                      <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-ivory/15 bg-ivory/[0.06] shadow-organic">
+                        <img
+                          src={phase.image}
+                          alt={phase.range}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                          onError={(event) => {
+                            event.currentTarget.style.display = "none";
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/45 via-transparent to-transparent" />
+                      </div>
+                    </div>
+                    <div className="md:col-span-7">
+                      <p className="font-serif text-3xl text-ivory md:text-4xl">{phase.range}</p>
+                      <p className="mt-3 text-sm uppercase tracking-[0.18em] text-ivory/55">{phase.detail}</p>
+                      <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ivory/75 text-pretty">{phase.text}</p>
+                    </div>
+                  </article>
                 </Reveal>
               ))}
-            </ol>
+            </div>
             <Reveal delay={180} className="mt-12">
               <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-ivory px-7 py-3.5 text-sm text-forest-deep shadow-soft transition-colors duration-500 hover:bg-gold-soft">Start Your Journey <ArrowUpRight size={16} strokeWidth={1.5} /></a>
             </Reveal>
