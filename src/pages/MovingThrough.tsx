@@ -229,29 +229,28 @@ const MovingThrough = () => {
               <h2 className="font-serif text-4xl leading-[1.05] text-ivory text-balance md:text-6xl">9-Month Transformation Journey</h2>
               <p className="mt-6 text-lg leading-relaxed text-ivory/78 text-pretty md:text-xl">A 9-month path that supports transformation over time. At the beginning, I accompany you closely. Gradually, the support becomes lighter, until you can continue walking with more autonomy, trust and inner strength.</p>
             </Reveal>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="mt-12 space-y-10 md:space-y-12">
               {PHASES.map((phase, index) => (
                 <Reveal key={phase.range} delay={index * 100}>
-                  <article className="h-full">
-                    <div className="relative aspect-square overflow-hidden rounded-[1.75rem] border border-ivory/15 bg-ivory/[0.06] shadow-organic">
-                      <img
-                        src={phase.image}
-                        alt={phase.range}
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                        onError={(event) => {
-                          event.currentTarget.style.display = "none";
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/45 via-transparent to-transparent" />
-                      <p className="absolute bottom-4 left-4 right-4 font-serif text-2xl leading-tight text-ivory drop-shadow-md">
-                        {index + 1}
-                      </p>
+                  <article className="mx-auto grid max-w-4xl items-center gap-6 md:grid-cols-[250px_1fr] md:gap-10">
+                    <div className={`mx-auto w-full max-w-[250px] ${index % 2 === 1 ? "md:order-2" : ""}`}>
+                      <div className="relative aspect-square overflow-hidden rounded-[1.65rem] border border-ivory/15 bg-ivory/[0.06] shadow-organic">
+                        <img
+                          src={phase.image}
+                          alt={phase.range}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                          onError={(event) => {
+                            event.currentTarget.style.display = "none";
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/35 via-transparent to-transparent" />
+                      </div>
                     </div>
-                    <div className="pt-6">
-                      <p className="font-serif text-2xl text-ivory md:text-3xl">{phase.range}</p>
-                      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-ivory/55">{phase.detail}</p>
-                      <p className="mt-4 text-sm leading-relaxed text-ivory/73 text-pretty md:text-base">{phase.text}</p>
+                    <div className={`${index % 2 === 1 ? "md:order-1 md:text-right" : ""}`}>
+                      <p className="font-serif text-3xl text-ivory md:text-4xl">{phase.range}</p>
+                      <p className="mt-3 text-xs uppercase tracking-[0.18em] text-ivory/55">{phase.detail}</p>
+                      <p className={`mt-5 text-base leading-relaxed text-ivory/75 text-pretty ${index % 2 === 1 ? "md:ml-auto" : ""} max-w-xl`}>{phase.text}</p>
                     </div>
                   </article>
                 </Reveal>
