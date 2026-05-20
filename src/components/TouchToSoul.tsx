@@ -179,6 +179,7 @@ export const TouchToSoul = () => {
                 src={IMAGES[active]}
                 alt={`Touch to Soul image ${active + 1}`}
                 className="h-full w-full object-cover"
+                style={{ objectPosition: active === 8 ? "65% center" : "center" }}
                 onError={(event) => {
                   event.currentTarget.style.display = "none";
                 }}
