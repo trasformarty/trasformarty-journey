@@ -169,7 +169,7 @@ export const Header = () => {
     () => [
       { label: labels.work, href: `${localizePath("/", language)}#work` },
       { label: labels.touch, href: `${localizePath("/", language)}#touch-to-soul` },
-      { label: labels.moving, href: `${localizePath("/", language)}#sessions` },
+      { label: labels.moving, href: localizePath("/moving-through", language) },
       { label: labels.workshops, href: `${localizePath("/", language)}#workshops` },
       { label: labels.retreats, href: `${localizePath("/", language)}#retreats` },
       { label: labels.courses, href: `${localizePath("/", language)}#courses` },
