@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Events from "./pages/Events.tsx";
+import MovingThrough from "./pages/MovingThrough.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,8 @@ const App = () => (
           <Route path="/it" element={<Index />} />
           <Route path="/events" element={<Events />} />
           <Route path="/it/events" element={<Events />} />
+          <Route path="/moving-through" element={<MovingThrough />} />
+          <Route path="/it/moving-through" element={<MovingThrough />} />
           {SECTION_ROUTES.map((route) => (
             <Route key={route} path={`/${route}`} element={<Index />} />
           ))}
