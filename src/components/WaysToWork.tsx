@@ -1,4 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { getLanguageFromPath, localizePath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
 const FEATURED = {
@@ -12,7 +14,8 @@ const OFFERINGS = [
   {
     title: "Moving Through",
     desc: "Somatic and emotional accompaniment to meet what is moving inside you.",
-    href: "#sessions",
+    href: "/moving-through",
+    route: true,
     image: "/work-with-me/moving-through.jpg",
   },
   {
@@ -35,63 +38,93 @@ const OFFERINGS = [
   },
 ];
 
+const WorkCardContent = ({
+  title,
+  desc,
+  image,
+  featured = false,
+}: {
+  title: string;
+  desc: string;
+  image: string;
+  featured?: boolean;
+}) => (
+  <>
+    <img
+      src={image}
+      alt=""
+      className="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-95"
+      loading="lazy"
+      onError={(event) => {
+        event.currentTarget.style.display = "none";
+      }}
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-forest-deep/18 to-transparent" />
+    <div className="absolute inset-0 bg-ivory/5 mix-blend-soft-light" />
+
+    <div className={`relative z-10 flex h-full w-full flex-col justify-end ${featured ? "p-8 md:p-10" : "p-6"}`}>
+      <p className="mb-4 text-[10px] uppercase tracking-[0.32em] text-white/80 drop-shadow-sm">
+        Work with me
+      </p>
+      <h3 className={`font-serif leading-[1.05] text-white drop-shadow-md text-balance ${featured ? "text-4xl md:text-6xl" : "text-3xl"}`}>
+        {title}
+      </h3>
+      <p className={`mt-4 max-w-md leading-relaxed text-white/88 drop-shadow-sm text-pretty ${featured ? "text-lg" : "text-sm"}`}>
+        {desc}
+      </p>
+      <span className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/45 px-4 py-2 text-xs text-white/95 backdrop-blur-[2px] transition-colors duration-500 group-hover:bg-white group-hover:text-forest-deep">
+        Explore
+        <ArrowUpRight
+          size={15}
+          strokeWidth={1.5}
+          className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+        />
+      </span>
+    </div>
+  </>
+);
+
 const WorkCard = ({
   title,
   desc,
   href,
   image,
   featured = false,
+  route = false,
 }: {
   title: string;
   desc: string;
   href: string;
   image: string;
   featured?: boolean;
+  route?: boolean;
 }) => {
-  return (
-    <a
-      href={href}
-      className={`group relative isolate flex overflow-hidden rounded-[2rem] shadow-organic border border-ivory/30 bg-earth/20 text-ivory ${
-        featured ? "min-h-[470px] md:min-h-[620px]" : "min-h-[250px] md:min-h-[295px]"
-      }`}
-      aria-label={`Explore ${title}`}
-    >
-      <img
-        src={image}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-95"
-        loading="lazy"
-        onError={(event) => {
-          event.currentTarget.style.display = "none";
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-forest-deep/18 to-transparent" />
-      <div className="absolute inset-0 bg-ivory/5 mix-blend-soft-light" />
+  const baseClass = `group relative isolate flex overflow-hidden rounded-[2rem] shadow-organic border border-ivory/30 bg-earth/20 text-ivory ${
+    featured ? "min-h-[470px] md:min-h-[620px]" : "min-h-[250px] md:min-h-[295px]"
+  }`;
 
-      <div className={`relative z-10 flex h-full w-full flex-col justify-end ${featured ? "p-8 md:p-10" : "p-6"}`}>
-        <p className="mb-4 text-[10px] uppercase tracking-[0.32em] text-white/80 drop-shadow-sm">
-          Work with me
-        </p>
-        <h3 className={`font-serif leading-[1.05] text-white drop-shadow-md text-balance ${featured ? "text-4xl md:text-6xl" : "text-3xl"}`}>
-          {title}
-        </h3>
-        <p className={`mt-4 max-w-md leading-relaxed text-white/88 drop-shadow-sm text-pretty ${featured ? "text-lg" : "text-sm"}`}>
-          {desc}
-        </p>
-        <span className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/45 px-4 py-2 text-xs text-white/95 backdrop-blur-[2px] transition-colors duration-500 group-hover:bg-white group-hover:text-forest-deep">
-          Explore
-          <ArrowUpRight
-            size={15}
-            strokeWidth={1.5}
-            className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
-          />
-        </span>
-      </div>
+  if (route) {
+    return (
+      <Link to={href} className={baseClass} aria-label={`Explore ${title}`}>
+        <WorkCardContent title={title} desc={desc} image={image} featured={featured} />
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className={baseClass} aria-label={`Explore ${title}`}>
+      <WorkCardContent title={title} desc={desc} image={image} featured={featured} />
     </a>
   );
 };
 
 export const WaysToWork = () => {
+  const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
+  const localizedOfferings = OFFERINGS.map((offering) =>
+    offering.route ? { ...offering, href: localizePath(offering.href, language) } : offering
+  );
+
   return (
     <section id="work" className="section bg-ivory-warm" aria-label="Ways to work with me">
       <div className="container-soft">
@@ -118,7 +151,7 @@ export const WaysToWork = () => {
           </Reveal>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:gap-6">
-            {OFFERINGS.map((offering, index) => (
+            {localizedOfferings.map((offering, index) => (
               <Reveal key={offering.title} delay={(index + 1) * 90}>
                 <WorkCard {...offering} />
               </Reveal>
