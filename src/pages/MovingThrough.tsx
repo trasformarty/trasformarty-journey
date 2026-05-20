@@ -30,6 +30,13 @@ const PHASES = [
   { range: "Months 7 — 9", detail: "One session per month.", text: "Support becomes lighter. You continue walking with more trust, resilience and inner strength, carrying the work into daily life." },
 ];
 
+const SIGNS = [
+  "When emotions feel present, but difficult to name or express.",
+  "When your body carries tension, restlessness or a sense of holding something inside.",
+  "When you are moving through a transition and need a space to feel, integrate and listen.",
+  "When you want to build more trust, resilience and inner resources without forcing yourself.",
+];
+
 const MovingThrough = () => {
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
@@ -87,10 +94,10 @@ const MovingThrough = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
-        <section className="relative overflow-hidden bg-gradient-forest px-6 pb-20 pt-36 text-ivory md:px-10 md:pb-28 md:pt-44">
-          <div aria-hidden="true" className="absolute -right-24 top-28 h-80 w-80 rounded-full bg-gold-soft/15 blur-3xl" />
-          <div aria-hidden="true" className="absolute -bottom-28 -left-20 h-96 w-96 rounded-full bg-sage/20 blur-3xl" />
-          <div className="container-soft relative grid items-end gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="relative overflow-hidden bg-gradient-forest px-6 pb-16 pt-28 text-ivory md:px-10 md:pb-22 md:pt-34 lg:pt-36">
+          <div aria-hidden="true" className="absolute -right-24 top-20 h-72 w-72 rounded-full bg-gold-soft/15 blur-3xl" />
+          <div aria-hidden="true" className="absolute -bottom-28 -left-20 h-80 w-80 rounded-full bg-sage/20 blur-3xl" />
+          <div className="container-soft relative grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr]">
             <Reveal className="max-w-3xl">
               <p className="eyebrow mb-5 text-ivory/65">Moving Through</p>
               <h1 className="font-serif text-5xl leading-[0.98] text-ivory text-balance md:text-7xl">
@@ -100,8 +107,8 @@ const MovingThrough = () => {
                 A space to explore what is moving inside you through the body, emotional presence and deep listening — online or in person.
               </p>
             </Reveal>
-            <Reveal delay={120}>
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-ivory/20 bg-ivory/10 shadow-organic">
+            <Reveal delay={120} className="mx-auto w-full max-w-[330px] lg:max-w-[360px]">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2.25rem] border border-ivory/20 bg-ivory/10 shadow-organic">
                 <img src="/moving-through/intro.jpg" alt="Moving Through session" className="h-full w-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/40 via-transparent to-transparent" />
               </div>
@@ -109,8 +116,8 @@ const MovingThrough = () => {
           </div>
         </section>
 
-        <section className="bg-ivory px-6 py-16 md:px-10 md:py-24" aria-label="What Moving Through is">
-          <div className="container-soft grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <section className="bg-ivory px-6 py-14 md:px-10 md:py-20" aria-label="What Moving Through is">
+          <div className="container-soft grid gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
               <p className="eyebrow mb-5">The work</p>
               <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
@@ -127,8 +134,32 @@ const MovingThrough = () => {
           </div>
         </section>
 
-        <section className="bg-sage/25 px-6 py-16 md:px-10 md:py-24" aria-label="What happens in a session">
-          <div className="container-soft grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <section className="bg-ivory-warm px-6 py-14 md:px-10 md:py-20" aria-label="Who Moving Through is for">
+          <div className="container-soft grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <Reveal className="lg:col-span-5">
+              <p className="eyebrow mb-5">Who it may speak to</p>
+              <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
+                When something inside asks for space.
+              </h2>
+            </Reveal>
+            <Reveal delay={120} className="lg:col-span-7">
+              <div className="space-y-5 text-lg leading-relaxed text-foreground/78 text-pretty">
+                <p>This work can be for anyone who feels the desire to understand themselves through the body, not only through words.</p>
+                <p>You may feel called to it when something is moving inside you and you do not yet know how to meet it — an emotion, a sensation, a transition, a repeated pattern, or a part of you that needs more care.</p>
+              </div>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {SIGNS.map((sign) => (
+                  <div key={sign} className="rounded-[1.5rem] border border-forest/10 bg-ivory/70 p-5 text-sm leading-relaxed text-foreground/68 shadow-soft">
+                    {sign}
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="bg-sage/25 px-6 py-14 md:px-10 md:py-20" aria-label="What happens in a session">
+          <div className="container-soft grid gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
               <p className="eyebrow mb-5">In a session</p>
               <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
@@ -146,16 +177,16 @@ const MovingThrough = () => {
           </div>
         </section>
 
-        <section className="bg-ivory px-6 py-16 md:px-10 md:py-24" aria-label="Moving Through images">
+        <section className="bg-ivory px-6 py-14 md:px-10 md:py-20" aria-label="Moving Through images">
           <div className="container-soft">
             <Reveal className="mx-auto max-w-3xl text-center">
               <p className="eyebrow mb-5">Touch · Presence · Field</p>
-              <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
+              <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-5xl">
                 A contact that can also be subtle.
               </h2>
             </Reveal>
-            <Reveal delay={120} className="mx-auto mt-12 max-w-4xl">
-              <div className="relative aspect-[5/4] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-organic cursor-zoom-in touch-pan-y" onClick={() => setLightbox(IMAGES[active])} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+            <Reveal delay={120} className="mx-auto mt-10 max-w-3xl">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[2.25rem] bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-organic cursor-zoom-in touch-pan-y md:aspect-[16/9]" onClick={() => setLightbox(IMAGES[active])} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
                 <img src={IMAGES[active]} alt={`Moving Through image ${active + 1}`} className="h-full w-full object-cover" loading="lazy" />
                 <button type="button" onClick={(event) => { event.stopPropagation(); goPrevious(); }} className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-ivory/28 text-forest-deep backdrop-blur-sm transition-colors hover:bg-ivory/45" aria-label="Previous Moving Through image"><ChevronLeft size={22} strokeWidth={1.4} /></button>
                 <button type="button" onClick={(event) => { event.stopPropagation(); goNext(); }} className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-ivory/28 text-forest-deep backdrop-blur-sm transition-colors hover:bg-ivory/45" aria-label="Next Moving Through image"><ChevronRight size={22} strokeWidth={1.4} /></button>
@@ -170,7 +201,7 @@ const MovingThrough = () => {
           </div>
         </section>
 
-        <section className="bg-ivory-warm px-6 py-16 md:px-10 md:py-24" aria-label="Ways to enter Moving Through">
+        <section className="bg-ivory-warm px-6 py-14 md:px-10 md:py-20" aria-label="Ways to enter Moving Through">
           <div className="container-soft">
             <Reveal className="max-w-3xl">
               <p className="eyebrow mb-5">Ways to enter</p>
