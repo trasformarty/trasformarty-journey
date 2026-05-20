@@ -195,10 +195,14 @@ const MovingThrough = () => {
             </Reveal>
             <Reveal delay={120} className="lg:col-span-7">
               <div className="space-y-5 text-lg leading-relaxed text-foreground/78 text-pretty">
-                <p>Together, we explore what is moving inside you and create space for it to be felt without forcing it to become something else.</p>
-                <p>We look for the resources that are already present: places, sensations, gestures, images, memories or inner qualities that can support you. Little by little, you learn how to access them and how to return to them.</p>
-                <p>The work creates enough space and safety so that what feels delicate can be approached with care, while your capacity, resilience and trust begin to grow.</p>
-                <p>This can happen through words, movement, silence, breath, visualization or subtle energetic contact. The body guides the rhythm.</p>
+                <p>In a Moving Through session, we begin from what is present.</p>
+                <p>Sometimes it is a sensation in the body. Sometimes an emotion. Sometimes a tension, an image, a memory, a question, or simply a feeling that is difficult to name.</p>
+                <p>Together, we slow down enough to listen to it without forcing it to become something else.</p>
+                <p>Through gentle guidance, body awareness and emotional presence, we explore what is moving inside you and what your system needs in order to feel safer.</p>
+                <p>We look for the resources that are already there — places, sensations, memories, gestures, images or inner qualities that can support you.</p>
+                <p>The work is not about going too fast or entering pain directly. It is about creating enough space and safety so that what feels delicate can be approached little by little, while your capacity, resilience and trust begin to grow.</p>
+                <p>Over time, you learn to recognize what supports you, how to return to it, and how to stay close to yourself even when something intense is moving.</p>
+                <p>This can happen in person or online. Sometimes through words, sometimes through movement, sometimes through silence, breath, visualization or subtle energetic contact. The body guides the rhythm.</p>
               </div>
             </Reveal>
           </div>
