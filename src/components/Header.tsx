@@ -57,6 +57,12 @@ const keepBackButtonOnHome = (homePath?: string) => {
   window.history.replaceState(null, "", homePath);
 };
 
+const getLanguageTogglePath = (pathname: string, hash: string) => {
+  const isItalian = pathname === "/it" || pathname.startsWith("/it/");
+  const basePath = isItalian ? pathname.replace(/^\/it(?=\/|$)/, "") || "/" : `/it${pathname === "/" ? "" : pathname}`;
+  return `${basePath}${hash}`;
+};
+
 const DesktopNavItem = ({ item }: { item: NavItem }) => {
   const content = (
     <>
@@ -177,7 +183,7 @@ export const Header = () => {
     [labels, language]
   );
 
-  const languageToggleHref = language === "it" ? "/" : "/it";
+  const languageToggleHref = getLanguageTogglePath(location.pathname, location.hash);
   const languageToggleLabel = language === "it" ? "EN" : "IT";
 
   useEffect(() => {
