@@ -3,50 +3,110 @@ import { Link, useLocation } from "react-router-dom";
 import { getLanguageFromPath, localizePath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
-const FEATURED = {
-  title: "A Touch to Soul",
-  desc: "Signature massage and bodywork through touch, presence and deep listening.",
-  href: "#touch-to-soul",
-  image: "/work-with-me/touch-to-soul.jpg",
+const WORK_COPY = {
+  en: {
+    aria: "Ways to work with me",
+    eyebrow: "Ways to Work With Me",
+    title: "Different doors into the same movement.",
+    paragraphs: [
+      "Returning to the body, listening to what is alive, and allowing transformation to unfold with care.",
+      "Choose the way your body is asking to be met.",
+    ],
+    cardLabel: "Work with me",
+    explore: "Explore",
+    featured: {
+      title: "A Touch to Soul",
+      desc: "Signature massage and bodywork through touch, presence and deep listening.",
+      href: "#touch-to-soul",
+      image: "/work-with-me/touch-to-soul.jpg",
+    },
+    offerings: [
+      {
+        title: "Moving Through",
+        desc: "Somatic and emotional accompaniment to meet what is moving inside you.",
+        href: "/moving-through",
+        route: true,
+        image: "/work-with-me/moving-through.jpg",
+      },
+      {
+        title: "Workshops",
+        desc: "Group experiences around touch, body awareness and conscious relationship.",
+        href: "#workshops",
+        image: "/work-with-me/workshops.jpg",
+      },
+      {
+        title: "Retreats",
+        desc: "Immersive spaces to slow down, feel, move and reconnect with nature.",
+        href: "#retreats",
+        image: "/work-with-me/retreats.jpg",
+      },
+      {
+        title: "Courses & Collaborations",
+        desc: "Trainings and collaborations where touch becomes a living language of care.",
+        href: "#courses",
+        image: "/work-with-me/courses.jpg",
+      },
+    ],
+  },
+  it: {
+    aria: "Modi per lavorare con me",
+    eyebrow: "Work With Me",
+    title: "Porte diverse verso lo stesso movimento.",
+    paragraphs: [
+      "Ritornare al corpo, ascoltare ciò che è vivo e lasciare che la trasformazione possa accadere con cura.",
+      "Scegli il modo in cui il tuo corpo chiede di essere incontrato.",
+    ],
+    cardLabel: "Work with me",
+    explore: "Esplora",
+    featured: {
+      title: "A Touch to Soul",
+      desc: "Massaggio e bodywork attraverso il tocco, la presenza e l’ascolto profondo.",
+      href: "#touch-to-soul",
+      image: "/work-with-me/touch-to-soul.jpg",
+    },
+    offerings: [
+      {
+        title: "Moving Through",
+        desc: "Accompagnamento somatico ed emozionale per incontrare ciò che si muove dentro di te.",
+        href: "/moving-through",
+        route: true,
+        image: "/work-with-me/moving-through.jpg",
+      },
+      {
+        title: "Workshop",
+        desc: "Esperienze di gruppo intorno al tocco, alla consapevolezza del corpo e alla relazione consapevole.",
+        href: "#workshops",
+        image: "/work-with-me/workshops.jpg",
+      },
+      {
+        title: "Ritiri",
+        desc: "Spazi immersivi per rallentare, sentire, muoversi e riconnettersi alla natura.",
+        href: "#retreats",
+        image: "/work-with-me/retreats.jpg",
+      },
+      {
+        title: "Corsi e collaborazioni",
+        desc: "Percorsi e collaborazioni dove il tocco diventa un linguaggio vivo di cura.",
+        href: "#courses",
+        image: "/work-with-me/courses.jpg",
+      },
+    ],
+  },
 };
-
-const OFFERINGS = [
-  {
-    title: "Moving Through",
-    desc: "Somatic and emotional accompaniment to meet what is moving inside you.",
-    href: "/moving-through",
-    route: true,
-    image: "/work-with-me/moving-through.jpg",
-  },
-  {
-    title: "Workshops",
-    desc: "Group experiences around touch, body awareness and conscious relationship.",
-    href: "#workshops",
-    image: "/work-with-me/workshops.jpg",
-  },
-  {
-    title: "Retreats",
-    desc: "Immersive spaces to slow down, feel, move and reconnect with nature.",
-    href: "#retreats",
-    image: "/work-with-me/retreats.jpg",
-  },
-  {
-    title: "Courses & Collaborations",
-    desc: "Trainings and collaborations where touch becomes a living language of care.",
-    href: "#courses",
-    image: "/work-with-me/courses.jpg",
-  },
-];
 
 const WorkCardContent = ({
   title,
   desc,
   image,
+  label,
+  explore,
   featured = false,
 }: {
   title: string;
   desc: string;
   image: string;
+  label: string;
+  explore: string;
   featured?: boolean;
 }) => (
   <>
@@ -64,7 +124,7 @@ const WorkCardContent = ({
 
     <div className={`relative z-10 flex h-full w-full flex-col justify-end ${featured ? "p-8 md:p-10" : "p-6"}`}>
       <p className="mb-4 text-[10px] uppercase tracking-[0.32em] text-white/80 drop-shadow-sm">
-        Work with me
+        {label}
       </p>
       <h3 className={`font-serif leading-[1.05] text-white drop-shadow-md text-balance ${featured ? "text-4xl md:text-6xl" : "text-3xl"}`}>
         {title}
@@ -73,7 +133,7 @@ const WorkCardContent = ({
         {desc}
       </p>
       <span className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/45 px-4 py-2 text-xs text-white/95 backdrop-blur-[2px] transition-colors duration-500 group-hover:bg-white group-hover:text-forest-deep">
-        Explore
+        {explore}
         <ArrowUpRight
           size={15}
           strokeWidth={1.5}
@@ -89,6 +149,8 @@ const WorkCard = ({
   desc,
   href,
   image,
+  label,
+  explore,
   featured = false,
   route = false,
 }: {
@@ -96,6 +158,8 @@ const WorkCard = ({
   desc: string;
   href: string;
   image: string;
+  label: string;
+  explore: string;
   featured?: boolean;
   route?: boolean;
 }) => {
@@ -103,17 +167,19 @@ const WorkCard = ({
     featured ? "min-h-[470px] md:min-h-[620px]" : "min-h-[250px] md:min-h-[295px]"
   }`;
 
+  const content = <WorkCardContent title={title} desc={desc} image={image} label={label} explore={explore} featured={featured} />;
+
   if (route) {
     return (
-      <Link to={href} className={baseClass} aria-label={`Explore ${title}`}>
-        <WorkCardContent title={title} desc={desc} image={image} featured={featured} />
+      <Link to={href} className={baseClass} aria-label={`${explore} ${title}`}>
+        {content}
       </Link>
     );
   }
 
   return (
-    <a href={href} className={baseClass} aria-label={`Explore ${title}`}>
-      <WorkCardContent title={title} desc={desc} image={image} featured={featured} />
+    <a href={href} className={baseClass} aria-label={`${explore} ${title}`}>
+      {content}
     </a>
   );
 };
@@ -121,39 +187,36 @@ const WorkCard = ({
 export const WaysToWork = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
-  const localizedOfferings = OFFERINGS.map((offering) =>
+  const copy = WORK_COPY[language];
+  const localizedOfferings = copy.offerings.map((offering) =>
     offering.route ? { ...offering, href: localizePath(offering.href, language) } : offering
   );
 
   return (
-    <section id="work" className="section bg-ivory-warm" aria-label="Ways to work with me">
+    <section id="work" className="section bg-ivory-warm" aria-label={copy.aria}>
       <div className="container-soft">
         <Reveal className="max-w-3xl">
-          <p className="eyebrow mb-5">Ways to Work With Me</p>
+          <p className="eyebrow mb-5">{copy.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-8 text-balance">
-            Different doors into the same movement.
+            {copy.title}
           </h2>
 
           <div className="space-y-4 text-lg md:text-xl text-foreground/75 leading-relaxed text-pretty">
-            <p>
-              Returning to the body, listening to what is alive, and allowing transformation to unfold with care.
-            </p>
-
-            <p>
-              Choose the way your body is asking to be met.
-            </p>
+            {copy.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </Reveal>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-[1.05fr_1.45fr] lg:gap-6">
           <Reveal>
-            <WorkCard {...FEATURED} featured />
+            <WorkCard {...copy.featured} label={copy.cardLabel} explore={copy.explore} featured />
           </Reveal>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:gap-6">
             {localizedOfferings.map((offering, index) => (
               <Reveal key={offering.title} delay={(index + 1) * 90}>
-                <WorkCard {...offering} />
+                <WorkCard {...offering} label={copy.cardLabel} explore={copy.explore} />
               </Reveal>
             ))}
           </div>
