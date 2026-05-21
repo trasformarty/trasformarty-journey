@@ -1,46 +1,98 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
 const mamaImages = Array.from({ length: 44 }, (_, index) => `/workshops/mama-${index + 1}.jpg`);
 const touchImages = Array.from({ length: 22 }, (_, index) => `/workshops/touch-${index + 1}.jpg`);
 
-const WORKSHOPS = [
-  {
-    title: "The Importance of Touch",
-    body: [
-      "This workshop is created for yoga teachers, movement facilitators, body-based practitioners, support groups, families and anyone who works with people through the body, presence and relationship.",
-      "Together, we explore touch as a conscious language — a way to offer support, grounding, calm or activation when it is truly needed.",
-      "Through simple and respectful practices, we learn when touch can accompany a process, when it can become a resource, and when the most sensitive choice is simply not to touch.",
-      "A space to bring more listening, clarity and care into the way we meet another body.",
+const WORKSHOPS_COPY = {
+  en: {
+    aria: "Workshops",
+    eyebrow: "Offering — Groups",
+    title: "Workshops",
+    intro:
+      "Workshops around touch, body awareness, emotional presence and connection. These spaces are created for groups who want to explore the body not as an idea, but as a living place of relationship, care and transformation.",
+    cardEyebrow: "Workshop",
+    addPhotos: "Add photos here",
+    workshops: [
+      {
+        title: "The Importance of Touch",
+        body: [
+          "This workshop is created for yoga teachers, movement facilitators, body-based practitioners, support groups, families and anyone who works with people through the body, presence and relationship.",
+          "Together, we explore touch as a conscious language — a way to offer support, grounding, calm or activation when it is truly needed.",
+          "Through simple and respectful practices, we learn when touch can accompany a process, when it can become a resource, and when the most sensitive choice is simply not to touch.",
+          "A space to bring more listening, clarity and care into the way we meet another body.",
+        ],
+        cta: "Explore More",
+        images: touchImages,
+        caption: "Workshop Kalena Yoga Teacher Training, Ibiza April 2026",
+      },
+      {
+        title: "Mama yo te curo",
+        body: [
+          "Born from a simple and true gesture — my son’s spontaneous desire to care, share and teach something that, at home, is already a game, a moment of calm, contact and love.",
+          "Mama yo te curo is a workshop for parents and children, created from my experience as a mother and often held with my children beside me. Through play, touch and presence, families are invited to slow down and find a sweeter, more natural way of being together.",
+          "At the heart of the experience are the hands: small hands that listen, connect, calm and reassure. Small hands, big magic. Through simple gestures, children discover the subtle energy of touch — and the care and power they already carry within them.",
+          "Parents and children leave with something they can bring home: a small massage sequence, a shared ritual of softness, a way to turn touch into a moment of intimacy, play and care.",
+          "It is a warm and intimate space where care becomes play and play becomes care — a place to meet each other with more presence, sweetness and truth.",
+        ],
+        cta: "Ask for the Full Story",
+        images: mamaImages,
+      },
     ],
-    cta: "Explore More",
-    images: touchImages,
-    caption: "Workshop Kalena Yoga Teacher Training, Ibiza aprile 2026",
   },
-  {
-    title: "Mama yo te curo",
-    body: [
-      "Born from a simple and true gesture — my son’s spontaneous desire to care, share and teach something that, at home, is already a game, a moment of calm, contact and love.",
-      "Mama yo te curo is a workshop for parents and children, created from my experience as a mother and often held with my children beside me. Through play, touch and presence, families are invited to slow down and find a sweeter, more natural way of being together.",
-      "At the heart of the experience are the hands: small hands that listen, connect, calm and reassure. Small hands, big magic. Through simple gestures, children discover the subtle energy of touch — and the care and power they already carry within them.",
-      "Parents and children leave with something they can bring home: a small massage sequence, a shared ritual of softness, a way to turn touch into a moment of intimacy, play and care.",
-      "It is a warm and intimate space where care becomes play and play becomes care — a place to meet each other with more presence, sweetness and truth.",
+  it: {
+    aria: "Workshop",
+    eyebrow: "Offerta — Gruppi",
+    title: "Workshop",
+    intro:
+      "Workshop intorno al tocco, alla consapevolezza del corpo, alla presenza emotiva e alla connessione. Spazi creati per gruppi che desiderano esplorare il corpo non come un’idea, ma come un luogo vivo di relazione, cura e trasformazione.",
+    cardEyebrow: "Workshop",
+    addPhotos: "Aggiungi qui le foto",
+    workshops: [
+      {
+        title: "The Importance of Touch",
+        body: [
+          "Questo workshop è pensato per insegnanti di yoga, facilitatori del movimento, professionisti che lavorano attraverso il corpo, gruppi di supporto, famiglie e chiunque accompagni le persone attraverso presenza, corpo e relazione.",
+          "Insieme esploriamo il tocco come linguaggio consapevole: un modo per offrire sostegno, radicamento, calma o attivazione quando è davvero necessario.",
+          "Attraverso pratiche semplici e rispettose, impariamo quando il tocco può accompagnare un processo, quando può diventare una risorsa e quando la scelta più sensibile è semplicemente non toccare.",
+          "Uno spazio per portare più ascolto, chiarezza e cura nel modo in cui incontriamo il corpo dell’altro.",
+        ],
+        cta: "Scopri di più",
+        images: touchImages,
+        caption: "Workshop Kalena Yoga Teacher Training, Ibiza aprile 2026",
+      },
+      {
+        title: "Mama yo te curo",
+        body: [
+          "Nasce da un gesto semplice e vero: il desiderio spontaneo di mio figlio di prendersi cura, condividere e insegnare qualcosa che, a casa, è già un gioco, un momento di calma, contatto e amore.",
+          "Mama yo te curo è un workshop per genitori e bambini, creato a partire dalla mia esperienza di madre e spesso vissuto con i miei figli accanto. Attraverso gioco, tocco e presenza, le famiglie sono invitate a rallentare e a ritrovare un modo più dolce e naturale di stare insieme.",
+          "Al centro dell’esperienza ci sono le mani: piccole mani che ascoltano, connettono, calmano e rassicurano. Piccole mani, grande magia. Attraverso gesti semplici, i bambini scoprono l’energia sottile del tocco — e la cura e il potere che portano già dentro di sé.",
+          "Genitori e bambini tornano a casa con qualcosa da portare nella vita quotidiana: una piccola sequenza di massaggio, un rituale condiviso di morbidezza, un modo per trasformare il tocco in un momento di intimità, gioco e cura.",
+          "È uno spazio caldo e intimo dove la cura diventa gioco e il gioco diventa cura — un luogo per incontrarsi con più presenza, dolcezza e verità.",
+        ],
+        cta: "Chiedi la storia completa",
+        images: mamaImages,
+      },
     ],
-    cta: "Ask for the Full Story",
-    images: mamaImages,
   },
-];
+};
+
+type Workshop = (typeof WORKSHOPS_COPY.en.workshops)[number];
 
 const WorkshopCarousel = ({
   title,
   images,
   caption,
+  addPhotos,
 }: {
   title: string;
   images: string[];
   caption?: string;
+  addPhotos: string;
 }) => {
   const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
@@ -164,7 +216,7 @@ const WorkshopCarousel = ({
         {!loaded[active] && (
           <div className="absolute inset-0 flex items-center justify-center px-8 text-center">
             <span className="text-[11px] uppercase tracking-[0.3em] text-forest-deep/45">
-              Aggiungi qui le foto
+              {addPhotos}
             </span>
           </div>
         )}
@@ -202,28 +254,29 @@ const WorkshopCarousel = ({
 };
 
 export const Workshops = () => {
+  const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
+  const copy = WORKSHOPS_COPY[language];
+
   return (
-    <section id="workshops" className="section bg-ivory" aria-label="Workshops">
+    <section id="workshops" className="section bg-ivory" aria-label={copy.aria}>
       <div className="container-soft">
         <Reveal className="max-w-3xl">
-          <p className="eyebrow mb-5">Offering — Groups</p>
+          <p className="eyebrow mb-5">{copy.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-8 text-balance">
-            Workshops
+            {copy.title}
           </h2>
           <p className="text-lg text-foreground/80 leading-relaxed text-pretty">
-            Workshops around touch, body awareness, emotional presence and
-            connection. These spaces are created for groups who want to explore
-            the body not as an idea, but as a living place of relationship, care
-            and transformation.
+            {copy.intro}
           </p>
         </Reveal>
 
         <div className="mt-12 space-y-7">
-          {WORKSHOPS.map((workshop, index) => (
+          {copy.workshops.map((workshop: Workshop, index: number) => (
             <Reveal key={workshop.title} delay={index * 150}>
               <article className="bg-card rounded-[2rem] p-6 md:p-8 shadow-card border border-border grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 <div className="lg:col-span-6">
-                  <p className="eyebrow mb-3">Workshop</p>
+                  <p className="eyebrow mb-3">{copy.cardEyebrow}</p>
                   <h3 className="font-serif text-3xl md:text-[2.35rem] text-forest-deep mb-4">
                     {workshop.title}
                   </h3>
@@ -243,7 +296,7 @@ export const Workshops = () => {
                 </div>
 
                 <div className="lg:col-span-6">
-                  <WorkshopCarousel title={workshop.title} images={workshop.images} caption={workshop.caption} />
+                  <WorkshopCarousel title={workshop.title} images={workshop.images} caption={workshop.caption} addPhotos={copy.addPhotos} />
                 </div>
               </article>
             </Reveal>
