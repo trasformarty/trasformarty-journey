@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 import ImageLightbox from "./ImageLightbox";
 
@@ -18,7 +20,51 @@ const IMAGES = [
   "/touch-to-soul-9.jpg",
 ];
 
+const TOUCH_COPY = {
+  en: {
+    aria: "A Touch to Soul",
+    eyebrow: "Offering — Bodywork",
+    title: "A Touch to Soul",
+    subtitle: "A full body massage and somatic experience.",
+    paragraphs: [
+      "A Touch to Soul is a journey into one's own inner landscape — an experience of deep somatic listening, where the body can settle into relaxation and presence, the mind can grow quiet, and a more authentic sense of self can emerge.",
+      "A safe space where emotions are free to flow and vital energy can move again with ease, opening at times into states of deep release.",
+      "Through slow gestures, deeper pressures and a subtle touch, the body is met with care and respect — never forced, always listened to.",
+      "The body holds memories. When the mind softens and listening deepens, what has been quietly stored can begin to surface — sometimes as an image, a sensation, a forgotten emotion, a fragment of memory. Nothing is sought, nothing is forced: there is simply space for what asks to be seen, welcomed, and gently released.",
+    ],
+    highlight: "A gentle therapy. A sensory path where body and soul find each other again.",
+    closing:
+      "An intimate encounter with one's own rhythm and felt sense, with a quality of presence that daily life so often forgets. What remains is a state of well-being, peace and integration that can last in time —",
+    closingItalic: " a small step on the path of knowing oneself.",
+    timing: "I offer sessions from 60 to 120 minutes, allowing the time to follow the rhythm and depth of the work.",
+    cta: "Book a Session",
+    upload: "Upload treatment images here",
+  },
+  it: {
+    aria: "A Touch to Soul",
+    eyebrow: "Offerta — Bodywork",
+    title: "A Touch to Soul",
+    subtitle: "Un massaggio full body e un’esperienza somatica.",
+    paragraphs: [
+      "A Touch to Soul è un viaggio nel proprio paesaggio interiore: un’esperienza di ascolto somatico profondo, dove il corpo può entrare in rilassamento e presenza, la mente può quietarsi e un senso più autentico di sé può emergere.",
+      "Uno spazio sicuro dove le emozioni possono fluire e l’energia vitale può tornare a muoversi con più facilità, aprendo a volte stati di profondo rilascio.",
+      "Attraverso gesti lenti, pressioni più profonde e un tocco sottile, il corpo viene incontrato con cura e rispetto: mai forzato, sempre ascoltato.",
+      "Il corpo custodisce memorie. Quando la mente si ammorbidisce e l’ascolto si fa più profondo, ciò che è rimasto silenziosamente trattenuto può iniziare ad affiorare: un’immagine, una sensazione, un’emozione dimenticata, un frammento di memoria. Nulla viene cercato, nulla viene forzato: si apre semplicemente uno spazio per ciò che chiede di essere visto, accolto e delicatamente lasciato andare.",
+    ],
+    highlight: "Una terapia gentile. Un percorso sensoriale in cui corpo e anima possono ritrovarsi.",
+    closing:
+      "Un incontro intimo con il proprio ritmo e il proprio sentire, con una qualità di presenza che la vita quotidiana spesso dimentica. Ciò che resta è uno stato di benessere, pace e integrazione che può continuare nel tempo —",
+    closingItalic: " un piccolo passo nel cammino del conoscersi.",
+    timing: "Offro sessioni dai 60 ai 120 minuti, lasciando che il tempo segua il ritmo e la profondità del lavoro.",
+    cta: "Prenota una sessione",
+    upload: "Carica qui le immagini del trattamento",
+  },
+};
+
 export const TouchToSoul = () => {
+  const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
+  const copy = TOUCH_COPY[language];
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const touchStartX = useRef<number | null>(null);
@@ -98,62 +144,33 @@ export const TouchToSoul = () => {
     `h-2 rounded-full transition-all duration-300 ${activeDot === dot ? "w-6 bg-forest" : "w-2 bg-forest/30"}`;
 
   return (
-    <section id="touch-to-soul" className="section bg-ivory" aria-label="A Touch to Soul">
+    <section id="touch-to-soul" className="section bg-ivory" aria-label={copy.aria}>
       <div className="container-soft grid md:grid-cols-12 gap-12 md:gap-16 items-center">
         <Reveal className="md:col-span-6">
-          <p className="eyebrow mb-5">Offering — Bodywork</p>
+          <p className="eyebrow mb-5">{copy.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-4 text-balance">
-            A Touch to Soul
+            {copy.title}
           </h2>
           <p className="font-serif italic text-xl text-earth mb-8">
-            A full body massage and somatic experience.
+            {copy.subtitle}
           </p>
 
           <div className="space-y-5 text-lg text-foreground/80 leading-relaxed text-pretty">
-            <p>
-              A Touch to Soul is a journey into one&apos;s own inner landscape —
-              an experience of deep somatic listening, where the body can
-              settle into relaxation and presence, the mind can grow quiet,
-              and a more authentic sense of self can emerge.
-            </p>
-
-            <p>
-              A safe space where emotions are free to flow and vital energy
-              can move again with ease, opening at times into states of deep
-              release.
-            </p>
-
-            <p>
-              Through slow gestures, deeper pressures and a subtle touch, the
-              body is met with care and respect — never forced, always
-              listened to.
-            </p>
-
-            <p>
-              The body holds memories. When the mind softens and listening
-              deepens, what has been quietly stored can begin to surface —
-              sometimes as an image, a sensation, a forgotten emotion, a
-              fragment of memory. Nothing is sought, nothing is forced:
-              there is simply space for what asks to be seen, welcomed, and
-              gently released.
-            </p>
+            {copy.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
 
             <p className="font-serif italic text-xl text-forest-deep pt-2">
-              A gentle therapy. A sensory path where body and soul find each
-              other again.
+              {copy.highlight}
             </p>
 
             <p>
-              An intimate encounter with one&apos;s own rhythm and felt sense, with
-              a quality of presence that daily life so often forgets. What
-              remains is a state of well-being, peace and integration that can
-              last in time —
-              <span className="italic"> a small step on the path of knowing oneself.</span>
+              {copy.closing}
+              <span className="italic">{copy.closingItalic}</span>
             </p>
 
             <p className="text-base text-foreground/70 pt-1">
-              I offer sessions from 60 to 120 minutes, allowing the time to
-              follow the rhythm and depth of the work.
+              {copy.timing}
             </p>
           </div>
 
@@ -163,7 +180,7 @@ export const TouchToSoul = () => {
             rel="noopener noreferrer"
             className="mt-10 inline-flex items-center rounded-full bg-forest text-ivory px-7 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
           >
-            Book a Session
+            {copy.cta}
           </a>
         </Reveal>
 
@@ -186,7 +203,7 @@ export const TouchToSoul = () => {
               />
               <div className="absolute inset-0 flex items-center justify-center px-8 text-center pointer-events-none">
                 <span className="text-[11px] uppercase tracking-[0.3em] text-forest-deep/45">
-                  Upload treatment images here
+                  {copy.upload}
                 </span>
               </div>
 
