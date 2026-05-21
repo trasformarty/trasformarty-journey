@@ -1,9 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import ImageLightbox from "@/components/ImageLightbox";
+import { getLanguageFromPath } from "@/lib/language";
 
 const WHATSAPP_BOOKING_URL =
   "https://wa.me/34691738479?text=Hi%20Martina%2C%20I%20would%20like%20to%20book%20a%20session.%0AMy%20name%20is%3A%0AI%27m%20interested%20in%3A%0AMy%20availability%20is%3A";
@@ -17,27 +19,127 @@ const IMAGES = [
   "/moving-through/moving-6.jpg",
 ];
 
-const FORMATS = [
-  { title: "Single Session", note: "A space to meet what is present and begin listening from the body." },
-  { title: "5-Session Journey", note: "A first arc of support to open a process and begin recognizing your resources." },
-  { title: "10-Session Journey", note: "A deeper unfolding, with more continuity, integration and emotional capacity." },
-  { title: "9-Month Journey", note: "A long-form path that supports transformation over time." },
-];
-
-const PHASES = [
-  { range: "Months 1 — 3", detail: "One session per week.", text: "Close accompaniment, rhythm and safety. We begin to listen to the body, recognize resources and create a stable ground for the process.", image: "/moving-through/journey-1.jpg" },
-  { range: "Months 4 — 6", detail: "One session every two weeks.", text: "The work begins to breathe. There is more space for integration, autonomy and the capacity to return to yourself between sessions.", image: "/moving-through/journey-2.jpg" },
-  { range: "Months 7 — 9", detail: "One session per month.", text: "Support becomes lighter. You continue walking with more trust, resilience and inner strength, carrying the work into daily life.", image: "/moving-through/journey-3.jpg" },
-];
-
-const SIGNS = [
-  "When emotions feel present, but difficult to name or express.",
-  "When your body carries tension, restlessness or a sense of holding something inside.",
-  "When you are moving through a transition and need a space to feel, integrate and listen.",
-  "When you want to build more trust, resilience and inner resources without forcing yourself.",
-];
+const COPY = {
+  en: {
+    heroEyebrow: "Moving Through",
+    heroTitle: "One-to-one emotional & somatic accompaniment.",
+    heroText:
+      "A space to explore what is moving inside you through the body, emotional presence and deep listening — online or in person.",
+    workEyebrow: "The work",
+    workTitle: "A gentle way to meet what is alive inside.",
+    work: [
+      "Moving Through is a one-to-one space where emotional processes are explored through the body, sensation and presence.",
+      "It is not about analyzing everything with the mind or pushing yourself to feel more than you are ready to feel. It is about slowing down enough to notice what is present, what your body is saying, and what your system needs in order to feel safer.",
+      "Sometimes the work begins from a sensation in the body. Sometimes from an emotion, a tension, an image, a memory, a question, or simply something that is difficult to name.",
+    ],
+    whoEyebrow: "Who it may speak to",
+    whoTitle: "When something inside asks for space.",
+    who: [
+      "This work can be for anyone who feels the desire to understand themselves through the body, not only through words.",
+      "You may feel called to it when something is moving inside you and you do not yet know how to meet it — an emotion, a sensation, a transition, a repeated pattern, or a part of you that needs more care.",
+    ],
+    signs: [
+      "When emotions feel present, but difficult to name or express.",
+      "When your body carries tension, restlessness or a sense of holding something inside.",
+      "When you are moving through a transition and need a space to feel, integrate and listen.",
+      "When you want to build more trust, resilience and inner resources without forcing yourself.",
+    ],
+    sessionEyebrow: "In a session",
+    sessionTitle: "What happens, simply.",
+    session: [
+      "In a Moving Through session, we begin from what is present.",
+      "Sometimes it is a sensation in the body. Sometimes an emotion. Sometimes a tension, an image, a memory, a question, or simply a feeling that is difficult to name.",
+      "Together, we slow down enough to listen to it without forcing it to become something else.",
+      "Through gentle guidance, body awareness and emotional presence, we explore what is moving inside you and what your system needs in order to feel safer.",
+      "We look for the resources that are already there — places, sensations, memories, gestures, images or inner qualities that can support you.",
+      "The work is not about going too fast or entering pain directly. It is about creating enough space and safety so that what feels delicate can be approached little by little, while your capacity, resilience and trust begin to grow.",
+      "Over time, you learn to recognize what supports you, how to return to it, and how to stay close to yourself even when something intense is moving.",
+      "This can happen in person or online. Sometimes through words, sometimes through movement, sometimes through silence, breath, visualization or subtle energetic contact. The body guides the rhythm.",
+    ],
+    imagesEyebrow: "Touch · Presence · Field",
+    imagesTitle: "A contact that can also be subtle.",
+    waysEyebrow: "Ways to enter",
+    waysTitle: "Different rhythms for different moments.",
+    formats: [
+      { title: "Single Session", note: "A space to meet what is present and begin listening from the body." },
+      { title: "5-Session Journey", note: "A first arc of support to open a process and begin recognizing your resources." },
+      { title: "10-Session Journey", note: "A deeper unfolding, with more continuity, integration and emotional capacity." },
+      { title: "9-Month Journey", note: "A long-form path that supports transformation over time." },
+    ],
+    journeyEyebrow: "Featured Path",
+    journeyTitle: "9-Month Transformation Journey",
+    journeyIntro:
+      "A 9-month path that supports transformation over time. At the beginning, I accompany you closely. Gradually, the support becomes lighter, until you can continue walking with more autonomy, trust and inner strength.",
+    phases: [
+      { range: "Months 1 — 3", detail: "One session per week.", text: "Close accompaniment, rhythm and safety. We begin to listen to the body, recognize resources and create a stable ground for the process.", image: "/moving-through/journey-1.jpg" },
+      { range: "Months 4 — 6", detail: "One session every two weeks.", text: "The work begins to breathe. There is more space for integration, autonomy and the capacity to return to yourself between sessions.", image: "/moving-through/journey-2.jpg" },
+      { range: "Months 7 — 9", detail: "One session per month.", text: "Support becomes lighter. You continue walking with more trust, resilience and inner strength, carrying the work into daily life.", image: "/moving-through/journey-3.jpg" },
+    ],
+    cta: "Start Your Journey",
+  },
+  it: {
+    heroEyebrow: "Moving Through",
+    heroTitle: "Accompagnamento emozionale e somatico uno a uno.",
+    heroText:
+      "Uno spazio per esplorare ciò che si muove dentro di te attraverso il corpo, la presenza emotiva e un ascolto profondo — online o in presenza.",
+    workEyebrow: "Il lavoro",
+    workTitle: "Un modo delicato per incontrare ciò che è vivo dentro.",
+    work: [
+      "Moving Through è uno spazio uno a uno in cui i processi emotivi vengono esplorati attraverso il corpo, le sensazioni e la presenza.",
+      "Non si tratta di analizzare tutto con la mente o di spingerti a sentire più di quanto tu sia pronto a sentire. Si tratta di rallentare abbastanza da poter notare ciò che è presente, cosa sta comunicando il corpo e di cosa ha bisogno il tuo sistema per sentirsi più al sicuro.",
+      "A volte il lavoro inizia da una sensazione nel corpo. A volte da un’emozione, una tensione, un’immagine, una memoria, una domanda, o semplicemente qualcosa che è difficile nominare.",
+    ],
+    whoEyebrow: "A chi può parlare",
+    whoTitle: "Quando qualcosa dentro chiede spazio.",
+    who: [
+      "Questo lavoro può essere per chi sente il desiderio di conoscersi attraverso il corpo, non solo attraverso le parole.",
+      "Potresti sentirti chiamata o chiamato quando qualcosa si muove dentro di te e non sai ancora come incontrarlo — un’emozione, una sensazione, un passaggio di vita, uno schema che ritorna, o una parte di te che ha bisogno di più cura.",
+    ],
+    signs: [
+      "Quando le emozioni sono presenti, ma difficili da nominare o esprimere.",
+      "Quando il corpo porta tensione, inquietudine o la sensazione di trattenere qualcosa dentro.",
+      "Quando stai attraversando un cambiamento e hai bisogno di uno spazio per sentire, integrare e ascoltare.",
+      "Quando vuoi costruire più fiducia, resilienza e risorse interiori senza forzarti.",
+    ],
+    sessionEyebrow: "In una sessione",
+    sessionTitle: "Cosa succede, semplicemente.",
+    session: [
+      "In una sessione di Moving Through partiamo da ciò che è presente.",
+      "A volte è una sensazione nel corpo. A volte un’emozione. A volte una tensione, un’immagine, una memoria, una domanda, o semplicemente qualcosa che è difficile nominare.",
+      "Insieme rallentiamo abbastanza da poterlo ascoltare, senza forzarlo a diventare qualcos’altro.",
+      "Attraverso una guida delicata, la consapevolezza del corpo e la presenza emotiva, esploriamo ciò che si sta muovendo dentro di te e ciò di cui il tuo sistema ha bisogno per sentirsi più al sicuro.",
+      "Andiamo a riconoscere le risorse che sono già presenti — luoghi, sensazioni, memorie, gesti, immagini o qualità interiori che possono sostenerti.",
+      "Il lavoro non consiste nell’andare troppo veloce o entrare direttamente nel dolore. Consiste nel creare abbastanza spazio e sicurezza perché ciò che è delicato possa essere avvicinato poco alla volta, mentre crescono capacità, resilienza e fiducia.",
+      "Con il tempo, impari a riconoscere ciò che ti sostiene, come tornarci, e come restare vicino a te anche quando qualcosa di intenso si muove.",
+      "Questo può accadere in presenza o online. A volte attraverso le parole, a volte attraverso il movimento, il silenzio, il respiro, la visualizzazione o un contatto energetico sottile. Il corpo guida il ritmo.",
+    ],
+    imagesEyebrow: "Tocco · Presenza · Campo",
+    imagesTitle: "Un contatto che può essere anche sottile.",
+    waysEyebrow: "Come entrare nel percorso",
+    waysTitle: "Ritmi diversi per momenti diversi.",
+    formats: [
+      { title: "Sessione singola", note: "Uno spazio per incontrare ciò che è presente e iniziare ad ascoltare dal corpo." },
+      { title: "Percorso di 5 sessioni", note: "Un primo arco di sostegno per aprire un processo e iniziare a riconoscere le tue risorse." },
+      { title: "Percorso di 10 sessioni", note: "Un’apertura più profonda, con più continuità, integrazione e capacità emotiva." },
+      { title: "Percorso di 9 mesi", note: "Un percorso più ampio che sostiene la trasformazione nel tempo." },
+    ],
+    journeyEyebrow: "Percorso in evidenza",
+    journeyTitle: "Percorso di trasformazione di 9 mesi",
+    journeyIntro:
+      "Un percorso di 9 mesi che sostiene la trasformazione nel tempo. All’inizio ti accompagno da vicino. Gradualmente, il supporto diventa più leggero, finché puoi continuare a camminare con più autonomia, fiducia e forza interiore.",
+    phases: [
+      { range: "Mesi 1 — 3", detail: "Una sessione a settimana.", text: "Accompagnamento ravvicinato, ritmo e sicurezza. Iniziamo ad ascoltare il corpo, riconoscere le risorse e creare una base stabile per il processo.", image: "/moving-through/journey-1.jpg" },
+      { range: "Mesi 4 — 6", detail: "Una sessione ogni due settimane.", text: "Il lavoro inizia a respirare. C’è più spazio per l’integrazione, l’autonomia e la capacità di tornare a te tra una sessione e l’altra.", image: "/moving-through/journey-2.jpg" },
+      { range: "Mesi 7 — 9", detail: "Una sessione al mese.", text: "Il supporto diventa più leggero. Continui a camminare con più fiducia, resilienza e forza interiore, portando il lavoro nella vita quotidiana.", image: "/moving-through/journey-3.jpg" },
+    ],
+    cta: "Inizia il tuo percorso",
+  },
+};
 
 const MovingThrough = () => {
+  const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
+  const copy = COPY[language];
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const touchStartX = useRef<number | null>(null);
@@ -126,12 +228,12 @@ const MovingThrough = () => {
           <div aria-hidden="true" className="absolute -bottom-28 -left-20 h-80 w-80 rounded-full bg-sage/20 blur-3xl" />
           <div className="container-soft relative grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr]">
             <Reveal className="max-w-3xl">
-              <p className="eyebrow mb-5 text-ivory/65">Moving Through</p>
+              <p className="eyebrow mb-5 text-ivory/65">{copy.heroEyebrow}</p>
               <h1 className="font-serif text-5xl leading-[0.98] text-ivory text-balance md:text-7xl">
-                One-to-one emotional & somatic accompaniment.
+                {copy.heroTitle}
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ivory/75 text-pretty md:text-xl">
-                A space to explore what is moving inside you through the body, emotional presence and deep listening — online or in person.
+                {copy.heroText}
               </p>
             </Reveal>
             <Reveal delay={120} className="mx-auto w-full max-w-[330px] lg:max-w-[360px]">
@@ -146,16 +248,16 @@ const MovingThrough = () => {
         <section className="bg-ivory px-6 py-14 md:px-10 md:py-20" aria-label="What Moving Through is">
           <div className="container-soft grid gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
-              <p className="eyebrow mb-5">The work</p>
+              <p className="eyebrow mb-5">{copy.workEyebrow}</p>
               <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
-                A gentle way to meet what is alive inside.
+                {copy.workTitle}
               </h2>
             </Reveal>
             <Reveal delay={120} className="lg:col-span-7">
               <div className="space-y-5 text-lg leading-relaxed text-foreground/78 text-pretty">
-                <p>Moving Through is a one-to-one space where emotional processes are explored through the body, sensation and presence.</p>
-                <p>It is not about analyzing everything with the mind or pushing yourself to feel more than you are ready to feel. It is about slowing down enough to notice what is present, what your body is saying, and what your system needs in order to feel safer.</p>
-                <p>Sometimes the work begins from a sensation in the body. Sometimes from an emotion, a tension, an image, a memory, a question, or simply something that is difficult to name.</p>
+                {copy.work.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </Reveal>
           </div>
@@ -164,18 +266,19 @@ const MovingThrough = () => {
         <section className="bg-ivory-warm px-6 py-14 md:px-10 md:py-20" aria-label="Who Moving Through is for">
           <div className="container-soft grid gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
-              <p className="eyebrow mb-5">Who it may speak to</p>
+              <p className="eyebrow mb-5">{copy.whoEyebrow}</p>
               <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
-                When something inside asks for space.
+                {copy.whoTitle}
               </h2>
             </Reveal>
             <Reveal delay={120} className="lg:col-span-7">
               <div className="space-y-5 text-lg leading-relaxed text-foreground/78 text-pretty">
-                <p>This work can be for anyone who feels the desire to understand themselves through the body, not only through words.</p>
-                <p>You may feel called to it when something is moving inside you and you do not yet know how to meet it — an emotion, a sensation, a transition, a repeated pattern, or a part of you that needs more care.</p>
+                {copy.who.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
               <div className="mt-8 space-y-4 border-l border-forest/20 pl-5 md:pl-7">
-                {SIGNS.map((sign) => (
+                {copy.signs.map((sign) => (
                   <p key={sign} className="font-serif text-xl leading-snug text-forest-deep/82 text-balance md:text-2xl">
                     {sign}
                   </p>
@@ -188,21 +291,16 @@ const MovingThrough = () => {
         <section className="bg-sage/25 px-6 py-14 md:px-10 md:py-20" aria-label="What happens in a session">
           <div className="container-soft grid gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
-              <p className="eyebrow mb-5">In a session</p>
+              <p className="eyebrow mb-5">{copy.sessionEyebrow}</p>
               <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
-                What happens, simply.
+                {copy.sessionTitle}
               </h2>
             </Reveal>
             <Reveal delay={120} className="lg:col-span-7">
               <div className="space-y-5 text-lg leading-relaxed text-foreground/78 text-pretty">
-                <p>In a Moving Through session, we begin from what is present.</p>
-                <p>Sometimes it is a sensation in the body. Sometimes an emotion. Sometimes a tension, an image, a memory, a question, or simply a feeling that is difficult to name.</p>
-                <p>Together, we slow down enough to listen to it without forcing it to become something else.</p>
-                <p>Through gentle guidance, body awareness and emotional presence, we explore what is moving inside you and what your system needs in order to feel safer.</p>
-                <p>We look for the resources that are already there — places, sensations, memories, gestures, images or inner qualities that can support you.</p>
-                <p>The work is not about going too fast or entering pain directly. It is about creating enough space and safety so that what feels delicate can be approached little by little, while your capacity, resilience and trust begin to grow.</p>
-                <p>Over time, you learn to recognize what supports you, how to return to it, and how to stay close to yourself even when something intense is moving.</p>
-                <p>This can happen in person or online. Sometimes through words, sometimes through movement, sometimes through silence, breath, visualization or subtle energetic contact. The body guides the rhythm.</p>
+                {copy.session.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </Reveal>
           </div>
@@ -211,9 +309,9 @@ const MovingThrough = () => {
         <section className="bg-ivory px-6 py-14 md:px-10 md:py-20" aria-label="Moving Through images">
           <div className="container-soft">
             <Reveal className="mx-auto max-w-3xl text-center">
-              <p className="eyebrow mb-5">Touch · Presence · Field</p>
+              <p className="eyebrow mb-5">{copy.imagesEyebrow}</p>
               <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-5xl">
-                A contact that can also be subtle.
+                {copy.imagesTitle}
               </h2>
             </Reveal>
             <Reveal delay={120} className="mx-auto mt-10 max-w-3xl">
@@ -235,13 +333,13 @@ const MovingThrough = () => {
         <section className="bg-ivory-warm px-6 py-14 md:px-10 md:py-20" aria-label="Ways to enter Moving Through">
           <div className="container-soft">
             <Reveal className="max-w-3xl">
-              <p className="eyebrow mb-5">Ways to enter</p>
+              <p className="eyebrow mb-5">{copy.waysEyebrow}</p>
               <h2 className="font-serif text-4xl leading-[1.05] text-forest-deep text-balance md:text-6xl">
-                Different rhythms for different moments.
+                {copy.waysTitle}
               </h2>
             </Reveal>
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {FORMATS.map((format, index) => (
+              {copy.formats.map((format, index) => (
                 <Reveal key={format.title} delay={index * 90}>
                   <article className="leaf-card h-full">
                     <h3 className="font-serif text-2xl text-forest-deep mb-3">{format.title}</h3>
@@ -256,12 +354,12 @@ const MovingThrough = () => {
         <section className="bg-gradient-forest px-6 py-16 text-ivory md:px-10 md:py-24" aria-label="Nine month journey">
           <div className="container-soft">
             <Reveal className="max-w-3xl">
-              <p className="eyebrow mb-5 text-ivory/60">Featured Path</p>
-              <h2 className="font-serif text-4xl leading-[1.05] text-ivory text-balance md:text-6xl">9-Month Transformation Journey</h2>
-              <p className="mt-6 text-lg leading-relaxed text-ivory/78 text-pretty md:text-xl">A 9-month path that supports transformation over time. At the beginning, I accompany you closely. Gradually, the support becomes lighter, until you can continue walking with more autonomy, trust and inner strength.</p>
+              <p className="eyebrow mb-5 text-ivory/60">{copy.journeyEyebrow}</p>
+              <h2 className="font-serif text-4xl leading-[1.05] text-ivory text-balance md:text-6xl">{copy.journeyTitle}</h2>
+              <p className="mt-6 text-lg leading-relaxed text-ivory/78 text-pretty md:text-xl">{copy.journeyIntro}</p>
             </Reveal>
             <div className="mt-12 space-y-10 md:space-y-12">
-              {PHASES.map((phase, index) => (
+              {copy.phases.map((phase, index) => (
                 <Reveal key={phase.range} delay={index * 100}>
                   <article className="mx-auto grid max-w-4xl items-center gap-6 md:grid-cols-[250px_1fr] md:gap-10">
                     <div className={`mx-auto w-full max-w-[250px] ${index % 2 === 1 ? "md:order-2" : ""}`}>
@@ -288,7 +386,7 @@ const MovingThrough = () => {
               ))}
             </div>
             <Reveal delay={180} className="mt-12">
-              <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-ivory px-7 py-3.5 text-sm text-forest-deep shadow-soft transition-colors duration-500 hover:bg-gold-soft">Start Your Journey <ArrowUpRight size={16} strokeWidth={1.5} /></a>
+              <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-ivory px-7 py-3.5 text-sm text-forest-deep shadow-soft transition-colors duration-500 hover:bg-gold-soft">{copy.cta} <ArrowUpRight size={16} strokeWidth={1.5} /></a>
             </Reveal>
           </div>
         </section>
