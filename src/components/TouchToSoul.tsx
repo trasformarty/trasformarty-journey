@@ -42,9 +42,9 @@ const TOUCH_COPY = {
   },
   it: {
     aria: "A Touch to Soul",
-    eyebrow: "Offerta — Bodywork",
+    eyebrow: "Offerta — Lavoro sul corpo",
     title: "A Touch to Soul",
-    subtitle: "Un massaggio full body e un’esperienza somatica.",
+    subtitle: "Un massaggio a corpo intero e un’esperienza somatica.",
     paragraphs: [
       "A Touch to Soul è un viaggio nel proprio paesaggio interiore: un’esperienza di ascolto somatico profondo, dove il corpo può entrare in rilassamento e presenza, la mente può quietarsi e un senso più autentico di sé può emergere.",
       "Uno spazio sicuro dove le emozioni possono fluire e l’energia vitale può tornare a muoversi con più facilità, aprendo a volte stati di profondo rilascio.",
