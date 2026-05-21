@@ -1,10 +1,66 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Instagram, Mail, MapPin, Phone, Check, AlertCircle } from "lucide-react";
+import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
 
+const CONTACT_COPY = {
+  en: {
+    aria: "Contact and booking",
+    eyebrow: "Contact",
+    title: "Begin the Conversation",
+    intro: "If you feel called to begin, write to me. We can find the way of working together that best supports your moment.",
+    location: "Ibiza & more",
+    formAria: "Contact form",
+    thankTitle: "Thank you.",
+    thankText: "Your message has been sent. I’ll write back as soon as I can.",
+    labels: {
+      name: "Name",
+      email: "Email",
+      interest: "What are you interested in?",
+      format: "Online or in person?",
+      message: "Message",
+    },
+    select: "Select…",
+    interests: ["A Touch to Soul", "One-to-One Sessions", "Workshops", "Retreats", "Courses", "Other"],
+    formats: ["Online", "In person", "Not sure yet"],
+    placeholder: "Share what feels alive for you right now…",
+    sending: "Sending…",
+    send: "Send Message",
+    error: "Something went wrong while sending your message. Please write directly to martina.roscioli@gmail.com.",
+  },
+  it: {
+    aria: "Contatti e prenotazioni",
+    eyebrow: "Contatti",
+    title: "Inizia la conversazione",
+    intro: "Se senti che è il momento di iniziare, scrivimi. Possiamo trovare insieme il modo di lavorare che sostiene meglio questo momento della tua vita.",
+    location: "Ibiza e oltre",
+    formAria: "Modulo di contatto",
+    thankTitle: "Grazie.",
+    thankText: "Il tuo messaggio è stato inviato. Ti risponderò appena possibile.",
+    labels: {
+      name: "Nome",
+      email: "Email",
+      interest: "A cosa sei interessata/o?",
+      format: "Online o in presenza?",
+      message: "Messaggio",
+    },
+    select: "Seleziona…",
+    interests: ["A Touch to Soul", "Sessioni one-to-one", "Workshop", "Ritiri", "Corsi", "Altro"],
+    formats: ["Online", "In presenza", "Non lo so ancora"],
+    placeholder: "Raccontami cosa senti vivo in questo momento…",
+    sending: "Invio…",
+    send: "Invia messaggio",
+    error: "Qualcosa non ha funzionato durante l’invio. Scrivimi direttamente a martina.roscioli@gmail.com.",
+  },
+};
+
 export const Contact = () => {
+  const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
+  const copy = CONTACT_COPY[language];
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,25 +93,22 @@ export const Contact = () => {
       form.reset();
       setSubmitted(true);
     } catch {
-      setError(
-        "Something went wrong while sending your message. Please write directly to martina.roscioli@gmail.com."
-      );
+      setError(copy.error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="bg-ivory pt-10 pb-24 px-6 md:pt-14 md:pb-32 md:px-10" aria-label="Contact and booking">
+    <section id="contact" className="bg-ivory pt-10 pb-24 px-6 md:pt-14 md:pb-32 md:px-10" aria-label={copy.aria}>
       <div className="container-soft grid md:grid-cols-12 gap-12 md:gap-16">
         <Reveal className="md:col-span-5">
-          <p className="eyebrow mb-5">Contact</p>
+          <p className="eyebrow mb-5">{copy.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-8 text-balance">
-            Begin the Conversation
+            {copy.title}
           </h2>
           <p className="text-lg text-foreground/80 leading-relaxed text-pretty">
-            If you feel called to begin, write to me. We can find the way of
-            working together that best supports your moment.
+            {copy.intro}
           </p>
 
           <ul className="mt-10 space-y-5 text-foreground/80">
@@ -78,9 +131,7 @@ export const Contact = () => {
             </li>
             <li className="flex items-start gap-4">
               <MapPin size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
-              <span>
-                Ibiza & more
-              </span>
+              <span>{copy.location}</span>
             </li>
             <li className="flex items-start gap-4">
               <Phone size={18} strokeWidth={1.4} className="text-forest mt-1 shrink-0" />
@@ -100,22 +151,22 @@ export const Contact = () => {
           <form
             onSubmit={onSubmit}
             className="leaf-card space-y-5"
-            aria-label="Contact form"
+            aria-label={copy.formAria}
           >
             {submitted ? (
               <div key="thanks" className="text-center py-12 px-4 animate-fade-in">
                 <div className="mx-auto w-14 h-14 rounded-full bg-sage/40 flex items-center justify-center mb-5">
                   <Check size={26} strokeWidth={1.5} className="text-forest-deep" />
                 </div>
-                <h3 className="font-serif text-3xl text-forest-deep mb-3">Thank you.</h3>
+                <h3 className="font-serif text-3xl text-forest-deep mb-3">{copy.thankTitle}</h3>
                 <p className="text-foreground/70 max-w-md mx-auto leading-relaxed">
-                  Your message has been sent. I&rsquo;ll write back as soon as I can.
+                  {copy.thankText}
                 </p>
               </div>
             ) : (
               <div key="form-fields" className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
-                  <Field label="Name" id="name" required>
+                  <Field label={copy.labels.name} id="name" required>
                     <input
                       id="name"
                       name="name"
@@ -125,7 +176,7 @@ export const Contact = () => {
                       className="form-input"
                     />
                   </Field>
-                  <Field label="Email" id="email" required>
+                  <Field label={copy.labels.email} id="email" required>
                     <input
                       id="email"
                       name="email"
@@ -138,34 +189,31 @@ export const Contact = () => {
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-5">
-                  <Field label="What are you interested in?" id="interest">
+                  <Field label={copy.labels.interest} id="interest">
                     <select id="interest" name="interest" className="form-input" defaultValue="">
-                      <option value="" disabled>Select…</option>
-                      <option>A Touch to Soul</option>
-                      <option>One-to-One Sessions</option>
-                      <option>Workshops</option>
-                      <option>Retreats</option>
-                      <option>Courses</option>
-                      <option>Other</option>
+                      <option value="" disabled>{copy.select}</option>
+                      {copy.interests.map((interest) => (
+                        <option key={interest}>{interest}</option>
+                      ))}
                     </select>
                   </Field>
-                  <Field label="Online or in person?" id="format">
+                  <Field label={copy.labels.format} id="format">
                     <select id="format" name="format" className="form-input" defaultValue="">
-                      <option value="" disabled>Select…</option>
-                      <option>Online</option>
-                      <option>In person</option>
-                      <option>Not sure yet</option>
+                      <option value="" disabled>{copy.select}</option>
+                      {copy.formats.map((format) => (
+                        <option key={format}>{format}</option>
+                      ))}
                     </select>
                   </Field>
                 </div>
 
-                <Field label="Message" id="message">
+                <Field label={copy.labels.message} id="message">
                   <textarea
                     id="message"
                     name="message"
                     rows={5}
                     className="form-input resize-none"
-                    placeholder="Share what feels alive for you right now…"
+                    placeholder={copy.placeholder}
                   />
                 </Field>
 
@@ -181,7 +229,7 @@ export const Contact = () => {
                   disabled={loading}
                   className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-forest text-ivory px-8 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft disabled:opacity-60"
                 >
-                  {loading ? "Sending…" : "Send Message"}
+                  {loading ? copy.sending : copy.send}
                 </button>
               </div>
             )}
