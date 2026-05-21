@@ -54,7 +54,7 @@ const WORKSHOPS_COPY = {
     addPhotos: "Aggiungi qui le foto",
     workshops: [
       {
-        title: "The Importance of Touch",
+        title: "L’importanza del tocco",
         body: [
           "Questo workshop è pensato per insegnanti di yoga, facilitatori del movimento, professionisti che lavorano attraverso il corpo, gruppi di supporto, famiglie e chiunque accompagni le persone attraverso presenza, corpo e relazione.",
           "Insieme esploriamo il tocco come linguaggio consapevole: un modo per offrire sostegno, radicamento, calma o attivazione quando è davvero necessario.",
