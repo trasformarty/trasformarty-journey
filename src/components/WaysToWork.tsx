@@ -23,7 +23,7 @@ const WORK_COPY = {
     offerings: [
       {
         title: "Moving Through",
-        desc: "Somatic and emotional accompaniment to meet what is moving inside you.",
+        desc: "Somatic and emotional accompaniment to meet what is moving inside you. Available online and in person.",
         href: "/moving-through",
         route: true,
         image: "/work-with-me/moving-through.jpg",
@@ -67,7 +67,7 @@ const WORK_COPY = {
     offerings: [
       {
         title: "Moving Through",
-        desc: "Accompagnamento somatico ed emozionale per incontrare ciò che si muove dentro di te.",
+        desc: "Accompagnamento somatico ed emozionale per incontrare ciò che si muove dentro di te. Disponibile online e in presenza.",
         href: "/moving-through",
         route: true,
         image: "/work-with-me/moving-through.jpg",
