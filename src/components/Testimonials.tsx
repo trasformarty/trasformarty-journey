@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Check, AlertCircle } from "lucide-react";
+import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
@@ -28,6 +30,45 @@ const TESTIMONIALS = [
   },
 ];
 
+const TESTIMONIALS_COPY = {
+  en: {
+    aria: "Client feedback",
+    eyebrow: "Feedback",
+    title: "From You",
+    intro: "Words shared by people who have walked through this work with me.",
+    carouselAria: "Client testimonials carousel",
+    positionAria: "Feedback position",
+    showFeedback: "Show feedback",
+    thankYou: "Thank you. Your words have been received privately.",
+    formTitle: "Share your words",
+    formText: "It would be beautiful to receive a few words from you — a small trace of what we lived together, seen through your eyes.",
+    name: "Name",
+    email: "Email (optional)",
+    words: "Your words",
+    sending: "Sending…",
+    send: "Send",
+    error: "Opening a secure backup sending page. If it does not open, please send your words directly to martina.roscioli@gmail.com.",
+  },
+  it: {
+    aria: "Feedback dei clienti",
+    eyebrow: "Feedback",
+    title: "Le vostre parole",
+    intro: "Parole condivise da persone che hanno attraversato questo lavoro con me.",
+    carouselAria: "Carosello delle testimonianze",
+    positionAria: "Posizione feedback",
+    showFeedback: "Mostra feedback",
+    thankYou: "Grazie. Le tue parole sono state ricevute in privato.",
+    formTitle: "Lascia le tue parole",
+    formText: "Sarebbe bello ricevere qualche parola da te: una piccola traccia di ciò che abbiamo vissuto insieme, visto attraverso i tuoi occhi.",
+    name: "Nome",
+    email: "Email (opzionale)",
+    words: "Le tue parole",
+    sending: "Invio…",
+    send: "Invia",
+    error: "Si sta aprendo una pagina sicura alternativa per l’invio. Se non si apre, scrivimi direttamente a martina.roscioli@gmail.com.",
+  },
+};
+
 const TestimonialQuote = ({ quote, name }: { quote: string; name: string }) => (
   <figure>
     <blockquote className="font-serif italic text-lg md:text-xl leading-[1.45] text-forest-deep text-pretty">
@@ -40,6 +81,9 @@ const TestimonialQuote = ({ quote, name }: { quote: string; name: string }) => (
 );
 
 export const Testimonials = () => {
+  const location = useLocation();
+  const language = getLanguageFromPath(location.pathname);
+  const copy = TESTIMONIALS_COPY[language];
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -125,28 +169,28 @@ export const Testimonials = () => {
       setSubmitted(true);
       setLoading(false);
     } catch {
-      setError("Opening a secure backup sending page. If it does not open, please send your words directly to martina.roscioli@gmail.com.");
+      setError(copy.error);
       submitWithFallback(form);
     }
   };
 
   return (
-    <section id="from-you" className="bg-ivory pt-24 pb-10 px-6 md:pt-32 md:pb-14 md:px-10" aria-label="Client feedback">
+    <section id="from-you" className="bg-ivory pt-24 pb-10 px-6 md:pt-32 md:pb-14 md:px-10" aria-label={copy.aria}>
       <div className="container-soft">
         <Reveal className="max-w-3xl">
-          <p className="eyebrow mb-5">Feedback</p>
+          <p className="eyebrow mb-5">{copy.eyebrow}</p>
           <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-6 text-balance">
-            From You
+            {copy.title}
           </h2>
           <p className="text-lg text-foreground/75 leading-relaxed text-pretty">
-            Words shared by people who have walked through this work with me.
+            {copy.intro}
           </p>
         </Reveal>
 
         <Reveal delay={120} className="mt-12">
           <div
             className="relative touch-pan-y"
-            aria-label="Client testimonials carousel"
+            aria-label={copy.carouselAria}
             tabIndex={0}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
@@ -163,7 +207,7 @@ export const Testimonials = () => {
               ))}
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-2" aria-label="Feedback position">
+            <div className="mt-8 flex items-center justify-center gap-2" aria-label={copy.positionAria}>
               {TESTIMONIALS.map((item, index) => (
                 <button
                   key={item.name}
@@ -172,7 +216,7 @@ export const Testimonials = () => {
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === active ? "w-6 bg-forest" : "w-2 bg-forest/25"
                   }`}
-                  aria-label={`Show feedback ${index + 1}`}
+                  aria-label={`${copy.showFeedback} ${index + 1}`}
                 />
               ))}
             </div>
@@ -189,7 +233,7 @@ export const Testimonials = () => {
             {submitted ? (
               <div className="flex items-start gap-3 text-foreground/70 animate-fade-in">
                 <Check size={18} strokeWidth={1.5} className="mt-1 text-forest shrink-0" />
-                <p>Thank you. Your words have been received privately.</p>
+                <p>{copy.thankYou}</p>
               </div>
             ) : (
               <>
@@ -199,9 +243,9 @@ export const Testimonials = () => {
                 <input type="hidden" name="_next" value="https://trasformarti.com/#from-you" />
 
                 <div>
-                  <p className="font-serif text-2xl text-forest-deep mb-3">Share your words</p>
+                  <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
                   <p className="text-foreground/65 leading-relaxed">
-                    It would be beautiful to receive a few words from you — a small trace of what we lived together, seen through your eyes.
+                    {copy.formText}
                   </p>
                 </div>
 
@@ -209,14 +253,14 @@ export const Testimonials = () => {
                   <input
                     name="name"
                     type="text"
-                    placeholder="Name"
+                    placeholder={copy.name}
                     className="from-you-input"
                     required
                   />
                   <input
                     name="email"
                     type="email"
-                    placeholder="Email (optional)"
+                    placeholder={copy.email}
                     className="from-you-input"
                   />
                 </div>
@@ -224,7 +268,7 @@ export const Testimonials = () => {
                 <textarea
                   name="words"
                   rows={4}
-                  placeholder="Your words"
+                  placeholder={copy.words}
                   className="from-you-input resize-none"
                   required
                 />
@@ -241,7 +285,7 @@ export const Testimonials = () => {
                   disabled={loading}
                   className="inline-flex items-center rounded-full bg-forest text-ivory px-6 py-3 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft disabled:opacity-60"
                 >
-                  {loading ? "Sending…" : "Send"}
+                  {loading ? copy.sending : copy.send}
                 </button>
               </>
             )}
