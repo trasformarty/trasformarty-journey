@@ -21,7 +21,7 @@ const IMAGES = [
 
 const COPY = {
   en: {
-    heroEyebrow: "Moving Through",
+    heroEyebrow: "Moving Through · Online & In Person",
     heroTitle: "One-to-one emotional & somatic accompaniment.",
     heroText:
       "A space to explore what is moving inside you through the body, emotional presence and deep listening — online or in person.",
@@ -78,7 +78,7 @@ const COPY = {
     cta: "Start Your Journey",
   },
   it: {
-    heroEyebrow: "Moving Through",
+    heroEyebrow: "Moving Through · Online e in presenza",
     heroTitle: "Accompagnamento emozionale e somatico one-to-one.",
     heroText:
       "Uno spazio per esplorare ciò che si muove dentro di te attraverso il corpo, la presenza emotiva e un ascolto profondo — online o in presenza.",
