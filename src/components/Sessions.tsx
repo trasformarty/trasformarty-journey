@@ -13,8 +13,6 @@ const SESSIONS_COPY = {
       "Together, we create a safe and welcoming space where sensations, emotions and expression can be met with care, without forcing the process to become something else.",
     ],
     cta: "Explore Moving Through",
-    imageEyebrow: "Touch · presence · field",
-    imageTitle: "A contact that can also be subtle.",
     formats: [
       { title: "Single Session", note: "An open meeting to begin." },
       { title: "5-Session Journey", note: "A first arc of listening." },
@@ -31,8 +29,6 @@ const SESSIONS_COPY = {
       "Insieme creiamo uno spazio sicuro e accogliente dove sensazioni, emozioni ed espressione possono essere incontrate con cura, senza forzare il processo a diventare qualcos’altro.",
     ],
     cta: "Esplora Moving Through",
-    imageEyebrow: "Tocco · presenza · campo",
-    imageTitle: "Un contatto che può essere anche sottile.",
     formats: [
       { title: "Sessione singola", note: "Un primo incontro per iniziare." },
       { title: "Percorso di 5 sessioni", note: "Un primo arco di ascolto." },
@@ -52,7 +48,7 @@ export const Sessions = () => {
     <section id="sessions" className="section bg-sage/30" aria-label={copy.aria}>
       <div className="container-soft">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 lg:items-center">
-          <Reveal className="lg:col-span-6">
+          <Reveal className="lg:col-span-7">
             <p className="eyebrow mb-5">{copy.eyebrow}</p>
             <h2 className="font-serif text-4xl md:text-6xl leading-[1.05] mb-4 text-balance">
               Moving Through
@@ -75,10 +71,10 @@ export const Sessions = () => {
             </Link>
           </Reveal>
 
-          <Reveal delay={150} className="lg:col-span-6">
+          <Reveal delay={150} className="lg:col-span-5">
             <Link
               to={movingThroughPath}
-              className="group relative block aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-organic"
+              className="group relative mx-auto block aspect-[5/4] w-full max-w-[430px] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-earth-soft/40 via-ivory-warm to-sage/40 shadow-soft"
               aria-label={copy.cta}
             >
               <img
@@ -90,11 +86,6 @@ export const Sessions = () => {
                   event.currentTarget.style.display = "none";
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/45 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-ivory">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-ivory/75">{copy.imageEyebrow}</p>
-                <p className="mt-3 font-serif text-3xl leading-tight text-balance">{copy.imageTitle}</p>
-              </div>
             </Link>
           </Reveal>
         </div>
