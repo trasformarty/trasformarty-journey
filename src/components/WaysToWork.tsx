@@ -56,7 +56,7 @@ const WORK_COPY = {
       "Ritornare al corpo, ascoltare ciò che è vivo e lasciare che la trasformazione possa accadere con cura.",
       "Scegli il modo in cui il tuo corpo chiede di essere incontrato.",
     ],
-    cardLabel: "Work with me",
+    cardLabel: "Work With Me",
     explore: "Esplora",
     featured: {
       title: "A Touch to Soul",
