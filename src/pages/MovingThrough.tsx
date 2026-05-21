@@ -79,15 +79,15 @@ const COPY = {
   },
   it: {
     heroEyebrow: "Moving Through",
-    heroTitle: "Accompagnamento emozionale e somatico uno a uno.",
+    heroTitle: "Accompagnamento emozionale e somatico one-to-one.",
     heroText:
       "Uno spazio per esplorare ciò che si muove dentro di te attraverso il corpo, la presenza emotiva e un ascolto profondo — online o in presenza.",
-    workEyebrow: "Il lavoro",
+    workEyebrow: "Cos’è",
     workTitle: "Un modo delicato per incontrare ciò che è vivo dentro.",
     work: [
-      "Moving Through è uno spazio uno a uno in cui i processi emotivi vengono esplorati attraverso il corpo, le sensazioni e la presenza.",
-      "Non si tratta di analizzare tutto con la mente o di spingerti a sentire più di quanto tu sia pronto a sentire. Si tratta di rallentare abbastanza da poter notare ciò che è presente, cosa sta comunicando il corpo e di cosa ha bisogno il tuo sistema per sentirsi più al sicuro.",
-      "A volte il lavoro inizia da una sensazione nel corpo. A volte da un’emozione, una tensione, un’immagine, una memoria, una domanda, o semplicemente qualcosa che è difficile nominare.",
+      "Moving Through significa “passarci attraverso”. Attraversare ciò che si muove dentro: un’emozione, una sensazione, una memoria del corpo, una tensione, un’immagine, una domanda, o qualcosa che ancora non ha un nome.",
+      "L’accompagnamento consiste proprio in questo: creare uno spazio sicuro in cui poterci passare attraverso con presenza, ascolto e gradualità, senza forzare il processo e senza dover capire tutto con la mente.",
+      "Non si tratta di spingerti a sentire più di quanto tu sia pronto a sentire. Si tratta di rallentare abbastanza da poter notare ciò che è presente, cosa sta comunicando il corpo e di cosa ha bisogno il tuo sistema per sentirsi più al sicuro. Passarci attraverso, per trasformare.",
     ],
     whoEyebrow: "A chi può parlare",
     whoTitle: "Quando qualcosa dentro chiede spazio.",
