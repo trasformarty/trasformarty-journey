@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Instagram, Mail, MapPin, Phone, Check } from "lucide-react";
+import { Instagram, Mail, MapPin, Phone, Check, AlertCircle } from "lucide-react";
 import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
-const FORM_ENDPOINT = "https://formsubmit.co/martina.roscioli@gmail.com";
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
 
 const CONTACT_COPY = {
   en: {
@@ -29,6 +29,7 @@ const CONTACT_COPY = {
     placeholder: "Share what feels alive for you right now…",
     sending: "Sending…",
     send: "Send Message",
+    error: "Something went wrong while sending your message. Please try again, or write directly to martina.roscioli@gmail.com.",
   },
   it: {
     aria: "Contatti e prenotazioni",
@@ -52,6 +53,7 @@ const CONTACT_COPY = {
     placeholder: "Raccontami cosa senti vivo in questo momento…",
     sending: "Invio…",
     send: "Invia messaggio",
+    error: "Qualcosa non ha funzionato durante l’invio. Riprova, oppure scrivimi direttamente a martina.roscioli@gmail.com.",
   },
 };
 
@@ -61,21 +63,44 @@ export const Contact = () => {
   const copy = CONTACT_COPY[language];
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = () => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
+    setError(null);
 
-    window.setTimeout(() => {
-      formRef.current?.reset();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    formData.append("_subject", "New message from TrasforMarti website");
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send the message");
+      }
+
+      form.reset();
       setSubmitted(true);
+    } catch {
+      setError(copy.error);
+    } finally {
       setLoading(false);
-    }, 900);
+    }
   };
 
   return (
     <section id="contact" className="bg-ivory pt-10 pb-24 px-6 md:pt-14 md:pb-32 md:px-10" aria-label={copy.aria}>
-      <iframe name="contact-hidden-frame" title="Contact form submission" className="hidden" />
       <div className="container-soft grid md:grid-cols-12 gap-12 md:gap-16">
         <Reveal className="md:col-span-5">
           <p className="eyebrow mb-5">{copy.eyebrow}</p>
@@ -124,11 +149,7 @@ export const Contact = () => {
 
         <Reveal delay={150} className="md:col-span-7">
           <form
-            ref={formRef}
             onSubmit={onSubmit}
-            action={FORM_ENDPOINT}
-            method="POST"
-            target="contact-hidden-frame"
             className="leaf-card space-y-5"
             aria-label={copy.formAria}
           >
@@ -144,12 +165,6 @@ export const Contact = () => {
               </div>
             ) : (
               <div key="form-fields" className="space-y-5">
-                <input type="hidden" name="_subject" value="New message from TrasforMarti website" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://trasformarti.com/thank-you" />
-                <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
-
                 <div className="grid sm:grid-cols-2 gap-5">
                   <Field label={copy.labels.name} id="name" required>
                     <input
@@ -201,6 +216,13 @@ export const Contact = () => {
                     placeholder={copy.placeholder}
                   />
                 </Field>
+
+                {error && (
+                  <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
+                    <AlertCircle size={16} strokeWidth={1.5} className="mt-0.5 shrink-0" />
+                    {error}
+                  </p>
+                )}
 
                 <button
                   type="submit"
