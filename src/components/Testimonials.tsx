@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { AlertCircle } from "lucide-react";
+import { Mail } from "lucide-react";
 import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
-const FORM_ENDPOINT = "https://formsubmit.co/martina.roscioli@gmail.com";
+const FEEDBACK_EMAIL = "martina.roscioli@gmail.com";
 
 const TESTIMONIALS = [
   {
@@ -43,8 +43,15 @@ const TESTIMONIALS_COPY = {
     name: "Name",
     email: "Email (optional)",
     words: "Your words",
-    send: "Send",
-    fallbackNote: "After sending, you may briefly see a secure FormSubmit confirmation page before returning here.",
+    send: "Open email to send",
+    directEmail: "Or write directly to",
+    note: "Your email app will open with the message already prepared.",
+    subject: "New private words from TrasforMarti website",
+    bodyLabels: {
+      name: "Name",
+      email: "Email",
+      words: "Words",
+    },
   },
   it: {
     aria: "Feedback dei clienti",
@@ -59,8 +66,15 @@ const TESTIMONIALS_COPY = {
     name: "Nome",
     email: "Email (opzionale)",
     words: "Le tue parole",
-    send: "Invia",
-    fallbackNote: "Dopo l’invio potresti vedere per un momento una pagina sicura di conferma FormSubmit prima di tornare qui.",
+    send: "Apri email per inviare",
+    directEmail: "Oppure scrivi direttamente a",
+    note: "Si aprirà la tua app email con il messaggio già preparato.",
+    subject: "Nuove parole private dal sito TrasforMarti",
+    bodyLabels: {
+      name: "Nome",
+      email: "Email",
+      words: "Parole",
+    },
   },
 };
 
@@ -80,8 +94,10 @@ export const Testimonials = () => {
   const language = getLanguageFromPath(location.pathname);
   const copy = TESTIMONIALS_COPY[language];
   const [active, setActive] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [words, setWords] = useState("");
   const touchStartX = useRef<number | null>(null);
-  const nextUrl = language === "it" ? "https://trasformarti.com/it#from-you" : "https://trasformarti.com/#from-you";
 
   const goPrevious = () => {
     setActive((current) => (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
@@ -135,6 +151,16 @@ export const Testimonials = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const mailBody = [
+    `${copy.bodyLabels.name}: ${name}`,
+    `${copy.bodyLabels.email}: ${email || "-"}`,
+    "",
+    `${copy.bodyLabels.words}:`,
+    words,
+  ].join("\n");
+
+  const mailtoHref = `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(copy.subject)}&body=${encodeURIComponent(mailBody)}`;
+
   return (
     <section id="from-you" className="bg-ivory pt-24 pb-10 px-6 md:pt-32 md:pb-14 md:px-10" aria-label={copy.aria}>
       <div className="container-soft">
@@ -186,16 +212,12 @@ export const Testimonials = () => {
 
         <Reveal delay={180} className="mt-10 max-w-2xl">
           <form
-            action={FORM_ENDPOINT}
-            method="POST"
+            onSubmit={(event) => {
+              event.preventDefault();
+              window.location.href = mailtoHref;
+            }}
             className="border-t border-forest-deep/10 pt-8 space-y-4"
           >
-            <input type="hidden" name="_subject" value="New private words from TrasforMarti website" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value={nextUrl} />
-            <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
-
             <div>
               <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
               <p className="text-foreground/65 leading-relaxed">
@@ -210,12 +232,16 @@ export const Testimonials = () => {
                 placeholder={copy.name}
                 className="from-you-input"
                 required
+                value={name}
+                onChange={(event) => setName(event.target.value)}
               />
               <input
                 name="email"
                 type="email"
                 placeholder={copy.email}
                 className="from-you-input"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </div>
 
@@ -225,19 +251,26 @@ export const Testimonials = () => {
               placeholder={copy.words}
               className="from-you-input resize-none"
               required
+              value={words}
+              onChange={(event) => setWords(event.target.value)}
             />
 
             <p className="flex items-start gap-2 text-xs text-foreground/50">
-              <AlertCircle size={14} strokeWidth={1.5} className="mt-0.5 shrink-0" />
-              {copy.fallbackNote}
+              <Mail size={14} strokeWidth={1.5} className="mt-0.5 shrink-0" />
+              {copy.note}
             </p>
 
-            <button
-              type="submit"
-              className="inline-flex items-center rounded-full bg-forest text-ivory px-6 py-3 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
-            >
-              {copy.send}
-            </button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-full bg-forest text-ivory px-6 py-3 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
+              >
+                {copy.send}
+              </button>
+              <a href={`mailto:${FEEDBACK_EMAIL}`} className="text-sm text-forest-deep/75 underline-offset-4 hover:underline">
+                {copy.directEmail} {FEEDBACK_EMAIL}
+              </a>
+            </div>
           </form>
 
           <style>{`
