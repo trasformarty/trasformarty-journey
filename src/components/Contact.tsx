@@ -72,18 +72,21 @@ export const Contact = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    formData.append("_subject", "New message from TrasforMarti website");
-    formData.append("_template", "table");
-    formData.append("_captcha", "false");
+    const payload = Object.fromEntries(formData.entries());
 
     try {
       const response = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: formData,
+        body: JSON.stringify({
+          ...payload,
+          _subject: "New message from TrasforMarti website",
+          _template: "table",
+          _captcha: "false",
+        }),
       });
 
       if (!response.ok) {
