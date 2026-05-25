@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Check, AlertCircle } from "lucide-react";
+import { Check } from "lucide-react";
 import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
+const FORM_ENDPOINT = "https://formsubmit.co/martina.roscioli@gmail.com";
 
 const TESTIMONIALS = [
   {
@@ -46,7 +46,6 @@ const TESTIMONIALS_COPY = {
     words: "Your words",
     sending: "Sending…",
     send: "Send",
-    error: "Something went wrong. Please send your words directly to martina.roscioli@gmail.com.",
   },
   it: {
     aria: "Feedback dei clienti",
@@ -64,7 +63,6 @@ const TESTIMONIALS_COPY = {
     words: "Le tue parole",
     sending: "Invio…",
     send: "Invia",
-    error: "Qualcosa non ha funzionato. Scrivimi direttamente a martina.roscioli@gmail.com.",
   },
 };
 
@@ -85,7 +83,6 @@ export const Testimonials = () => {
   const copy = TESTIMONIALS_COPY[language];
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [active, setActive] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
@@ -141,37 +138,19 @@ export const Testimonials = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = () => {
     setLoading(true);
-    setError(null);
+  };
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    formData.append("_subject", "New private words from TrasforMarti website");
-    formData.append("_template", "table");
-    formData.append("_captcha", "false");
-
-    try {
-      const response = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error("Unable to send your words");
-
-      form.reset();
-      setSubmitted(true);
-    } catch {
-      setError(copy.error);
-    } finally {
-      setLoading(false);
-    }
+  const onFrameLoad = () => {
+    if (!loading) return;
+    setSubmitted(true);
+    setLoading(false);
   };
 
   return (
     <section id="from-you" className="bg-ivory pt-24 pb-10 px-6 md:pt-32 md:pb-14 md:px-10" aria-label={copy.aria}>
+      <iframe name="feedback-submit-frame" title="Feedback form submission" className="hidden" onLoad={onFrameLoad} />
       <div className="container-soft">
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">{copy.eyebrow}</p>
@@ -220,7 +199,13 @@ export const Testimonials = () => {
         </Reveal>
 
         <Reveal delay={180} className="mt-10 max-w-2xl">
-          <form onSubmit={onSubmit} className="border-t border-forest-deep/10 pt-8 space-y-4">
+          <form
+            onSubmit={onSubmit}
+            action={FORM_ENDPOINT}
+            method="POST"
+            target="feedback-submit-frame"
+            className="border-t border-forest-deep/10 pt-8 space-y-4"
+          >
             {submitted ? (
               <div className="flex items-start gap-3 text-foreground/70 animate-fade-in">
                 <Check size={18} strokeWidth={1.5} className="mt-1 text-forest shrink-0" />
@@ -228,6 +213,11 @@ export const Testimonials = () => {
               </div>
             ) : (
               <>
+                <input type="hidden" name="_subject" value="New private words from TrasforMarti website" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value="https://trasformarti.com/#from-you" />
+
                 <div>
                   <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
                   <p className="text-foreground/65 leading-relaxed">
@@ -258,13 +248,6 @@ export const Testimonials = () => {
                   className="from-you-input resize-none"
                   required
                 />
-
-                {error && (
-                  <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
-                    <AlertCircle size={16} strokeWidth={1.5} className="mt-0.5 shrink-0" />
-                    {error}
-                  </p>
-                )}
 
                 <button
                   type="submit"
