@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Check, AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
-const FORM_FALLBACK_ENDPOINT = "https://formsubmit.co/martina.roscioli@gmail.com";
+const FORM_ENDPOINT = "https://formsubmit.co/martina.roscioli@gmail.com";
 
 const TESTIMONIALS = [
   {
@@ -39,15 +38,13 @@ const TESTIMONIALS_COPY = {
     carouselAria: "Client testimonials carousel",
     positionAria: "Feedback position",
     showFeedback: "Show feedback",
-    thankYou: "Thank you. Your words have been received privately.",
     formTitle: "Share your words",
     formText: "It would be beautiful to receive a few words from you — a small trace of what we lived together, seen through your eyes.",
     name: "Name",
     email: "Email (optional)",
     words: "Your words",
-    sending: "Sending…",
     send: "Send",
-    error: "Opening a secure backup sending page. If it does not open, please send your words directly to martina.roscioli@gmail.com.",
+    fallbackNote: "After sending, you may briefly see a secure FormSubmit confirmation page before returning here.",
   },
   it: {
     aria: "Feedback dei clienti",
@@ -57,15 +54,13 @@ const TESTIMONIALS_COPY = {
     carouselAria: "Carosello delle testimonianze",
     positionAria: "Posizione feedback",
     showFeedback: "Mostra feedback",
-    thankYou: "Grazie. Le tue parole sono state ricevute in privato.",
     formTitle: "Lascia le tue parole",
     formText: "Sarebbe bello ricevere qualche parola da te: una piccola traccia di ciò che abbiamo vissuto insieme, visto attraverso i tuoi occhi.",
     name: "Nome",
     email: "Email (opzionale)",
     words: "Le tue parole",
-    sending: "Invio…",
     send: "Invia",
-    error: "Si sta aprendo una pagina sicura alternativa per l’invio. Se non si apre, scrivimi direttamente a martina.roscioli@gmail.com.",
+    fallbackNote: "Dopo l’invio potresti vedere per un momento una pagina sicura di conferma FormSubmit prima di tornare qui.",
   },
 };
 
@@ -84,11 +79,9 @@ export const Testimonials = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
   const copy = TESTIMONIALS_COPY[language];
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [active, setActive] = useState(0);
   const touchStartX = useRef<number | null>(null);
+  const nextUrl = language === "it" ? "https://trasformarti.com/it#from-you" : "https://trasformarti.com/#from-you";
 
   const goPrevious = () => {
     setActive((current) => (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
@@ -142,38 +135,6 @@ export const Testimonials = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const submitWithFallback = (form: HTMLFormElement) => {
-    form.action = FORM_FALLBACK_ENDPOINT;
-    form.method = "POST";
-    HTMLFormElement.prototype.submit.call(form);
-  };
-
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error("Unable to send your words");
-
-      form.reset();
-      setSubmitted(true);
-      setLoading(false);
-    } catch {
-      setError(copy.error);
-      submitWithFallback(form);
-    }
-  };
-
   return (
     <section id="from-you" className="bg-ivory pt-24 pb-10 px-6 md:pt-32 md:pb-14 md:px-10" aria-label={copy.aria}>
       <div className="container-soft">
@@ -225,70 +186,58 @@ export const Testimonials = () => {
 
         <Reveal delay={180} className="mt-10 max-w-2xl">
           <form
-            onSubmit={onSubmit}
-            action={FORM_FALLBACK_ENDPOINT}
+            action={FORM_ENDPOINT}
             method="POST"
             className="border-t border-forest-deep/10 pt-8 space-y-4"
           >
-            {submitted ? (
-              <div className="flex items-start gap-3 text-foreground/70 animate-fade-in">
-                <Check size={18} strokeWidth={1.5} className="mt-1 text-forest shrink-0" />
-                <p>{copy.thankYou}</p>
-              </div>
-            ) : (
-              <>
-                <input type="hidden" name="_subject" value="New private words from TrasforMarti website" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://trasformarti.com/#from-you" />
+            <input type="hidden" name="_subject" value="New private words from TrasforMarti website" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value={nextUrl} />
+            <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 
-                <div>
-                  <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
-                  <p className="text-foreground/65 leading-relaxed">
-                    {copy.formText}
-                  </p>
-                </div>
+            <div>
+              <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
+              <p className="text-foreground/65 leading-relaxed">
+                {copy.formText}
+              </p>
+            </div>
 
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder={copy.name}
-                    className="from-you-input"
-                    required
-                  />
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder={copy.email}
-                    className="from-you-input"
-                  />
-                </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              <input
+                name="name"
+                type="text"
+                placeholder={copy.name}
+                className="from-you-input"
+                required
+              />
+              <input
+                name="email"
+                type="email"
+                placeholder={copy.email}
+                className="from-you-input"
+              />
+            </div>
 
-                <textarea
-                  name="words"
-                  rows={4}
-                  placeholder={copy.words}
-                  className="from-you-input resize-none"
-                  required
-                />
+            <textarea
+              name="words"
+              rows={4}
+              placeholder={copy.words}
+              className="from-you-input resize-none"
+              required
+            />
 
-                {error && (
-                  <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
-                    <AlertCircle size={16} strokeWidth={1.5} className="mt-0.5 shrink-0" />
-                    {error}
-                  </p>
-                )}
+            <p className="flex items-start gap-2 text-xs text-foreground/50">
+              <AlertCircle size={14} strokeWidth={1.5} className="mt-0.5 shrink-0" />
+              {copy.fallbackNote}
+            </p>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="inline-flex items-center rounded-full bg-forest text-ivory px-6 py-3 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft disabled:opacity-60"
-                >
-                  {loading ? copy.sending : copy.send}
-                </button>
-              </>
-            )}
+            <button
+              type="submit"
+              className="inline-flex items-center rounded-full bg-forest text-ivory px-6 py-3 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft"
+            >
+              {copy.send}
+            </button>
           </form>
 
           <style>{`
