@@ -81,7 +81,7 @@ export const Testimonials = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
   const copy = TESTIMONIALS_COPY[language];
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(0);
   const touchStartX = useRef<number | null>(null);
@@ -142,15 +142,8 @@ export const Testimonials = () => {
     setLoading(true);
   };
 
-  const onFrameLoad = () => {
-    if (!loading) return;
-    setSubmitted(true);
-    setLoading(false);
-  };
-
   return (
     <section id="from-you" className="bg-ivory pt-24 pb-10 px-6 md:pt-32 md:pb-14 md:px-10" aria-label={copy.aria}>
-      <iframe name="feedback-submit-frame" title="Feedback form submission" className="hidden" onLoad={onFrameLoad} />
       <div className="container-soft">
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-5">{copy.eyebrow}</p>
@@ -203,7 +196,6 @@ export const Testimonials = () => {
             onSubmit={onSubmit}
             action={FORM_ENDPOINT}
             method="POST"
-            target="feedback-submit-frame"
             className="border-t border-forest-deep/10 pt-8 space-y-4"
           >
             {submitted ? (
@@ -215,7 +207,6 @@ export const Testimonials = () => {
               <>
                 <input type="hidden" name="_subject" value="New private words from TrasforMarti website" />
                 <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_next" value="https://trasformarti.com/#from-you" />
 
                 <div>
