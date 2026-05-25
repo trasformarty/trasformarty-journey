@@ -5,7 +5,6 @@ import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
-const FORM_FALLBACK_ENDPOINT = "https://formsubmit.co/martina.roscioli@gmail.com";
 
 const TESTIMONIALS = [
   {
@@ -47,7 +46,7 @@ const TESTIMONIALS_COPY = {
     words: "Your words",
     sending: "Sending…",
     send: "Send",
-    error: "Something went wrong while sending your words. Please try again, or write directly to martina.roscioli@gmail.com.",
+    error: "Something went wrong. Please send your words directly to martina.roscioli@gmail.com.",
   },
   it: {
     aria: "Feedback dei clienti",
@@ -65,7 +64,7 @@ const TESTIMONIALS_COPY = {
     words: "Le tue parole",
     sending: "Invio…",
     send: "Invia",
-    error: "Qualcosa non ha funzionato durante l’invio. Riprova, oppure scrivimi direttamente a martina.roscioli@gmail.com.",
+    error: "Qualcosa non ha funzionato. Scrivimi direttamente a martina.roscioli@gmail.com.",
   },
 };
 
@@ -142,12 +141,6 @@ export const Testimonials = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const submitWithFallback = (form: HTMLFormElement) => {
-    form.action = FORM_FALLBACK_ENDPOINT;
-    form.method = "POST";
-    HTMLFormElement.prototype.submit.call(form);
-  };
-
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -155,6 +148,9 @@ export const Testimonials = () => {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    formData.append("_subject", "New private words from TrasforMarti website");
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
 
     try {
       const response = await fetch(FORM_ENDPOINT, {
@@ -167,10 +163,10 @@ export const Testimonials = () => {
 
       form.reset();
       setSubmitted(true);
-      setLoading(false);
     } catch {
       setError(copy.error);
-      submitWithFallback(form);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -224,12 +220,7 @@ export const Testimonials = () => {
         </Reveal>
 
         <Reveal delay={180} className="mt-10 max-w-2xl">
-          <form
-            onSubmit={onSubmit}
-            action={FORM_FALLBACK_ENDPOINT}
-            method="POST"
-            className="border-t border-forest-deep/10 pt-8 space-y-4"
-          >
+          <form onSubmit={onSubmit} className="border-t border-forest-deep/10 pt-8 space-y-4">
             {submitted ? (
               <div className="flex items-start gap-3 text-foreground/70 animate-fade-in">
                 <Check size={18} strokeWidth={1.5} className="mt-1 text-forest shrink-0" />
@@ -237,11 +228,6 @@ export const Testimonials = () => {
               </div>
             ) : (
               <>
-                <input type="hidden" name="_subject" value="New private words from TrasforMarti website" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://trasformarti.com/#from-you" />
-
                 <div>
                   <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
                   <p className="text-foreground/65 leading-relaxed">
