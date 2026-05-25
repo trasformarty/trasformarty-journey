@@ -59,22 +59,15 @@ export const Contact = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
   const copy = CONTACT_COPY[language];
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onSubmit = () => {
     setLoading(true);
   };
 
-  const onFrameLoad = () => {
-    if (!loading) return;
-    setSubmitted(true);
-    setLoading(false);
-  };
-
   return (
     <section id="contact" className="bg-ivory pt-10 pb-24 px-6 md:pt-14 md:pb-32 md:px-10" aria-label={copy.aria}>
-      <iframe name="contact-submit-frame" title="Contact form submission" className="hidden" onLoad={onFrameLoad} />
       <div className="container-soft grid md:grid-cols-12 gap-12 md:gap-16">
         <Reveal className="md:col-span-5">
           <p className="eyebrow mb-5">{copy.eyebrow}</p>
@@ -126,7 +119,6 @@ export const Contact = () => {
             onSubmit={onSubmit}
             action={FORM_ENDPOINT}
             method="POST"
-            target="contact-submit-frame"
             className="leaf-card space-y-5"
             aria-label={copy.formAria}
           >
@@ -144,29 +136,14 @@ export const Contact = () => {
               <div key="form-fields" className="space-y-5">
                 <input type="hidden" name="_subject" value="New message from TrasforMarti website" />
                 <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_next" value="https://trasformarti.com/#contact" />
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <Field label={copy.labels.name} id="name" required>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      className="form-input"
-                    />
+                    <input id="name" name="name" type="text" required autoComplete="name" className="form-input" />
                   </Field>
                   <Field label={copy.labels.email} id="email" required>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      className="form-input"
-                    />
+                    <input id="email" name="email" type="email" required autoComplete="email" className="form-input" />
                   </Field>
                 </div>
 
@@ -174,36 +151,22 @@ export const Contact = () => {
                   <Field label={copy.labels.interest} id="interest">
                     <select id="interest" name="interest" className="form-input" defaultValue="">
                       <option value="" disabled>{copy.select}</option>
-                      {copy.interests.map((interest) => (
-                        <option key={interest}>{interest}</option>
-                      ))}
+                      {copy.interests.map((interest) => <option key={interest}>{interest}</option>)}
                     </select>
                   </Field>
                   <Field label={copy.labels.format} id="format">
                     <select id="format" name="format" className="form-input" defaultValue="">
                       <option value="" disabled>{copy.select}</option>
-                      {copy.formats.map((format) => (
-                        <option key={format}>{format}</option>
-                      ))}
+                      {copy.formats.map((format) => <option key={format}>{format}</option>)}
                     </select>
                   </Field>
                 </div>
 
                 <Field label={copy.labels.message} id="message">
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    className="form-input resize-none"
-                    placeholder={copy.placeholder}
-                  />
+                  <textarea id="message" name="message" rows={5} className="form-input resize-none" placeholder={copy.placeholder} />
                 </Field>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-forest text-ivory px-8 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft disabled:opacity-60"
-                >
+                <button type="submit" disabled={loading} className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-forest text-ivory px-8 py-3.5 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft disabled:opacity-60">
                   {loading ? copy.sending : copy.send}
                 </button>
               </div>
