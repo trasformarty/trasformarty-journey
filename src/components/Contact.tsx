@@ -29,7 +29,7 @@ const CONTACT_COPY = {
     placeholder: "Share what feels alive for you right now…",
     sending: "Sending…",
     send: "Send Message",
-    error: "Something went wrong while sending your message. Please try again, or write directly to martina.roscioli@gmail.com.",
+    error: "Something went wrong while sending your message. Please write directly to martina.roscioli@gmail.com.",
   },
   it: {
     aria: "Contatti e prenotazioni",
@@ -53,7 +53,7 @@ const CONTACT_COPY = {
     placeholder: "Raccontami cosa senti vivo in questo momento…",
     sending: "Invio…",
     send: "Invia messaggio",
-    error: "Qualcosa non ha funzionato durante l’invio. Riprova, oppure scrivimi direttamente a martina.roscioli@gmail.com.",
+    error: "Qualcosa non ha funzionato durante l’invio. Scrivimi direttamente a martina.roscioli@gmail.com.",
   },
 };
 
@@ -72,21 +72,18 @@ export const Contact = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
+
+    formData.append("_subject", "New message from TrasforMarti website");
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
 
     try {
       const response = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          ...payload,
-          _subject: "New message from TrasforMarti website",
-          _template: "table",
-          _captcha: "false",
-        }),
+        body: formData,
       });
 
       if (!response.ok) {
