@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Check, AlertCircle } from "lucide-react";
 import { getLanguageFromPath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
-const CONTACT_EMAIL = ["martina.roscioli", "gmail.com"].join("@");
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
 
 const TESTIMONIALS = [
   {
@@ -37,14 +38,15 @@ const TESTIMONIALS_COPY = {
     carouselAria: "Client testimonials carousel",
     positionAria: "Feedback position",
     showFeedback: "Show feedback",
+    thankYou: "Thank you. Your words have been received privately.",
     formTitle: "Share your words",
     formText: "It would be beautiful to receive a few words from you — a small trace of what we lived together, seen through your eyes.",
     name: "Name",
     email: "Email (optional)",
     words: "Your words",
+    sending: "Sending…",
     send: "Send",
-    note: "Your email app will open with these words ready to send.",
-    subject: "New private words from TrasforMarti website",
+    error: "Something went wrong while sending your words. Please try again, or write directly to martina.roscioli@gmail.com.",
   },
   it: {
     aria: "Feedback dei clienti",
@@ -54,14 +56,15 @@ const TESTIMONIALS_COPY = {
     carouselAria: "Carosello delle testimonianze",
     positionAria: "Posizione feedback",
     showFeedback: "Mostra feedback",
+    thankYou: "Grazie. Le tue parole sono state ricevute in privato.",
     formTitle: "Lascia le tue parole",
     formText: "Sarebbe bello ricevere qualche parola da te: una piccola traccia di ciò che abbiamo vissuto insieme, visto attraverso i tuoi occhi.",
     name: "Nome",
     email: "Email (opzionale)",
     words: "Le tue parole",
+    sending: "Invio…",
     send: "Invia",
-    note: "Si aprirà la tua app email con queste parole già pronte da inviare.",
-    subject: "New private words from TrasforMarti website",
+    error: "Qualcosa non ha funzionato durante l’invio. Riprova, oppure scrivimi direttamente a martina.roscioli@gmail.com.",
   },
 };
 
@@ -80,6 +83,9 @@ export const Testimonials = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
   const copy = TESTIMONIALS_COPY[language];
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [active, setActive] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
@@ -101,34 +107,72 @@ export const Testimonials = () => {
 
   const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
     if (touchStartX.current === null) return;
+
     const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX.current;
     const distance = touchEndX - touchStartX.current;
     touchStartX.current = null;
+
     if (Math.abs(distance) < 40) return;
-    if (distance > 0) goPrevious();
-    else goNext();
+
+    if (distance > 0) {
+      goPrevious();
+    } else {
+      goNext();
+    }
   };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       const isWritingField = target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.tagName === "SELECT";
+
       if (isWritingField) return;
-      if (event.key === "ArrowLeft") goPrevious();
-      if (event.key === "ArrowRight") goNext();
+
+      if (event.key === "ArrowLeft") {
+        goPrevious();
+      }
+
+      if (event.key === "ArrowRight") {
+        goNext();
+      }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") || "").trim();
-    const email = String(formData.get("email") || "").trim();
-    const words = String(formData.get("words") || "").trim();
-    const body = [`Name: ${name}`, `Email: ${email || "-"}`, "", "Words:", words].join("\n");
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(copy.subject)}&body=${encodeURIComponent(body)}`;
+    setLoading(true);
+    setError(null);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    formData.append("_subject", "New private words from TrasforMarti website");
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send your words");
+      }
+
+      form.reset();
+      setSubmitted(true);
+    } catch {
+      setError(copy.error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -145,10 +189,17 @@ export const Testimonials = () => {
         </Reveal>
 
         <Reveal delay={120} className="mt-12">
-          <div className="relative touch-pan-y" aria-label={copy.carouselAria} tabIndex={0} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+          <div
+            className="relative touch-pan-y"
+            aria-label={copy.carouselAria}
+            tabIndex={0}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             <div className="sm:hidden px-6 text-center min-h-[310px] flex items-center justify-center">
               <TestimonialQuote {...TESTIMONIALS[active]} />
             </div>
+
             <div className="hidden sm:grid sm:grid-cols-3 gap-8">
               {visibleDesktopTestimonials.map((item, index) => (
                 <div key={`${item.name}-${index}`}>
@@ -156,13 +207,16 @@ export const Testimonials = () => {
                 </div>
               ))}
             </div>
+
             <div className="mt-8 flex items-center justify-center gap-2" aria-label={copy.positionAria}>
               {TESTIMONIALS.map((item, index) => (
                 <button
                   key={item.name}
                   type="button"
                   onClick={() => setActive(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${index === active ? "w-6 bg-forest" : "w-2 bg-forest/25"}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === active ? "w-6 bg-forest" : "w-2 bg-forest/25"
+                  }`}
                   aria-label={`${copy.showFeedback} ${index + 1}`}
                 />
               ))}
@@ -172,20 +226,62 @@ export const Testimonials = () => {
 
         <Reveal delay={180} className="mt-10 max-w-2xl">
           <form onSubmit={onSubmit} className="border-t border-forest-deep/10 pt-8 space-y-4">
-            <div>
-              <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
-              <p className="text-foreground/65 leading-relaxed">{copy.formText}</p>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-3">
-              <input name="name" type="text" placeholder={copy.name} className="from-you-input" required />
-              <input name="email" type="email" placeholder={copy.email} className="from-you-input" />
-            </div>
-            <textarea name="words" rows={4} placeholder={copy.words} className="from-you-input resize-none" required />
-            <p className="text-xs text-foreground/55 leading-relaxed">{copy.note}</p>
-            <button type="submit" className="inline-flex items-center rounded-full bg-forest text-ivory px-6 py-3 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft">
-              {copy.send}
-            </button>
+            {submitted ? (
+              <div className="flex items-start gap-3 text-foreground/70 animate-fade-in">
+                <Check size={18} strokeWidth={1.5} className="mt-1 text-forest shrink-0" />
+                <p>{copy.thankYou}</p>
+              </div>
+            ) : (
+              <>
+                <div>
+                  <p className="font-serif text-2xl text-forest-deep mb-3">{copy.formTitle}</p>
+                  <p className="text-foreground/65 leading-relaxed">
+                    {copy.formText}
+                  </p>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder={copy.name}
+                    className="from-you-input"
+                    required
+                  />
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder={copy.email}
+                    className="from-you-input"
+                  />
+                </div>
+
+                <textarea
+                  name="words"
+                  rows={4}
+                  placeholder={copy.words}
+                  className="from-you-input resize-none"
+                  required
+                />
+
+                {error && (
+                  <p className="flex items-start gap-2 text-sm text-destructive" role="alert">
+                    <AlertCircle size={16} strokeWidth={1.5} className="mt-0.5 shrink-0" />
+                    {error}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="inline-flex items-center rounded-full bg-forest text-ivory px-6 py-3 text-sm hover:bg-forest-deep transition-colors duration-500 shadow-soft disabled:opacity-60"
+                >
+                  {loading ? copy.sending : copy.send}
+                </button>
+              </>
+            )}
           </form>
+
           <style>{`
             .from-you-input {
               width: 100%;
