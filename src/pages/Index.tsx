@@ -45,6 +45,14 @@ const getSectionFromLocation = (pathname: string, hash: string) => {
   return SECTION_ALIASES[pathSection] ?? "home";
 };
 
+const getSectionUrl = (sectionId: "from-you" | "free-call", language: "en" | "it") => {
+  if (sectionId === "from-you") {
+    return `${localizePath("/", language)}#from-you`;
+  }
+
+  return localizePath("/free-call", language);
+};
+
 const Index = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
@@ -72,22 +80,38 @@ const Index = () => {
   }, [location.pathname, location.hash]);
 
   useEffect(() => {
-    const freeCallSection = document.getElementById("free-call");
-    if (!freeCallSection) return;
+    const trackedSections = ["from-you", "free-call"] as const;
+    const ratios = new Map<(typeof trackedSections)[number], number>();
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
+      (entries) => {
+        entries.forEach((entry) => {
+          ratios.set(entry.target.id as (typeof trackedSections)[number], entry.intersectionRatio);
+        });
 
-        const freeCallUrl = localizePath("/free-call", language);
-        if (window.location.pathname !== freeCallUrl) {
-          window.history.replaceState(null, "", freeCallUrl);
+        const bestSection = trackedSections.reduce((best, sectionId) => {
+          const currentRatio = ratios.get(sectionId) ?? 0;
+          const bestRatio = ratios.get(best) ?? 0;
+          return currentRatio > bestRatio ? sectionId : best;
+        }, trackedSections[0]);
+
+        const bestRatio = ratios.get(bestSection) ?? 0;
+        if (bestRatio < 0.45) return;
+
+        const nextUrl = getSectionUrl(bestSection, language);
+        const currentUrl = `${window.location.pathname}${window.location.hash}`;
+
+        if (currentUrl !== nextUrl) {
+          window.history.replaceState(null, "", nextUrl);
         }
       },
-      { threshold: 0.55 }
+      { threshold: [0, 0.25, 0.45, 0.6, 0.75, 1] }
     );
 
-    observer.observe(freeCallSection);
+    trackedSections.forEach((sectionId) => {
+      const section = document.getElementById(sectionId);
+      if (section) observer.observe(section);
+    });
 
     return () => observer.disconnect();
   }, [language]);
