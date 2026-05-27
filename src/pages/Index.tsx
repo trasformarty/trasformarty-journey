@@ -46,11 +46,7 @@ const getSectionFromLocation = (pathname: string, hash: string) => {
 };
 
 const getSectionUrl = (sectionId: "from-you" | "free-call", language: "en" | "it") => {
-  if (sectionId === "from-you") {
-    return `${localizePath("/", language)}#from-you`;
-  }
-
-  return localizePath("/free-call", language);
+  return `${localizePath("/", language)}#${sectionId}`;
 };
 
 const Index = () => {
