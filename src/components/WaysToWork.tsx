@@ -3,6 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import { getLanguageFromPath, localizePath } from "@/lib/language";
 import { Reveal } from "./Reveal";
 
+const WORK_IMAGE_VERSION = "20260527";
+const workImage = (file: string) => `/work-with-me/${file}.jpg?v=${WORK_IMAGE_VERSION}`;
+
 const WORK_COPY = {
   en: {
     aria: "Ways to work with me",
@@ -18,7 +21,7 @@ const WORK_COPY = {
       title: "A Touch to Soul",
       desc: "Signature massage and bodywork through touch, presence and deep listening.",
       href: "#touch-to-soul",
-      image: "/work-with-me/touch-to-soul.jpg",
+      image: workImage("touch-to-soul"),
     },
     offerings: [
       {
@@ -26,25 +29,25 @@ const WORK_COPY = {
         desc: "Somatic and emotional accompaniment to meet what is moving inside you. Available online and in person.",
         href: "/moving-through",
         route: true,
-        image: "/work-with-me/moving-through.jpg",
+        image: workImage("moving-through"),
       },
       {
         title: "Workshops",
         desc: "Group experiences around touch, body awareness and conscious relationship.",
         href: "#workshops",
-        image: "/work-with-me/workshops.jpg",
+        image: workImage("workshops"),
       },
       {
         title: "Retreats",
         desc: "Immersive spaces to slow down, feel, move and reconnect with nature.",
         href: "#retreats",
-        image: "/work-with-me/retreats.jpg",
+        image: workImage("retreats"),
       },
       {
         title: "Courses & Collaborations",
         desc: "Trainings and collaborations where touch becomes a living language of care.",
         href: "#courses",
-        image: "/work-with-me/courses.jpg",
+        image: workImage("courses"),
       },
     ],
   },
@@ -62,7 +65,7 @@ const WORK_COPY = {
       title: "A Touch to Soul",
       desc: "Massaggio e bodywork attraverso il tocco, la presenza e l’ascolto profondo.",
       href: "#touch-to-soul",
-      image: "/work-with-me/touch-to-soul.jpg",
+      image: workImage("touch-to-soul"),
     },
     offerings: [
       {
@@ -70,25 +73,25 @@ const WORK_COPY = {
         desc: "Accompagnamento somatico ed emozionale per incontrare ciò che si muove dentro di te. Disponibile online e in presenza.",
         href: "/moving-through",
         route: true,
-        image: "/work-with-me/moving-through.jpg",
+        image: workImage("moving-through"),
       },
       {
         title: "Workshop",
         desc: "Esperienze di gruppo intorno al tocco, alla consapevolezza del corpo e alla relazione consapevole.",
         href: "#workshops",
-        image: "/work-with-me/workshops.jpg",
+        image: workImage("workshops"),
       },
       {
         title: "Ritiri",
         desc: "Spazi immersivi per rallentare, sentire, muoversi e riconnettersi alla natura.",
         href: "#retreats",
-        image: "/work-with-me/retreats.jpg",
+        image: workImage("retreats"),
       },
       {
         title: "Corsi e collaborazioni",
         desc: "Percorsi e collaborazioni dove il tocco diventa un linguaggio vivo di cura.",
         href: "#courses",
-        image: "/work-with-me/courses.jpg",
+        image: workImage("courses"),
       },
     ],
   },
