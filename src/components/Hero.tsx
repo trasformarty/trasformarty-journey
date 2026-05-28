@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { getLanguageFromPath } from "@/lib/language";
@@ -27,32 +26,6 @@ export const Hero = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
   const copy = HERO_COPY[language];
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-
-    const playVideo = () => {
-      const playPromise = video.play();
-      if (playPromise) {
-        playPromise.catch(() => {
-          // Mobile browsers may still block autoplay in low-power/data-saver modes.
-        });
-      }
-    };
-
-    playVideo();
-    window.addEventListener("touchstart", playVideo, { once: true, passive: true });
-
-    return () => {
-      window.removeEventListener("touchstart", playVideo);
-    };
-  }, []);
 
   return (
     <section
@@ -63,17 +36,13 @@ export const Hero = () => {
       {/* Video background */}
       <div className="absolute inset-0 z-0 bg-gradient-forest" aria-hidden="true">
         <video
-          ref={videoRef}
-          className="w-full h-full object-cover opacity-90"
+          className="w-full h-full object-cover opacity-90 pointer-events-none"
           autoPlay
           muted
-          defaultMuted
           loop
           playsInline
-          preload="auto"
-          aria-hidden="true"
         >
-          <source src="/forest-hero.mp4?v=20260528" type="video/mp4" />
+          <source src="/forest-hero.mp4" type="video/mp4" />
         </video>
         {/* Decorative ambient overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,hsl(var(--sage)/0.25),transparent_60%),radial-gradient(ellipse_at_80%_80%,hsl(var(--gold)/0.15),transparent_55%)]" />
