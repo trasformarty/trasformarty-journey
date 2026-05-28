@@ -42,7 +42,7 @@ export const Hero = () => {
           loop
           playsInline
         >
-          <source src="/forest-hero.mp4" type="video/mp4" />
+          <source src="/forest-hero.mp4?v=original-autoplay" type="video/mp4" />
         </video>
         {/* Decorative ambient overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,hsl(var(--sage)/0.25),transparent_60%),radial-gradient(ellipse_at_80%_80%,hsl(var(--gold)/0.15),transparent_55%)]" />
