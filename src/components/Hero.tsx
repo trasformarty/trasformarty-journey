@@ -34,15 +34,17 @@ export const Hero = () => {
       aria-label={copy.aria}
     >
       {/* Video background */}
-      <div className="absolute inset-0 z-0 bg-gradient-forest" aria-hidden="true">
+      <div className="absolute inset-0 z-0 bg-gradient-forest pointer-events-none" aria-hidden="true">
         <video
-          className="w-full h-full object-cover opacity-90"
+          className="absolute inset-0 h-full w-full object-cover opacity-90 pointer-events-none"
           autoPlay
           muted
           defaultMuted
           loop
           playsInline
           preload="auto"
+          aria-hidden="true"
+          tabIndex={-1}
         >
           <source src="/forest-hero.mp4" type="video/mp4" />
         </video>
@@ -51,7 +53,7 @@ export const Hero = () => {
       </div>
 
       {/* Soft veil overlay for legibility */}
-      <div className="absolute inset-0 z-10 bg-gradient-veil" aria-hidden="true" />
+      <div className="absolute inset-0 z-10 bg-gradient-veil pointer-events-none" aria-hidden="true" />
 
       <div className="relative z-20 max-w-4xl mx-auto px-6 text-center animate-fade-in-slow">
         <p className="eyebrow text-ivory/70 mb-8">{copy.eyebrow}</p>
