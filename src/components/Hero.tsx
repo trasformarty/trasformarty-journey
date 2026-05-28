@@ -36,7 +36,7 @@ export const Hero = () => {
       {/* Video background */}
       <div className="absolute inset-0 z-0 bg-gradient-forest" aria-hidden="true">
         <video
-          className="w-full h-full object-cover opacity-90 pointer-events-none"
+          className="w-full h-full object-cover opacity-90"
           autoPlay
           muted
           loop
