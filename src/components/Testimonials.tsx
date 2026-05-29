@@ -27,6 +27,11 @@ const TESTIMONIALS = [
       "I’ve known and worked with Martina for many years, and she brings such amazing energy to everything she does. Now that I have the pleasure of having her in my salon in Turin, the atmosphere, the flow of the salon, and the incredible feedback from my clients make me so happy and proud of her work and passion. I always highly recommend this incredible talent.",
     name: "Nico — Toei House Salon, Torino",
   },
+  {
+    quote:
+      "I still remember the incredible somatic massage I had with Martina. It was such a deep and beautiful experience, with a profound release of emotional tension from my body.",
+    name: "Delphine",
+  },
 ];
 
 const TESTIMONIALS_COPY = {
