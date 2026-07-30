@@ -4,26 +4,34 @@ import { Reveal } from "./Reveal";
 
 const RETREATS_COPY = {
   en: {
-    aria: "Retreats",
-    eyebrow: "Offering — Immersive",
-    badge: "In Creation",
-    title: "Retreats",
+    aria: "TU retreat",
+    eyebrow: "Retreat — Italy",
+    badge: "May 2027",
+    title: "TU",
+    subtitle: "Where the Body Remembers.",
     paragraphs: [
-      "Immersive spaces to slow down, reconnect with the body, move through emotions and experience transformation over several days.",
-      "Future retreats will include both one-to-one and group formats, created as containers for rest, movement, emotional presence, touch-informed practices and deep reconnection with nature.",
+      "TU was born from the desire to create a space where people can truly meet.",
+      "A place to slow down, breathe, and rediscover something to carry back into everyday life.",
+      "I believe that, sometimes, people forget they are \"beautiful.\" I hope TU can become a place where we remember.",
+      "A journey through the body, nature, movement, touch, and authentic connection.",
+      "An experience to live. And to carry home.",
     ],
-    cta: "Stay Updated",
+    cta: "Discover More",
   },
   it: {
-    aria: "Ritiri",
-    eyebrow: "Offerta — Immersiva",
-    badge: "In creazione",
-    title: "Ritiri",
+    aria: "Retreat TU",
+    eyebrow: "Retreat — Italia",
+    badge: "Maggio 2027",
+    title: "TU",
+    subtitle: "Dove il corpo ricorda.",
     paragraphs: [
-      "Spazi immersivi per rallentare, ritornare al corpo, attraversare ciò che si muove dentro e vivere un processo di trasformazione in più giorni.",
-      "I prossimi ritiri potranno includere sia momenti one-to-one sia esperienze di gruppo, come contenitori di riposo, movimento, presenza emotiva, pratiche ispirate al tocco e riconnessione profonda con la natura.",
+      "TU nasce dal desiderio di creare uno spazio in cui le persone possano incontrarsi davvero.",
+      "Un luogo in cui rallentare, respirare e riscoprire qualcosa da portare con sé nella vita di tutti i giorni.",
+      "Credo che, a volte, le persone dimentichino di essere \"belle.\" Spero che TU possa diventare un luogo in cui ricordarlo.",
+      "Un viaggio attraverso il corpo, la natura, il movimento, il tocco e una connessione autentica.",
+      "Un'esperienza da vivere. E da portare a casa.",
     ],
-    cta: "Rimani aggiornata/o",
+    cta: "Scopri di più",
   },
 };
 
@@ -46,10 +54,13 @@ export const Retreats = () => {
               {copy.badge}
             </span>
           </div>
-          <h2 className="font-serif text-4xl md:text-6xl text-ivory leading-[1.05] mb-8 text-balance">
+          <h2 className="font-serif text-4xl md:text-6xl text-ivory leading-[1.05] mb-3 text-balance">
             {copy.title}
           </h2>
-          <div className="space-y-5 text-lg text-ivory/80 leading-relaxed text-pretty">
+          <p className="font-serif italic text-2xl md:text-3xl text-gold-soft mb-8">
+            {copy.subtitle}
+          </p>
+          <div className="space-y-4 text-base md:text-lg text-ivory/80 leading-relaxed text-pretty">
             {copy.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
