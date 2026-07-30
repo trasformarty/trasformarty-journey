@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Events from "./pages/Events.tsx";
 import MovingThrough from "./pages/MovingThrough.tsx";
+import RetreatsPage from "./pages/RetreatsPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -20,7 +21,6 @@ const SECTION_ROUTES = [
   "touch-to-soul",
   "sessions",
   "workshops",
-  "retreats",
   "courses",
   "from-you",
   "your-words",
@@ -42,6 +42,8 @@ const App = () => (
           <Route path="/it/events" element={<Events />} />
           <Route path="/moving-through" element={<MovingThrough />} />
           <Route path="/it/moving-through" element={<MovingThrough />} />
+          <Route path="/retreats" element={<RetreatsPage />} />
+          <Route path="/it/retreats" element={<RetreatsPage />} />
           {SECTION_ROUTES.map((route) => (
             <Route key={route} path={`/${route}`} element={<Index />} />
           ))}
