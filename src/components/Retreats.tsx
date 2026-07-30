@@ -17,6 +17,7 @@ const RETREATS_COPY = {
       "An experience to live. And to carry home.",
     ],
     cta: "Discover More",
+    href: "/retreats",
   },
   it: {
     aria: "Retreat TU",
@@ -32,6 +33,7 @@ const RETREATS_COPY = {
       "Un'esperienza da vivere. E da portare a casa.",
     ],
     cta: "Scopri di più",
+    href: "/it/retreats",
   },
 };
 
@@ -66,7 +68,7 @@ export const Retreats = () => {
             ))}
           </div>
           <a
-            href="#contact"
+            href={copy.href}
             className="mt-10 inline-flex items-center rounded-full bg-ivory text-forest-deep px-7 py-3.5 text-sm hover:bg-gold-soft transition-colors duration-500"
           >
             {copy.cta}
