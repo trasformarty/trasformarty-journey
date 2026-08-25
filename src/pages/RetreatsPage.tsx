@@ -38,6 +38,73 @@ const COPY = {
       "Because I believe every authentic encounter leaves something in both people.",
       "Imagine feeling the fire within you again. Stomping your feet on the earth. Dancing. Breathing. Feeling alive. Connected.",
     ],
+    exploreTitle: "What We Will Explore Together",
+    exploreIntro: "We will move through different experiences and try to listen to what moves inside us.",
+    explore: [
+      {
+        title: "Touch. A safe space.",
+        paragraphs: [
+          "Touch as support, containment, presence. Contact with another person, but also with ourselves. What happens when we receive? And what happens when we are the ones accompanying someone else, with care?",
+        ],
+      },
+      {
+        title: "Water.",
+        paragraphs: [
+          "Allowing ourselves to be held and gently rocked. Letting go of the weight, even if only for a moment, and allowing someone else to accompany us. And then becoming the one who holds, who supports, who creates a sense of safety for another body.",
+        ],
+      },
+      {
+        title: "Voice.",
+        paragraphs: [
+          "We will make space for that scream, for that broken sound that sometimes remains there and does not know how to come out. Without needing to explain it. Simply allowing it to find a way through.",
+        ],
+      },
+      {
+        title: "Earth.",
+        paragraphs: [
+          "We will touch the earth, the grass, the trees. We will walk barefoot. We will stop and feel our roots, the weight of the body, the sensation of being here. Now. Present.",
+        ],
+      },
+      {
+        title: "Fire.",
+        paragraphs: [
+          "The fire that moves and transforms. The one outside and the one within us. The one that can be anger, desire, strength, energy. The fire that needs to be expressed or released. The fire that, perhaps, needs to come alive again.",
+        ],
+      },
+      {
+        title: "Movement.",
+        paragraphs: [
+          "Through movement on the outside, we will listen to what is moving inside, without immediately trying to understand it. We will let the body speak, find its own rhythm, its own gesture. We will allow ourselves to be moved through.",
+        ],
+      },
+      {
+        title: "Silence.",
+        paragraphs: [
+          "We will listen to what remains when we do not need to fill the space. We will bring presence into simple things: eating, breathing, picking a flower, walking, cooking, sitting beside someone.",
+          "This is where we will also rediscover that sensitivity that, sometimes, we forget.",
+        ],
+      },
+      {
+        title: "The group.",
+        paragraphs: [
+          "All of this will happen together, with depth but also with lightness. There will be circles, eye contact, hearts, laughter and silence.",
+          "What happens when we allow ourselves to truly be seen in front of others? And what happens when we are the ones who remain present in front of someone who opens up?",
+          "The group as a space to give and to receive. To support and to allow ourselves to be supported. To discover how much of the other, sometimes, also lives within us.",
+        ],
+      },
+      {
+        title: "And then, bringing it home.",
+        paragraphs: [
+          "Presence. Relationship. Touch. Movement. Everything the body will have encountered and recognized.",
+          "How can we bring it into everyday life?",
+          "What are those beautiful resources that are already within reach and that, perhaps, we have simply forgotten how to recognize?",
+          "How can we remember to stop, breathe, feel, ask for support and offer it?",
+          "And how can we remember, once we are back home, what the body encountered here?",
+          "Because TU does not end here.",
+          "Something comes home with us.",
+        ],
+      },
+    ],
     closing: [
       "And I believe that, sometimes, people forget they are \"beautiful.\"",
       "I would love for TU to become a place where we remember.",
@@ -165,6 +232,27 @@ const RetreatsPage = () => {
             </Reveal>
           </div>
         </section>
+
+        {language === "en" && (
+          <section className="py-24 md:py-36 bg-ivory">
+            <div className="container-soft">
+              <Reveal className="max-w-3xl mx-auto">
+                <h2 className="font-serif text-4xl md:text-6xl leading-tight mb-6">{copy.exploreTitle}</h2>
+                <p className="text-lg md:text-xl leading-relaxed text-forest/75 mb-14">{copy.exploreIntro}</p>
+                <div className="space-y-12">
+                  {copy.explore.map((item) => (
+                    <div key={item.title}>
+                      <h3 className="font-serif text-2xl md:text-3xl mb-4">{item.title}</h3>
+                      <div className="space-y-4 text-lg md:text-xl leading-relaxed text-forest/80">
+                        {item.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+          </section>
+        )}
 
         <section className="py-24 md:py-36">
           <div className="container-soft">
