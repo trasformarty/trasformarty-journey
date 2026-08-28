@@ -41,69 +41,15 @@ const COPY = {
     exploreTitle: "What We Will Explore Together",
     exploreIntro: "We will move through different experiences and try to listen to what moves inside us.",
     explore: [
-      {
-        title: "Touch. A safe space.",
-        paragraphs: [
-          "Touch as support, containment, presence. Contact with another person, but also with ourselves. What happens when we receive? And what happens when we are the ones accompanying someone else, with care?",
-        ],
-      },
-      {
-        title: "Water.",
-        paragraphs: [
-          "Allowing ourselves to be held and gently rocked. Letting go of the weight, even if only for a moment, and allowing someone else to accompany us. And then becoming the one who holds, who supports, who creates a sense of safety for another body.",
-        ],
-      },
-      {
-        title: "Voice.",
-        paragraphs: [
-          "We will make space for that scream, for that broken sound that sometimes remains there and does not know how to come out. Without needing to explain it. Simply allowing it to find a way through.",
-        ],
-      },
-      {
-        title: "Earth.",
-        paragraphs: [
-          "We will touch the earth, the grass, the trees. We will walk barefoot. We will stop and feel our roots, the weight of the body, the sensation of being here. Now. Present.",
-        ],
-      },
-      {
-        title: "Fire.",
-        paragraphs: [
-          "The fire that moves and transforms. The one outside and the one within us. The one that can be anger, desire, strength, energy. The fire that needs to be expressed or released. The fire that, perhaps, needs to come alive again.",
-        ],
-      },
-      {
-        title: "Movement.",
-        paragraphs: [
-          "Through movement on the outside, we will listen to what is moving inside, without immediately trying to understand it. We will let the body speak, find its own rhythm, its own gesture. We will allow ourselves to be moved through.",
-        ],
-      },
-      {
-        title: "Silence.",
-        paragraphs: [
-          "We will listen to what remains when we do not need to fill the space. We will bring presence into simple things: eating, breathing, picking a flower, walking, cooking, sitting beside someone.",
-          "This is where we will also rediscover that sensitivity that, sometimes, we forget.",
-        ],
-      },
-      {
-        title: "The group.",
-        paragraphs: [
-          "All of this will happen together, with depth but also with lightness. There will be circles, eye contact, hearts, laughter and silence.",
-          "What happens when we allow ourselves to truly be seen in front of others? And what happens when we are the ones who remain present in front of someone who opens up?",
-          "The group as a space to give and to receive. To support and to allow ourselves to be supported. To discover how much of the other, sometimes, also lives within us.",
-        ],
-      },
-      {
-        title: "And then, bringing it home.",
-        paragraphs: [
-          "Presence. Relationship. Touch. Movement. Everything the body will have encountered and recognized.",
-          "How can we bring it into everyday life?",
-          "What are those beautiful resources that are already within reach and that, perhaps, we have simply forgotten how to recognize?",
-          "How can we remember to stop, breathe, feel, ask for support and offer it?",
-          "And how can we remember, once we are back home, what the body encountered here?",
-          "Because TU does not end here.",
-          "Something comes home with us.",
-        ],
-      },
+      { title: "Touch. A safe space.", paragraphs: ["Touch as support, containment, presence. Contact with another person, but also with ourselves. What happens when we receive? And what happens when we are the ones accompanying someone else, with care?"] },
+      { title: "Water.", paragraphs: ["Allowing ourselves to be held and gently rocked. Letting go of the weight, even if only for a moment, and allowing someone else to accompany us. And then becoming the one who holds, who supports, who creates a sense of safety for another body."] },
+      { title: "Voice.", paragraphs: ["We will make space for that scream, for that broken sound that sometimes remains there and does not know how to come out. Without needing to explain it. Simply allowing it to find a way through."] },
+      { title: "Earth.", paragraphs: ["We will touch the earth, the grass, the trees. We will walk barefoot. We will stop and feel our roots, the weight of the body, the sensation of being here. Now. Present."] },
+      { title: "Fire.", paragraphs: ["The fire that moves and transforms. The one outside and the one within us. The one that can be anger, desire, strength, energy. The fire that needs to be expressed or released. The fire that, perhaps, needs to come alive again."] },
+      { title: "Movement.", paragraphs: ["Through movement on the outside, we will listen to what is moving inside, without immediately trying to understand it. We will let the body speak, find its own rhythm, its own gesture. We will allow ourselves to be moved through."] },
+      { title: "Silence.", paragraphs: ["We will listen to what remains when we do not need to fill the space. We will bring presence into simple things: eating, breathing, picking a flower, walking, cooking, sitting beside someone.", "This is where we will also rediscover that sensitivity that, sometimes, we forget."] },
+      { title: "The group.", paragraphs: ["All of this will happen together, with depth but also with lightness. There will be circles, eye contact, hearts, laughter and silence.", "What happens when we allow ourselves to truly be seen in front of others? And what happens when we are the ones who remain present in front of someone who opens up?", "The group as a space to give and to receive. To support and to allow ourselves to be supported. To discover how much of the other, sometimes, also lives within us."] },
+      { title: "And then, bringing it home.", paragraphs: ["Presence. Relationship. Touch. Movement. Everything the body will have encountered and recognized.", "How can we bring it into everyday life?", "What are those beautiful resources that are already within reach and that, perhaps, we have simply forgotten how to recognize?", "How can we remember to stop, breathe, feel, ask for support and offer it?", "And how can we remember, once we are back home, what the body encountered here?", "Because TU does not end here.", "Something comes home with us."] },
     ],
     closing: [
       "And I believe that, sometimes, people forget they are \"beautiful.\"",
@@ -119,6 +65,7 @@ const COPY = {
       "I look forward to welcoming you.",
     ],
     image: "Image coming soon",
+    video: "Video coming soon",
     signature: "Martina",
   },
   it: {
@@ -168,18 +115,19 @@ const COPY = {
       "Ti aspetto.",
     ],
     image: "Immagine in arrivo",
+    video: "Video in arrivo",
     signature: "Martina",
   },
 };
 
-const ImageSpace = ({ label, tall = false }: { label: string; tall?: boolean }) => (
-  <div
-    className={`relative overflow-hidden rounded-[2rem] border border-forest/10 bg-gradient-to-br from-sage/20 via-ivory to-gold-soft/20 ${
-      tall ? "min-h-[440px]" : "min-h-[320px] md:min-h-[520px]"
-    }`}
-  >
+const MediaSpace = ({ label, aspect = "landscape", video = false }: { label: string; aspect?: "landscape" | "portrait"; video?: boolean }) => (
+  <div className={`group relative overflow-hidden rounded-[2rem] border border-forest/10 bg-gradient-to-br from-sage/25 via-ivory to-gold-soft/20 shadow-[0_20px_60px_rgba(34,54,42,0.08)] ${aspect === "portrait" ? "min-h-[360px] md:min-h-[520px]" : "aspect-[16/10]"}`}>
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,hsl(var(--gold)/0.12),transparent_30%),radial-gradient(circle_at_75%_75%,hsl(var(--sage)/0.22),transparent_35%)]" />
     <div className="absolute inset-0 flex items-center justify-center">
-      <span className="eyebrow text-forest/40">{label}</span>
+      <div className="text-center">
+        {video && <div className="mx-auto mb-4 h-14 w-14 rounded-full border border-forest/15 bg-ivory/70 backdrop-blur flex items-center justify-center text-xl">▶</div>}
+        <span className="eyebrow text-forest/40">{label}</span>
+      </div>
     </div>
   </div>
 );
@@ -197,76 +145,85 @@ const RetreatsPage = () => {
     <div className="min-h-screen bg-ivory text-forest-deep">
       <Header />
       <main>
-        <section className="pt-36 pb-20 md:pt-44 md:pb-28">
+        <section className="pt-32 pb-14 md:pt-36 md:pb-16">
           <div className="container-soft">
             <Reveal className="max-w-4xl">
-              <p className="eyebrow text-forest/55 mb-6">{copy.eyebrow}</p>
-              <h1 className="font-serif text-7xl md:text-9xl leading-none mb-4">{copy.title}</h1>
-              <p className="font-serif italic text-3xl md:text-5xl text-forest/70 mb-14">{copy.subtitle}</p>
-              <div className="space-y-4 text-xl md:text-2xl leading-relaxed text-forest/80 max-w-3xl">
+              <p className="eyebrow text-forest/55 mb-4">{copy.eyebrow}</p>
+              <h1 className="font-serif text-6xl md:text-8xl leading-none mb-3">{copy.title}</h1>
+              <p className="font-serif italic text-2xl md:text-4xl text-forest/70 mb-9">{copy.subtitle}</p>
+              <div className="space-y-2.5 text-lg md:text-xl leading-relaxed text-forest/80 max-w-2xl">
                 {copy.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
             </Reveal>
           </div>
         </section>
 
-        <section className="pb-24 md:pb-36">
-          <div className="container-soft">
-            <Reveal><ImageSpace label={copy.image} /></Reveal>
+        <section className="pb-16 md:pb-20">
+          <div className="container-soft grid gap-5 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+            <Reveal><MediaSpace label={copy.image} /></Reveal>
+            <Reveal className="md:translate-y-10"><MediaSpace label={copy.image} aspect="portrait" /></Reveal>
           </div>
         </section>
 
-        <section className="pb-24 md:pb-40">
-          <div className="container-soft grid gap-14 md:grid-cols-[1.1fr_0.9fr] md:gap-20 items-start">
-            <Reveal className="space-y-6 text-lg md:text-xl leading-relaxed text-forest/80">
+        <section className="py-16 md:py-20">
+          <div className="container-soft grid gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14 items-start">
+            <Reveal className="space-y-4 text-base md:text-lg leading-relaxed text-forest/80">
               {copy.first.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </Reveal>
-            <Reveal className="md:sticky md:top-28"><ImageSpace label={copy.image} tall /></Reveal>
+            <Reveal className="md:sticky md:top-24">
+              <MediaSpace label={copy.video} video />
+            </Reveal>
           </div>
         </section>
 
-        <section className="bg-forest-deep text-ivory py-24 md:py-36">
-          <div className="container-soft">
-            <Reveal className="max-w-4xl mx-auto space-y-7 text-xl md:text-2xl leading-relaxed text-ivory/82">
+        <section className="bg-forest-deep text-ivory py-16 md:py-20">
+          <div className="container-soft grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-14 items-start">
+            <Reveal>
+              <p className="font-serif italic text-3xl md:text-4xl leading-tight text-gold-soft max-w-sm">Not as activities. But as experiences to live.</p>
+            </Reveal>
+            <Reveal className="space-y-4 text-base md:text-lg leading-relaxed text-ivory/82">
               {copy.second.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </Reveal>
           </div>
         </section>
 
         {language === "en" && (
-          <section className="py-24 md:py-36 bg-ivory">
+          <section className="py-16 md:py-20 bg-ivory">
             <div className="container-soft">
-              <Reveal className="max-w-3xl mx-auto">
-                <h2 className="font-serif text-4xl md:text-6xl leading-tight mb-6">{copy.exploreTitle}</h2>
-                <p className="text-lg md:text-xl leading-relaxed text-forest/75 mb-14">{copy.exploreIntro}</p>
-                <div className="space-y-12">
-                  {copy.explore.map((item) => (
-                    <div key={item.title}>
-                      <h3 className="font-serif text-2xl md:text-3xl mb-4">{item.title}</h3>
-                      <div className="space-y-4 text-lg md:text-xl leading-relaxed text-forest/80">
+              <Reveal className="max-w-3xl mb-10">
+                <h2 className="font-serif text-3xl md:text-5xl leading-tight mb-4">{copy.exploreTitle}</h2>
+                <p className="text-base md:text-lg leading-relaxed text-forest/75">{copy.exploreIntro}</p>
+              </Reveal>
+              <div className="grid gap-4 md:grid-cols-2">
+                {copy.explore.map((item, index) => (
+                  <Reveal key={item.title} className={index === copy.explore.length - 1 ? "md:col-span-2" : ""}>
+                    <div className="h-full rounded-[1.5rem] border border-forest/10 bg-white/40 p-6 md:p-7 shadow-[0_12px_35px_rgba(34,54,42,0.05)]">
+                      <h3 className="font-serif text-xl md:text-2xl mb-3">{item.title}</h3>
+                      <div className="space-y-3 text-sm md:text-base leading-relaxed text-forest/78">
                         {item.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </Reveal>
+                  </Reveal>
+                ))}
+              </div>
             </div>
           </section>
         )}
 
-        <section className="py-24 md:py-36">
-          <div className="container-soft">
-            <Reveal><ImageSpace label={copy.image} /></Reveal>
+        <section className="py-16 md:py-20">
+          <div className="container-soft grid gap-5 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+            <Reveal><MediaSpace label={copy.image} aspect="portrait" /></Reveal>
+            <Reveal><MediaSpace label={copy.image} /></Reveal>
           </div>
         </section>
 
-        <section className="pb-28 md:pb-44">
+        <section className="pb-20 md:pb-28">
           <div className="container-soft">
             <Reveal className="max-w-3xl mx-auto text-center">
-              <div className="space-y-5 font-serif text-2xl md:text-4xl leading-relaxed text-forest-deep">
+              <div className="space-y-3 font-serif text-xl md:text-3xl leading-relaxed text-forest-deep">
                 {copy.closing.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
-              <p className="mt-16 font-serif italic text-3xl text-forest/70">{copy.signature}</p>
+              <p className="mt-10 font-serif italic text-2xl text-forest/70">{copy.signature}</p>
             </Reveal>
           </div>
         </section>
