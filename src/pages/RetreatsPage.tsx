@@ -24,8 +24,11 @@ const COPY = {
       "I have always dreamed of creating a place where I could welcome people, walk beside them for a while and be part of their transformation, while they, in their own way, become part of mine. Because I believe every authentic encounter leaves something in both people.",
       "Imagine feeling the fire within you again. Stomping your feet on the earth. Dancing. Breathing. Feeling alive. Connected."
     ],
+    exploreEyebrow: "THE EXPERIENCE",
     exploreTitle: "What We Will Explore Together",
     exploreIntro: "We will move through different experiences and listen to what moves inside us.",
+    homeEyebrow: "BRING IT WITH YOU",
+    homeWord: "HOME",
     explore: [
       { title: "Touch. A safe space.", tone: "sand", paragraphs: ["Touch as support, containment, presence. Contact with another person, but also with ourselves. What happens when we receive? And what happens when we are the ones accompanying someone else, with care?"] },
       { title: "Water.", tone: "water", paragraphs: ["Allowing ourselves to be held and gently rocked. Letting go of the weight, even if only for a moment, and allowing someone else to accompany us. And then becoming the one who holds, who supports, who creates a sense of safety for another body."] },
@@ -54,10 +57,37 @@ const COPY = {
     image: "Image coming soon", video: "Video coming soon", signature: "Martina"
   },
   it: {
-    eyebrow: "Italia · Maggio 2027", title: "TU", subtitle: "Dove il corpo ricorda.",
+    eyebrow: "Italia · Maggio 2027",
+    title: "TU",
+    subtitle: "Dove il corpo ricorda.",
     intro: ["Ci sono esperienze che non nascono in un giorno.", "Vivono dentro di noi per molto tempo, finché arriva il momento in cui chiedono di essere condivise.", "TU è una di queste."],
-    first: ["Per anni ho sentito il desiderio di creare uno spazio dove poter accogliere le persone. Uno spazio in cui incontrarsi davvero, dove il tempo rallenta, il corpo torna ad avere voce, la natura diventa casa e ogni persona possa sentirsi libera di essere esattamente com'è.", "Immagina di lasciarti cullare nell'acqua. Dall'acqua. Di sostenere qualcuno. O di lasciare che qualcuno sostenga te. Non immagino TU come un luogo in cui allontanarsi dalla propria vita, ma come uno spazio in cui riscoprire qualcosa da portare con sé, ogni giorno. Perché il viaggio più importante non è quello che vivremo insieme. È quello che continuerà quando ognuno tornerà a casa."],
-    second: ["Durante questi giorni ci accompagneranno il movimento, il tocco, la natura, l'acqua, la terra, il fuoco, il silenzio e la relazione.", "Non come attività da fare. Ma come esperienze da vivere.", "Raccogliere fiori in un campo, in silenzio, con un'intenzione. Ricordare qualcosa che era rimasto lì, fermo. Scriverlo.", "Uno spazio verde dove incontrare le persone, camminare al loro fianco per un tratto ed essere parte della loro trasformazione, mentre loro, in qualche modo, diventeranno parte della mia. Perché credo che ogni incontro autentico lasci qualcosa in entrambe le direzioni.", "Immagina di sentire il fuoco dentro, dopo tanto tempo. Di battere i piedi sulla terra. Di ballare. Di respirare. Di sentirti vivo. Connesso."],
+    first: [
+      "Per anni ho sentito il desiderio di creare uno spazio dove poter accogliere le persone. Uno spazio in cui incontrarsi davvero, dove il tempo rallenta, il corpo torna ad avere voce, la natura diventa casa e ogni persona possa sentirsi libera di essere esattamente com'è.",
+      "Immagina di lasciarti cullare nell'acqua. Dall'acqua. Di sostenere qualcuno. O di lasciare che qualcuno sostenga te. Non immagino TU come un luogo in cui allontanarsi dalla propria vita, ma come uno spazio in cui riscoprire qualcosa da portare con sé, ogni giorno. Perché il viaggio più importante non è quello che vivremo insieme. È quello che continuerà quando ognuno tornerà a casa."
+    ],
+    second: [
+      "Durante questi giorni ci accompagneranno il movimento, il tocco, la natura, l'acqua, la terra, il fuoco, il silenzio e la relazione.",
+      "Non come attività da fare. Ma come esperienze da vivere.",
+      "Raccogliere fiori in un campo, in silenzio, con un'intenzione. Ricordare qualcosa che era rimasto lì, fermo. Scriverlo.",
+      "Uno spazio verde dove incontrare le persone, camminare al loro fianco per un tratto ed essere parte della loro trasformazione, mentre loro, in qualche modo, diventeranno parte della mia. Perché credo che ogni incontro autentico lasci qualcosa in entrambe le direzioni.",
+      "Immagina di sentire il fuoco dentro, dopo tanto tempo. Di battere i piedi sulla terra. Di ballare. Di respirare. Di sentirti vivo. Connesso."
+    ],
+    exploreEyebrow: "L'ESPERIENZA",
+    exploreTitle: "Cosa esploreremo insieme",
+    exploreIntro: "Attraverseremo esperienze diverse e proveremo ad ascoltare cosa si muove dentro di noi.",
+    homeEyebrow: "PORTALO CON TE",
+    homeWord: "CASA",
+    explore: [
+      { title: "Il tocco. Uno spazio sicuro.", tone: "sand", paragraphs: ["Il tocco come sostegno, contenimento, presenza. Il contatto con l'altro, ma anche con noi stessi. Cosa accade quando riceviamo? E cosa accade quando siamo noi ad accompagnare qualcuno, con cura?"] },
+      { title: "L'acqua.", tone: "water", paragraphs: ["Lasciarsi cullare e sostenere. Lasciare andare il peso, anche solo per un momento, e permettere a qualcun altro di accompagnarci. E poi essere noi a cullare, a sostenere, a creare sicurezza per un altro corpo."] },
+      { title: "La voce.", tone: "rose", paragraphs: ["Daremo spazio a quel grido, a quel suono spezzato che a volte rimane lì e non sa come uscire. Senza doverlo spiegare. Permettendogli semplicemente di trovare una via."] },
+      { title: "La terra.", tone: "sage", paragraphs: ["Toccheremo la terra, l'erba, gli alberi. Cammineremo scalzi. Ci fermeremo a sentire le radici, il peso del corpo, la sensazione di essere qui. Ora. Presenti."] },
+      { title: "Il fuoco.", tone: "clay", paragraphs: ["Il fuoco che muove e trasforma. Quello fuori e quello dentro di noi. Quello che può essere rabbia, desiderio, forza, energia. Il fuoco da esprimere o da lasciare andare. Il fuoco che, forse, ha bisogno di tornare a vivere."] },
+      { title: "Il movimento.", tone: "moss", paragraphs: ["Attraverso il movimento fuori andremo ad ascoltare cosa si muove dentro, senza cercare subito di capirlo. Lasceremo che sia il corpo a parlare, a trovare il suo ritmo, il suo gesto. Ci lasceremo attraversare."] },
+      { title: "Il silenzio.", tone: "ivory", paragraphs: ["Ascolteremo cosa rimane quando non abbiamo bisogno di riempire. Porteremo presenza nelle cose semplici: mangiare, respirare, raccogliere un fiore, camminare, cucinare, stare accanto a qualcuno.", "È lì che ritroveremo anche quella sensibilità che, a volte, dimentichiamo."] },
+      { title: "Il gruppo.", tone: "earth", paragraphs: ["Tutto questo accadrà insieme, con profondità ma anche con leggerezza. Ci saranno cerchi, sguardi, cuori, risate e silenzi.", "Cosa succede quando ci permettiamo di essere davvero davanti agli altri? E cosa accade quando siamo noi a rimanere presenti davanti a qualcuno che si apre?", "Il gruppo come spazio per dare e per ricevere. Per sostenere e lasciarsi sostenere. Per scoprire quanto dell'altro, a volte, vive anche dentro di noi."] },
+      { title: "E poi, portarlo a casa.", tone: "home", paragraphs: ["La presenza. La relazione. Il tocco. Il movimento. Tutto ciò che il corpo avrà incontrato e riconosciuto.", "Come possiamo portarlo nella vita di tutti i giorni?", "Quali sono quelle risorse meravigliose che abbiamo già a portata di mano e che, forse, abbiamo semplicemente dimenticato di riconoscere?", "Come possiamo ricordarci di fermarci, respirare, sentire, chiedere sostegno e offrirlo?", "E come possiamo ricordare, una volta tornati a casa, ciò che il corpo ha incontrato qui?", "Perché TU non finisce qui.", "Qualcosa torna a casa con noi."] }
+    ],
     closing: ["E credo che, a volte, le persone dimentichino di essere \"belle\".", "Mi piacerebbe che TU fosse anche questo. Uno spazio dove poterlo ricordare.", "Un modo diverso di ascoltare il proprio corpo. Di stare nelle relazioni. Di attraversare le emozioni. Di respirare. Di rallentare. Di abitare la propria vita.", "Se, leggendo queste parole, hai sentito qualcosa muoversi dentro di te... forse questo viaggio è già iniziato.", "Ti aspetto."],
     form: {
       eyebrow: "TU · PROGRAMMA COMPLETO",
@@ -134,10 +164,10 @@ const RetreatsPage = () => {
 
       <section className="bg-[#4d4942] text-ivory py-14 md:py-20"><div className="container-soft"><Reveal className="max-w-4xl mx-auto space-y-6 text-base md:text-lg leading-[1.8] text-ivory/84">{copy.second.slice(2).map((p,i) => <p key={p} className={i === 2 ? "font-serif italic text-xl md:text-2xl text-[#d7c3aa]" : ""}>{p}</p>)}</Reveal></div></section>
 
-      {language === "en" && <section className="py-14 md:py-20 bg-[#f3eee6]"><div className="container-soft"><Reveal className="max-w-3xl mx-auto text-center mb-12 md:mb-16"><p className="eyebrow text-[#7c5d4d] mb-4">THE EXPERIENCE</p><h2 className="font-serif text-3xl md:text-5xl leading-tight mb-4">{copy.exploreTitle}</h2><p className="text-sm md:text-base leading-relaxed text-forest/72 max-w-2xl mx-auto">{copy.exploreIntro}</p></Reveal>
+      <section className="py-14 md:py-20 bg-[#f3eee6]"><div className="container-soft"><Reveal className="max-w-3xl mx-auto text-center mb-12 md:mb-16"><p className="eyebrow text-[#7c5d4d] mb-4">{copy.exploreEyebrow}</p><h2 className="font-serif text-3xl md:text-5xl leading-tight mb-4">{copy.exploreTitle}</h2><p className="text-sm md:text-base leading-relaxed text-forest/72 max-w-2xl mx-auto">{copy.exploreIntro}</p></Reveal>
         <div className="border border-forest/10">{copy.explore.slice(0,-1).map((item,index) => { const reverse=index%2===1; const darkTone=["clay","moss","earth"].includes(item.tone); return <Reveal key={item.title}><div className={`grid md:grid-cols-2 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}><div className={`${TONES[item.tone]} min-h-[250px] md:min-h-[320px] flex items-center p-8 md:p-11`}><div className="max-w-md"><h3 className="font-serif text-2xl md:text-3xl leading-tight mb-5">{item.title}</h3><div className={`space-y-3 text-sm md:text-[15px] leading-[1.75] ${darkTone ? "text-ivory/82" : "text-forest/78"}`}>{item.paragraphs.map(p => <p key={p}>{p}</p>)}</div></div></div><div className={`${index%3===0 ? "bg-[#e7ece7]" : index%3===1 ? "bg-[#d8c8b4]" : "bg-[#c7d5d1]"} min-h-[250px] md:min-h-[320px] flex items-center justify-center p-8`}><div className="w-2/3 md:w-3/5 aspect-[4/5] border border-forest/10 bg-[#f4f0e8] flex items-center justify-center text-center"><span className="eyebrow text-forest/40">{copy.image}</span></div></div></div></Reveal>})}</div>
-        <Reveal className="mt-14 md:mt-16"><div className="grid md:grid-cols-[0.36fr_0.64fr] border border-forest/10 bg-[#c8aa8d]"><div className="bg-[#7a6654] text-ivory p-8 md:p-10 flex items-start md:items-center"><div><p className="eyebrow text-ivory/60 mb-3">BRING IT WITH YOU</p><div className="font-serif text-5xl md:text-7xl leading-none">HOME</div></div></div><div className="p-8 md:p-12"><h3 className="font-serif text-2xl md:text-3xl mb-5">{copy.explore[copy.explore.length-1].title}</h3><div className="space-y-3 text-sm md:text-base leading-[1.75] text-forest/82 max-w-2xl">{copy.explore[copy.explore.length-1].paragraphs.map(p => <p key={p}>{p}</p>)}</div></div></div></Reveal>
-      </div></section>}
+        <Reveal className="mt-14 md:mt-16"><div className="grid md:grid-cols-[0.36fr_0.64fr] border border-forest/10 bg-[#c8aa8d]"><div className="bg-[#7a6654] text-ivory p-8 md:p-10 flex items-start md:items-center"><div><p className="eyebrow text-ivory/60 mb-3">{copy.homeEyebrow}</p><div className="font-serif text-5xl md:text-7xl leading-none">{copy.homeWord}</div></div></div><div className="p-8 md:p-12"><h3 className="font-serif text-2xl md:text-3xl mb-5">{copy.explore[copy.explore.length-1].title}</h3><div className="space-y-3 text-sm md:text-base leading-[1.75] text-forest/82 max-w-2xl">{copy.explore[copy.explore.length-1].paragraphs.map(p => <p key={p}>{p}</p>)}</div></div></div></Reveal>
+      </div></section>
 
       <section className="py-14 md:py-20 bg-[#e8e4db]"><div className="container-soft grid gap-0 md:grid-cols-2 border border-forest/10"><Reveal className="bg-[#f3eee6] p-8 md:p-12 flex items-center justify-center min-h-[360px]"><div className="w-3/5 max-w-[260px] aspect-[3/4] border border-forest/10 bg-[#dfe7e2] flex items-center justify-center"><span className="eyebrow text-forest/40">{copy.image}</span></div></Reveal><Reveal><MediaSpace label={copy.image} /></Reveal></div></section>
 
