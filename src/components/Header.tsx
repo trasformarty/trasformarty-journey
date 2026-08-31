@@ -154,6 +154,8 @@ export const Header = () => {
   const [workOpen, setWorkOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const isRetreatPage = location.pathname === "/retreats" || location.pathname === "/it/retreats";
+
   const NAV = useMemo(
     () => [
       { label: labels.home, href: `${localizePath("/", language)}#home` },
@@ -227,13 +229,14 @@ export const Header = () => {
     setWorkOpen(false);
   };
 
-  const headerTone = scrolled ? "text-forest-deep" : "text-ivory";
+  const initialDark = isRetreatPage && !scrolled;
+  const headerTone = scrolled || initialDark ? "text-forest-deep" : "text-ivory";
   const bookLinkBase =
     "text-[10px] md:text-[11px] lowercase tracking-[0.14em] font-normal transition-colors duration-500 whitespace-nowrap";
   const menuButtonBase =
     "group inline-flex items-center justify-center p-2 -mr-2 transition-all duration-500";
   const languageTextClass = `text-[10px] md:text-[11px] font-medium tracking-[0.18em] uppercase transition-colors duration-500 whitespace-nowrap ${
-    scrolled ? "text-forest-deep/70 hover:text-forest-deep" : "text-ivory/90 hover:text-ivory"
+    scrolled || initialDark ? "text-[#4d4942]/80 hover:text-[#4d4942]" : "text-ivory/90 hover:text-ivory"
   }`;
 
   const mobileMenu = open ? (
@@ -312,7 +315,9 @@ export const Header = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           scrolled
             ? "bg-ivory/86 backdrop-blur-xl border-b border-forest-deep/10 shadow-soft"
-            : "bg-gradient-to-b from-forest-deep/30 to-transparent"
+            : isRetreatPage
+              ? "bg-gradient-to-b from-[#f3eee6]/55 to-transparent"
+              : "bg-gradient-to-b from-forest-deep/30 to-transparent"
         }`}
       >
         <div
@@ -385,7 +390,7 @@ export const Header = () => {
                 </a>
               </nav>
             ) : (
-              <div className="flex items-center gap-3 text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
+              <div className={`flex items-center gap-3 ${initialDark ? "text-[#4d4942]" : "text-ivory drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]"}`}>
                 <LanguageSwitch
                   to={languageToggleHref}
                   label={languageToggleLabel}
@@ -395,12 +400,12 @@ export const Header = () => {
                   href={WHATSAPP_BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${bookLinkBase} text-ivory/90 hover:text-ivory`}
+                  className={`${bookLinkBase} ${initialDark ? "text-[#4d4942]/85 hover:text-[#4d4942]" : "text-ivory/90 hover:text-ivory"}`}
                 >
                   {labels.book}
                 </a>
                 <button
-                  className={`${menuButtonBase} text-ivory hover:text-ivory/80 hover:scale-105`}
+                  className={`${menuButtonBase} ${initialDark ? "text-[#4d4942] hover:text-[#3e3a35]" : "text-ivory hover:text-ivory/80"} hover:scale-105`}
                   onClick={() => setOpen(true)}
                   aria-label="Open menu"
                   aria-expanded={open}
