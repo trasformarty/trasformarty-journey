@@ -1,9 +1,11 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { getLanguageFromPath } from "@/lib/language";
+
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/martina.roscioli@gmail.com";
 
 const COPY = {
   en: {
@@ -36,6 +38,19 @@ const COPY = {
       { title: "And then, bringing it home.", tone: "home", paragraphs: ["Presence. Relationship. Touch. Movement. Everything the body will have encountered and recognized.", "How can we bring it into everyday life?", "What are those beautiful resources that are already within reach and that, perhaps, we have simply forgotten how to recognize?", "How can we remember to stop, breathe, feel, ask for support and offer it?", "And how can we remember, once we are back home, what the body encountered here?", "Because TU does not end here.", "Something comes home with us."] }
     ],
     closing: ["And I believe that, sometimes, people forget they are \"beautiful.\"", "I would love for TU to become a place where we remember.", "A different way of listening to the body. Of being in relationship. Of moving through emotions. Of breathing. Of slowing down. Of inhabiting life.", "If, while reading these words, you felt something move inside you... perhaps this journey has already begun.", "I look forward to welcoming you."],
+    form: {
+      eyebrow: "TU · FULL PROGRAM",
+      title: "Request the full program",
+      text: "Leave your details and I’ll send you the complete information for TU.",
+      name: "Name",
+      surname: "Surname",
+      email: "Email",
+      phone: "Phone number",
+      send: "Request full program",
+      sending: "Sending…",
+      thanks: "Thank you. Your request has been sent.",
+      error: "Something went wrong. Please try again or write to me directly."
+    },
     image: "Image coming soon", video: "Video coming soon", signature: "Martina"
   },
   it: {
@@ -44,6 +59,19 @@ const COPY = {
     first: ["Per anni ho sentito il desiderio di creare uno spazio dove poter accogliere le persone. Uno spazio in cui incontrarsi davvero, dove il tempo rallenta, il corpo torna ad avere voce, la natura diventa casa e ogni persona possa sentirsi libera di essere esattamente com'è.", "Immagina di lasciarti cullare nell'acqua. Dall'acqua. Di sostenere qualcuno. O di lasciare che qualcuno sostenga te. Non immagino TU come un luogo in cui allontanarsi dalla propria vita, ma come uno spazio in cui riscoprire qualcosa da portare con sé, ogni giorno. Perché il viaggio più importante non è quello che vivremo insieme. È quello che continuerà quando ognuno tornerà a casa."],
     second: ["Durante questi giorni ci accompagneranno il movimento, il tocco, la natura, l'acqua, la terra, il fuoco, il silenzio e la relazione.", "Non come attività da fare. Ma come esperienze da vivere.", "Raccogliere fiori in un campo, in silenzio, con un'intenzione. Ricordare qualcosa che era rimasto lì, fermo. Scriverlo.", "Uno spazio verde dove incontrare le persone, camminare al loro fianco per un tratto ed essere parte della loro trasformazione, mentre loro, in qualche modo, diventeranno parte della mia. Perché credo che ogni incontro autentico lasci qualcosa in entrambe le direzioni.", "Immagina di sentire il fuoco dentro, dopo tanto tempo. Di battere i piedi sulla terra. Di ballare. Di respirare. Di sentirti vivo. Connesso."],
     closing: ["E credo che, a volte, le persone dimentichino di essere \"belle\".", "Mi piacerebbe che TU fosse anche questo. Uno spazio dove poterlo ricordare.", "Un modo diverso di ascoltare il proprio corpo. Di stare nelle relazioni. Di attraversare le emozioni. Di respirare. Di rallentare. Di abitare la propria vita.", "Se, leggendo queste parole, hai sentito qualcosa muoversi dentro di te... forse questo viaggio è già iniziato.", "Ti aspetto."],
+    form: {
+      eyebrow: "TU · PROGRAMMA COMPLETO",
+      title: "Richiedi il programma completo",
+      text: "Lascia i tuoi dati e ti invierò tutte le informazioni complete su TU.",
+      name: "Nome",
+      surname: "Cognome",
+      email: "Email",
+      phone: "Numero di telefono",
+      send: "Richiedi il programma",
+      sending: "Invio…",
+      thanks: "Grazie. La tua richiesta è stata inviata.",
+      error: "Qualcosa non ha funzionato. Riprova oppure scrivimi direttamente."
+    },
     image: "Immagine in arrivo", video: "Video in arrivo", signature: "Martina"
   }
 };
@@ -61,7 +89,37 @@ const RetreatsPage = () => {
   const location = useLocation();
   const language = getLanguageFromPath(location.pathname);
   const copy = COPY[language];
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const email = String(formData.get("email") || "").trim();
+
+    formData.append("_subject", "TU retreat · Full program request");
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
+    if (email) formData.append("_replyto", email);
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, { method: "POST", headers: { Accept: "application/json" }, body: formData });
+      if (!response.ok) throw new Error("Unable to send request");
+      form.reset();
+      setSubmitted(true);
+    } catch {
+      setError(copy.form.error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#f3eee6] text-forest-deep"><Header /><main>
@@ -84,6 +142,8 @@ const RetreatsPage = () => {
       <section className="py-14 md:py-20 bg-[#e8e4db]"><div className="container-soft grid gap-0 md:grid-cols-2 border border-forest/10"><Reveal className="bg-[#f3eee6] p-8 md:p-12 flex items-center justify-center min-h-[360px]"><div className="w-3/5 max-w-[260px] aspect-[3/4] border border-forest/10 bg-[#dfe7e2] flex items-center justify-center"><span className="eyebrow text-forest/40">{copy.image}</span></div></Reveal><Reveal><MediaSpace label={copy.image} /></Reveal></div></section>
 
       <section className="py-16 md:py-20 bg-[#4d4942] text-ivory"><div className="container-soft"><Reveal className="max-w-2xl mx-auto text-center"><div className="space-y-4 font-serif text-lg md:text-2xl leading-relaxed text-ivory/90">{copy.closing.map(p => <p key={p}>{p}</p>)}</div><div className="mx-auto mt-8 h-px w-16 bg-[#b9cfcb]" /><p className="mt-6 font-serif italic text-xl text-ivory/70">{copy.signature}</p></Reveal></div></section>
+
+      <section className="py-14 md:py-16 bg-[#f3eee6]"><div className="container-soft"><Reveal className="max-w-4xl mx-auto border border-[#7a6654]/20 bg-[#d8c8b4] p-7 md:p-10"><div className="grid gap-8 md:grid-cols-[0.38fr_0.62fr] md:items-start"><div><p className="eyebrow text-[#6f5144] mb-3">{copy.form.eyebrow}</p><h2 className="font-serif text-3xl md:text-4xl leading-tight mb-3">{copy.form.title}</h2><p className="text-sm md:text-base leading-relaxed text-forest/72 max-w-sm">{copy.form.text}</p></div><div>{submitted ? <div className="min-h-[220px] flex items-center justify-center text-center"><p className="font-serif text-2xl text-forest-deep">{copy.form.thanks}</p></div> : <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2"><label className="block"><span className="block text-sm text-forest/70 mb-2">{copy.form.name}</span><input name="name" type="text" required autoComplete="given-name" className="w-full bg-[#f3eee6] border border-forest/15 px-4 py-3 text-sm outline-none focus:border-forest/40" /></label><label className="block"><span className="block text-sm text-forest/70 mb-2">{copy.form.surname}</span><input name="surname" type="text" required autoComplete="family-name" className="w-full bg-[#f3eee6] border border-forest/15 px-4 py-3 text-sm outline-none focus:border-forest/40" /></label><label className="block"><span className="block text-sm text-forest/70 mb-2">{copy.form.email}</span><input name="email" type="email" required autoComplete="email" className="w-full bg-[#f3eee6] border border-forest/15 px-4 py-3 text-sm outline-none focus:border-forest/40" /></label><label className="block"><span className="block text-sm text-forest/70 mb-2">{copy.form.phone}</span><input name="phone" type="tel" required autoComplete="tel" className="w-full bg-[#f3eee6] border border-forest/15 px-4 py-3 text-sm outline-none focus:border-forest/40" /></label><div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4 pt-2"><button type="submit" disabled={loading} className="inline-flex items-center justify-center bg-[#4d4942] text-ivory px-7 py-3 text-sm hover:bg-[#3e3a35] transition-colors disabled:opacity-60">{loading ? copy.form.sending : copy.form.send}</button>{error && <p className="text-sm text-[#7a3f32]">{error}</p>}</div></form>}</div></div></Reveal></div></section>
     </main><Footer /></div>
   );
 };
