@@ -122,21 +122,21 @@ const RetreatsPage = () => {
       <main>
         <section className="pt-28 md:pt-32">
           <div className="container-soft">
-            <Reveal className="grid gap-0 md:grid-cols-[1.25fr_0.75fr] border border-forest/10 bg-[#e7ece7]">
-              <div className="min-h-[420px] md:min-h-[560px] flex flex-col justify-between p-8 md:p-12 bg-[#dbe5df]">
+            <Reveal className="grid gap-0 md:grid-cols-[0.9fr_1.1fr] border border-forest/10 bg-[#dbe5df]">
+              <div className="order-2 md:order-1 p-8 md:p-12 bg-[#dbe5df] flex flex-col justify-start min-h-[390px] md:min-h-[560px]">
                 <div>
-                  <p className="eyebrow text-forest/55 mb-7">{copy.eyebrow}</p>
+                  <p className="eyebrow text-forest/55 mb-5">{copy.eyebrow}</p>
                   <h1 className="font-serif text-6xl md:text-8xl leading-none tracking-[-0.03em]">{copy.title}</h1>
                   <p className="font-serif italic text-2xl md:text-4xl text-forest/72 mt-3 max-w-xl">{copy.subtitle}</p>
                 </div>
-                <div className="space-y-1.5 text-base md:text-lg leading-relaxed text-forest/80 max-w-xl">
+                <div className="mt-8 md:mt-10 space-y-1.5 text-base md:text-lg leading-relaxed text-forest/80 max-w-xl">
                   {copy.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 </div>
               </div>
-              <div className="bg-[#4d4942] text-ivory min-h-[280px] md:min-h-[560px] flex items-end p-8 md:p-10">
-                <div className="max-w-xs">
-                  <div className="h-px w-14 bg-[#c6dbd6] mb-5" />
-                  <p className="font-serif italic text-lg md:text-xl leading-relaxed text-ivory/88">A space to slow down, listen, and return to what the body already knows.</p>
+              <div className="order-1 md:order-2 relative min-h-[280px] md:min-h-[560px] bg-[#8aa49d] overflow-hidden border-b md:border-b-0 md:border-l border-forest/10">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(43,58,49,0.14)),radial-gradient(circle_at_65%_28%,rgba(255,255,255,0.28),transparent_34%)]" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="eyebrow text-ivory/65">{copy.image}</span>
                 </div>
               </div>
             </Reveal>
