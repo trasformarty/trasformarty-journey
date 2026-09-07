@@ -37,6 +37,11 @@ const TESTIMONIALS = [
       "Conosco Martina da tanti anni, ma non avevo mai sperimentato un trattamento con lei. Sono state più di due ore difficili da spiegare a parole. In uno stato di profondo rilassamento ho visto, sentito e osservato dentro di me cose che non avevo mai incontrato prima. Non so nemmeno descrivere esattamente cosa sia successo, so solo che qualcosa si è mosso. Martina ha una sensibilità e una capacità di ascoltare il corpo che vanno oltre la tecnica. Un’esperienza che rifarei e che consiglio di vivere, più che cercare di spiegare.",
     name: "Luciano N.",
   },
+  {
+    quote:
+      "Marti, così vera, autentica, libera. Sa comprendere quello che senti, mettendoti a tuo agio. Grazie alla sua unicità, ti accompagna un questo viaggio meraviglioso che porta a trasformarti. Un viaggio che te lo porti con te tutta la vita. Grazie Marti!",
+    name: "Alberto B.",
+  },
 ];
 
 const TESTIMONIALS_COPY = {
